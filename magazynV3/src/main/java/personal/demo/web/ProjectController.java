@@ -39,4 +39,13 @@ public class ProjectController {
 
     }
 
+    @GetMapping("/{projectId}")
+    public ResponseEntity<?> getProjectById(@PathVariable String projectId){
+        //do null pointer exception
+        Project project = projectService.findProjectByIdentifer(projectId);
+
+        return new ResponseEntity<Project>(project,HttpStatus.OK);
+    }
+
+
 }

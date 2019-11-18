@@ -99,6 +99,7 @@ public class Project {
         this.updated_At = updated_At;
     }
 
+    //nowa data
     @PrePersist
     protected void onCreate(){
         this.created_At = new Date();

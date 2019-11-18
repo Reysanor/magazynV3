@@ -27,18 +27,22 @@ public class ProjectController {
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
-
+    //testowanie - postman - localhost:8080/api/project {"projectName" : "Tsettet, "projectIdentifier: "12345",//"description" : "test opis"}
     @PostMapping("")
+
+    //response entity - opakowanie obiektu i headery HTTP,Valid - daje 400 request i zwraca komunikaty walidacji czytelnie
+    //BindingResult - wywołuje walidator ,RequestBody - przekształć odpowiedź w obiekt Project
     public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result){
 
+        //mapa z błędami walidacji w formie jsona
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if(errorMap!=null) return errorMap;
-
+        //zapis do bazy danych
         Project project1 = projectService.saveOrUpdateProject(project);
         return new ResponseEntity<Project>(project1, HttpStatus.CREATED);
     }
 
-
+    //{} - path variable, mapping i nazwa string musza byc takie same
     @GetMapping("/{projectId}")
     public ResponseEntity<?> getProjectById(@PathVariable String projectId){
 
@@ -49,7 +53,9 @@ public class ProjectController {
 
 
     @GetMapping("/all")
-    public Iterable<Project> getAllProjects(){return projectService.findAllProjects();}
+    public Iterable<Project> getAllProjects(){
+        return projectService.findAllProjects();
+    }
 
 
     @DeleteMapping("/{projectId}")

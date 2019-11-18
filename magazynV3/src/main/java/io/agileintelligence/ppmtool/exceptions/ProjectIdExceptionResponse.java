@@ -1,7 +1,7 @@
 package io.agileintelligence.ppmtool.exceptions;
 
 public class ProjectIdExceptionResponse {
-
+//zwraca odpowiedz jako ciąg znaków
     private String projectIdentifier;
 
     public ProjectIdExceptionResponse(String projectIdentifier) {

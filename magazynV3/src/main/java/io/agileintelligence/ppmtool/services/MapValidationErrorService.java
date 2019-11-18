@@ -8,7 +8,7 @@ import org.springframework.validation.FieldError;
 
 import java.util.HashMap;
 import java.util.Map;
-
+//zwraca mape błędów
 @Service
 public class MapValidationErrorService {
 
@@ -20,7 +20,7 @@ public class MapValidationErrorService {
             for(FieldError error: result.getFieldErrors()){
                 errorMap.put(error.getField(), error.getDefaultMessage());
             }
-            return new ResponseEntity<Map<String, String>>(errorMap, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
         }
 
         return null;

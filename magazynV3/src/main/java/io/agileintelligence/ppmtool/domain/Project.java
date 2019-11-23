@@ -31,6 +31,13 @@ public class Project {
     private Date created_At;
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date updated_At;
+    //FetchType.EAGER - pobiera dane kiedy rodzic gotowy
+    //CascadeType.ALL - project jest rodzicem (usuwa wraz z nim logi)
+    //mappedBy - nazwa połączenia
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
+    //blokada pętli odwołań
+
+    private Backlog backlog;
 
     public Project() {
     }
@@ -97,6 +104,14 @@ public class Project {
 
     public void setUpdated_At(Date updated_At) {
         this.updated_At = updated_At;
+    }
+
+    public Backlog getBacklog() {
+        return backlog;
+    }
+
+    public void setBacklog(Backlog backlog) {
+        this.backlog = backlog;
     }
 
     //nowa data

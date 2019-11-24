@@ -5,6 +5,7 @@ import io.agileintelligence.ppmtool.domain.ProjectTask;
 import io.agileintelligence.ppmtool.repositories.BacklogRepository;
 import io.agileintelligence.ppmtool.repositories.ProjectTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,11 +27,12 @@ public class ProjectTaskService {
         projectTask.setBacklog(backlog);
         //sekwencja projetu ma byc jak: IDPRO-1, IDPRO-2
         Integer BacklogSequence = backlog.getPTSequence();
-        //Update the backlog SEQUENCE
+        //Update the backlog SEQUENCE and set it do new value
         BacklogSequence++;
+        backlog.setPTSequence(BacklogSequence);
         //Add Sequence to Project Task
         projectTask.setProjectSequence(projectIdentifier+"-"+BacklogSequence);
-        projectTask.setProjectIdentifer(projectIdentifier);
+        projectTask.setProjectIdentifier(projectIdentifier);
         //INITIAL priority - ważność
 //        if(projectTask.getPriority()==0|| projectTask.getPriority()==null){
 //            projectTask.setPriority(3);
@@ -39,7 +41,15 @@ public class ProjectTaskService {
         if(projectTask.getStatus()==""||projectTask.getStatus()==null){
             projectTask.setStatus("TO_DO");
         }
+        if(projectTask.getStatus()==null){ // formularz w react ma obsłużyć projectTask.getPriority()==0
+            projectTask.setPriority(3);
+        }
+
         //The save() method returns the saved entity, including the updated id field.
         return projectTaskRepository.save(projectTask);
+    }
+    //For each, zwraca listę powiązanych obiektów
+    public Iterable<ProjectTask> findBacklogById(String backlog_id) {
+    return projectTaskRepository.findByProjectIdentifierOrderByPriority(backlog_id);
     }
 }

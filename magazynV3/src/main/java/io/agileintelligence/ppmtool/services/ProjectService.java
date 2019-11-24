@@ -20,7 +20,6 @@ public class ProjectService {
     public Project saveOrUpdateProject(Project project){
         String projectIdentifierGet =  project.getProjectIdentifier().toUpperCase();
         try{
-
             project.setProjectIdentifier(projectIdentifierGet);
 
             //Logi
@@ -37,6 +36,7 @@ public class ProjectService {
 
             return projectRepository.save(project);
         }catch (Exception e){
+
             throw new ProjectIdException("Project ID '"+projectIdentifierGet+"' already exists");
         }
 

@@ -15,11 +15,13 @@ public class MapValidationErrorService {
     public ResponseEntity<?> MapValidationService(BindingResult result){
 
         if(result.hasErrors()){
+            //mapuje błędu uzyskane z Controllera - wartości to ( @NotBlank w domain)
             Map<String, String> errorMap = new HashMap<>();
 
             for(FieldError error: result.getFieldErrors()){
                 errorMap.put(error.getField(), error.getDefaultMessage());
             }
+            //przekazuje mape błędów do wyświetlenia w konsoli
             return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
         }
         return null;

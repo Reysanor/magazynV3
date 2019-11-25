@@ -12,8 +12,8 @@ public class ProjectTask {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(updatable = false)
-    private String projectSequence; // sekwencje nie powiązane z ID  w bazie danych
+    @Column(updatable = false, unique = true)
+    private String projectSequence; // sekwencje nie powiązane z ID w bazie danych
     @NotBlank(message = "Please include a project summary")
     private String summary;
     private String acceptanceCriteria;
@@ -21,13 +21,13 @@ public class ProjectTask {
     private Integer priority;
     private Date dueDate;
     //ManyToOne with Backlog
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH) // Refresh - odświeża powiązane Encje z bazy
-    @JoinColumn(name = "backlog_id",updatable = false, nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "backlog_id", updatable = false, nullable = false)
     @JsonIgnore
     private Backlog backlog;
 
     @Column(updatable = false)
-    private String projectIdentifier;
+    private String projectIdentifier; //id projektu
     private Date create_At;
     private Date update_At;
 
@@ -123,12 +123,12 @@ public class ProjectTask {
     }
 
     @PrePersist
-    protected void onCreate(){
+    protected void onCreate() {
         this.create_At = new Date();
     }
 
     @PreUpdate
-    protected void onUpdate(){
+    protected void onUpdate() {
         this.update_At = new Date();
     }
 

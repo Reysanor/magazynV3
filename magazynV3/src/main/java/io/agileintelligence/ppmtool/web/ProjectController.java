@@ -32,17 +32,17 @@ public class ProjectController {
     @PostMapping("")
 
     //response entity - opakowanie obiektu i headery HTTP,Valid - daje 400 request i zwraca komunikaty walidacji czytelnie
-    //BindingResult - zwraca listę błędów, wywołuje walidator ,RequestBody - przekształć odpowiedź w obiekt Project
+    //BindingResult - zwraca listę błędów, wywołuje walidator
+    //RequestBody - przekształć odpowiedź (JSONa) w obiekt Project
     //Valid - Wyświetla listę wszystkich dostępnych błędów
     public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result){
 
         // błąd dla danej zmiennej, mozna przypisac do List i wtedy result.getFieldErrors()
         //if(result.hasErrors(){ return new ResponseEntity<String>(body: "tresc błedu", HttpStatus.BAD_REQUEST);}
 
-
         //mapa z błędami walidacji w formie jsona
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
-        //zwracam listę błędów
+        //zwracam listę błędów i potem je wyświetlam
         if(errorMap!=null) return errorMap;
         //zapis do bazy danych
         Project project1 = projectService.saveOrUpdateProject(project);

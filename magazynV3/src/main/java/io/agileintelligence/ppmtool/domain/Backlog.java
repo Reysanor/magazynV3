@@ -23,8 +23,9 @@ public class Backlog {
     //blokada infinice recursion
     @JsonIgnore
     private Project project;
-    //OneToMany projecttasks
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "backlog")
+    //OneToMany projecttasks,
+    // CascadeType.REFRESH - odświeżanie - po stronie Parent (Backlog), orphanRemoval - usuwa porzucone dzieci
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER,mappedBy = "backlog", orphanRemoval = true)
     private List<ProjectTask> projectTaskList = new ArrayList<>();
 
     public Backlog() {

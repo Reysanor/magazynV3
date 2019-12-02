@@ -16,7 +16,7 @@ import { GET_ERRORS, GET_PROJECTS, GET_PROJECT, DELETE_PROJECT } from "./types";
 export const createProject = (project, history) => async dispatch => {
   try {
     //po poprawnym utworzeniu projektu wracam do dashboard (do tego używam parametru history)
-    const res = await axios.post("/api/project", project);
+    await axios.post("/api/project", project);
     history.push("/dashboard");
     //opóźnienie rozgłoszenia (ang. “dispatch) akcji lub rozgłoszenie jej tylko 
     //jeśli zostaną spełnione określone warunki.

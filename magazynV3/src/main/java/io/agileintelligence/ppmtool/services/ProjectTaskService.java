@@ -43,14 +43,14 @@ public class ProjectTaskService {
             projectTask.setProjectSequence(projectIdentifier + "-" + BacklogSequence);
             projectTask.setProjectIdentifier(projectIdentifier);
             //INITIAL priority - ważność
-//        if(projectTask.getPriority()==0|| projectTask.getPriority()==null){
-//            projectTask.setPriority(3);
-//        }
+ //           if (projectTask.getPriority() == 0 || projectTask.getPriority() == null) {
+ //               projectTask.setPriority(3);
+ //           }
             //INITAL status when status is null
             if (projectTask.getStatus() == "" || projectTask.getStatus() == null) {
                 projectTask.setStatus("TO_DO");
             }
-            if (projectTask.getStatus() == null) { // formularz w react ma obsłużyć projectTask.getPriority()==0
+            if (projectTask.getPriority() == 0||  projectTask.getPriority() == null) { // formularz w react ma obsłużyć projectTask.getPriority()==0
                 projectTask.setPriority(3);
             }
 
@@ -108,7 +108,7 @@ public class ProjectTaskService {
         return projectTaskRepository.save(projectTask);
     }
 
-    public void deletePTByProjectSequence(String backlog_id, String pt_id){
+    public void deletePTByProjectSequence(String backlog_id, String pt_id) {
         ProjectTask projectTask = findPTByProjectSequence(backlog_id, pt_id);
 
         projectTaskRepository.delete(projectTask);

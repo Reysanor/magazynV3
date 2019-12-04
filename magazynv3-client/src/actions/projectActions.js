@@ -1,5 +1,5 @@
 //!!!
-//tutaj pobieram dane z bazy poprzez SPRINGa i przekazuje przez reducery do reacta
+//tutaj pobieram dane z bazy poprzez SPRINGa (controllers) i przekazuje przez reducery do reacta
 //!!!
 
 import axios from "axios";
@@ -9,9 +9,9 @@ import { GET_ERRORS, GET_PROJECTS, GET_PROJECT, DELETE_PROJECT } from "./types";
 //async oznacza dodanie do kolejki wywolywania funkcji, dispatch przeslanie żądania
 //https://redux.js.org/advanced/async-actions
 
-//akcje otrzymuje zadanie od springa
+//akcje otrzymują zadanie od springa
 //wykorzystuja odpowiednie typy i prowadza do reducerów w index.js
-//przekazuje project jako objekt i history co pozwoli na przekierowanie w index.js
+//przekazuje project jako obiekt i history co pozwoli na przekierowanie w index.js
                                                 // czeka na promise i zwraca result (E6)
 export const createProject = (project, history) => async dispatch => {
   try {
@@ -22,7 +22,7 @@ export const createProject = (project, history) => async dispatch => {
     //jeśli zostaną spełnione określone warunki.
     dispatch({
       type: GET_ERRORS,
-      //usuwam errory ze state- są niepotrzebne po poprawnym utworzeniu projektu
+      //usuwam errory ze state - są niepotrzebne po poprawnym utworzeniu projektu
       payload: {}
     });
   } catch (err) {

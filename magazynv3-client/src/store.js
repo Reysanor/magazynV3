@@ -34,5 +34,4 @@ if (window.navigator.userAgent.includes("Chrome")) {
     compose(applyMiddleware(...middleware))
   );
 }
-
 export default store;

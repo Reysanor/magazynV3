@@ -12,12 +12,13 @@ class ProjectBoard extends Component {
 //constructor to errors
 componentDidMount(){
   const { id } = this.props.match.params; //pobranie id ze ścieżki
-  this.props.getBacklog(id); //pobranie backloga ze wskazanym id
+  this.props.getBacklog(id); //pobranie backloga ze wskazanym id (id projektu)
 }
 
 
   render() {
     const { id } = this.props.match.params;
+    const {project_tasks} = this.props.backlog //pobranie z backloga (tylko te z id projektu)
     return (
       <div className="container">
         <Link to={`/addProjectTask/${id}`} className="btn btn-primary mb-3">
@@ -25,7 +26,8 @@ componentDidMount(){
         </Link>
         <br />
         <hr />
-        <Backlog />
+        
+        <Backlog project_tasks_prop = {project_tasks}/> {/* przekazanie do backlog*/}
       </div>
     );
   }

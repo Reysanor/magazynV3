@@ -11,6 +11,7 @@ import store from "./store";
 import UpdateProject from "./components/Project/UpdateProject";
 import ProjectBoard from "./components/ProjectBoard/ProjectBoard";
 import AddProjectTask from "./components/ProjectBoard/ProjectTasks/AddProjectTask";
+import UpdateProjectTask from "./components/ProjectBoard/ProjectTasks/UpdateProjectTask";
 //definiowanie store uzywanego w aplikacji
 
 class App extends Component {
@@ -24,14 +25,24 @@ class App extends Component {
       //Provider przyjmuje atrybut prop: store
       <Provider store={store}>
         <Router>
-          <div className="App"> 
+          <div className="App">
             <Header />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/addProject" component={AddProject} />
-                              {/* z parametrem */}
+            {/* z parametrem */}
             <Route exact path="/updateProject/:id" component={UpdateProject} />
             <Route exact path="/projectBoard/:id" component={ProjectBoard} />
-            <Route exact path="/addProjectTask/:id" component={AddProjectTask} />
+            <Route
+              exact
+              path="/addProjectTask/:id"
+              component={AddProjectTask}
+            />
+            {/*jak wyżej ale drugi - id backlog (projektu) , trzeci - id project task */}
+            <Route
+              exact
+              path="/updateProjectTask/:backlog_id/:pt_id"
+              component={UpdateProjectTask}
+            />
           </div>
         </Router>
       </Provider>

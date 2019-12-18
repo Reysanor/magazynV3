@@ -34,6 +34,7 @@ export const createProject = (project, history) => async dispatch => {
     });
   }
 };
+
 export const getProjects = () => async dispatch => {
   const res = await axios.get("/api/project/all");
   dispatch({

@@ -30,7 +30,6 @@ public class ProjectController {
 
     //testowanie - postman - localhost:8080/api/project {"projectName" : "Tsettet, "projectIdentifier: "12345",//"description" : "test opis"}
     @PostMapping("")
-
     //response entity - opakowanie obiektu i headery HTTP,Valid - daje 400 request i zwraca komunikaty walidacji czytelnie
     //BindingResult - zwraca listę błędów, wywołuje walidator
     //RequestBody - przekształć odpowiedź (JSONa) w obiekt Project

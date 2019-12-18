@@ -22,6 +22,7 @@ export default function(state = initialState, action) {
 
     case DELETE_PROJECT:
       return {
+        //jeżeli delete się uda to ma odświeżyć poprzez odfiltrowanie usuniętego obiektu
         //zwraca do wyswietlenia projekty sprzeczne z action.payload (id do skasowania)
         ...state,
         projects: state.projects.filter(

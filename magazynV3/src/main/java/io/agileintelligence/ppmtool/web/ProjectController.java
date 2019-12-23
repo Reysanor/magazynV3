@@ -12,6 +12,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,8 @@ public class ProjectController {
     //BindingResult - zwraca listę błędów, wywołuje walidator
     //RequestBody - przekształć odpowiedź (JSONa) w obiekt Project
     //Valid - Wyświetla listę wszystkich dostępnych błędów
-    public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result){
+    //Principal - owner of project
+    public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result, Principal principal){
 
         // błąd dla danej zmiennej, mozna przypisac do List i wtedy result.getFieldErrors()
         //if(result.hasErrors(){ return new ResponseEntity<String>(body: "tresc błedu", HttpStatus.BAD_REQUEST);}
@@ -44,7 +46,7 @@ public class ProjectController {
         //zwracam listę błędów i potem je wyświetlam
         if(errorMap!=null) return errorMap;
         //zapis do bazy danych
-        Project project1 = projectService.saveOrUpdateProject(project);
+        Project project1 = projectService.saveOrUpdateProject(project,principal.getName());
         return new ResponseEntity<Project>(project1, HttpStatus.CREATED);
     }
 

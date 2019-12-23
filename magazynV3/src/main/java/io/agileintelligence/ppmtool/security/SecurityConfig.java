@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import static io.agileintelligence.ppmtool.security.SecurityConstants.H2_URL;
 import static io.agileintelligence.ppmtool.security.SecurityConstants.SIGN_UP_URLS;
+
 //http://namiekko.pl/2016/08/31/spring-boot-autoryzacja-uzytkownikow-w-oparciu-o-baze-danych/
 @Configuration
 @EnableWebSecurity
@@ -26,7 +27,7 @@ import static io.agileintelligence.ppmtool.security.SecurityConstants.SIGN_UP_UR
         jsr250Enabled = true,
         prePostEnabled = true
 )
-                                    //Class that implement web security
+//Class that implement web security
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -36,22 +37,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     CustomUserDetailService customUserDetailService;
 
     @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter(){return new JwtAuthenticationFilter();}
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+        return new JwtAuthenticationFilter();
+    }
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-    //Manager Builder - take user details service ,then build the authentication manager (nowy sposób logowania)
+    //https://kobietydokodu.pl/projekt-bilet-3-konfigurujemy-spring-security-oraz-oauth/
+    //Manager Builder - take user details service, then build the authentication manager (new login method)
     @Override
     protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-                                                        //use this as password encoder
+        //use this as password encoder
         authenticationManagerBuilder.userDetailsService(customUserDetailService).passwordEncoder(bCryptPasswordEncoder);
     }
+
     //the authenticationManager is the one that authenticates based on the correct username and password.
     //Send OK to tokenProvider to generate the JWT. That is the token that then accompanies
     //each user's request to a secured end point and grants access.
     @Override
     @Bean(BeanIds.AUTHENTICATION_MANAGER) //make the controller as BEAN because by default it is not a bean
-                                          // but super method so spring cannot Autowire it
+    // but super method so spring cannot Autowire it
     //https://stackoverflow.com/questions/21633555/how-to-inject-authenticationmanager-using-java-configuration-in-a-custom-filter
     protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();

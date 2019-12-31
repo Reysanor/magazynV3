@@ -1,8 +1,9 @@
+//importuje akcje które po wywołaniu mają przejść przez reducer.
 import { GET_PROJECTS, GET_PROJECT, DELETE_PROJECT } from "../actions/types";
 
 const initialState = {
   projects: [], //array
-  project: {} //single 
+  project: {} //single
 };
 
 export default function(state = initialState, action) {

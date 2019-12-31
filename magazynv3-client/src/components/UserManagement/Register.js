@@ -18,7 +18,7 @@ class Register extends Component {
     //bind pobiera i manipuluje stanem
     this.onChange = this.onChange.bind(this);
     //funkcja bind  przesyła stan
-     this.onSubmit = this.onSubmit.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   //wymaga bind w formularzu aby wprowadzać dane
@@ -44,7 +44,18 @@ class Register extends Component {
     this.props.createNewUser(newUser, this.props.history);
   }
 
+  //life cycle hooks - po każdym renderowaniu
+  componentWillReceiveProps(nextProps) {
+    //jeżeli mamy zmiany w state (jakieś errory nie null)
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   render() {
+    //pobieram errory
+    //https://developer.mozilla.org/pl/docs/Web/JavaScript/Referencje/Operatory/Destructuring_assignment
+    const { errors } = this.state;
     return (
       <div className="register">
         <div className="container">
@@ -55,44 +66,65 @@ class Register extends Component {
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
-                    type="fullName"
-                    className="form-control form-control-lg"
+                    type="text"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.fullName
+                    })}
                     placeholder="Full Name"
                     name="fullName"
                     value={this.state.fullName}
                     onChange={this.onChange}
-                    required
                   />
+                  {errors.fullName && (
+                    <div className="invalid-feedback">{errors.fullName}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.username
+                    })}
                     placeholder="Email Address (Username)"
                     name="username"
                     value={this.state.username}
                     onChange={this.onChange}
                   />
+                  {errors.username && (
+                    <div className="invalid-feedback">{errors.username}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <input
                     type="password"
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.password
+                    })}
                     placeholder="Password"
                     name="password"
                     value={this.state.password}
                     onChange={this.onChange}
                   />
+                  {errors.password && (
+                    <div className="invalid-feedback">{errors.password}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <input
                     type="password"
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.confirmPassword
+                    })}
                     placeholder="Confirm Password"
                     name="confirmPassword"
                     value={this.state.confirmPassword}
                     onChange={this.onChange}
                   />
+                  {errors.confirmPassword && (
+                    <div className="invalid-feedback">
+                      {errors.confirmPassword}
+                    </div>
+                  )}
                 </div>
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>

@@ -16,15 +16,17 @@ const middleware = [thunk];
 let store;
 //przegladarka - potrzebne do działania w nich
 
-if (window.navigator.userAgent.includes("Chrome")) {
+const ReactReduxDevTools =
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+
+if (window.navigator.userAgent.includes("Chrome") && ReactReduxDevTools) {
   //w przypadku chrome przekazuje wybrane parametry: zbiór reducerów, wartości domyślne, połączone funkcje 
   store = createStore(
     rootReducer,
     initalState,
     compose(
       applyMiddleware(...middleware),
-      window.__REDUX_DEVTOOLS_EXTENSION__ &&
-        window.__REDUX_DEVTOOLS_EXTENSION__()
+      
     )
   );
 } else {

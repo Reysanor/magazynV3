@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 //łączenie z state
 import { connect } from "react-redux";
+//1 - pobieram funkcje i obiekty
 import { createProject } from "../../actions/projectActions";
 import classnames from "classnames";
 
@@ -168,7 +169,7 @@ class AddProject extends Component {
 }
 
 AddProject.propTypes = {
-  //przekazuje funkcje, isRequired oznacza że jest niezbędna do działania componentu
+  //3 - przekazuje funkcje i obiekty do tej klasy, isRequired oznacza że jest niezbędna do działania componentu
   //jednocześnie określa wymagany typ uzyskanego prop
   createProject: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired
@@ -177,7 +178,7 @@ AddProject.propTypes = {
 const mapStateToProps = state => ({
   errors: state.errors
 });
-//łączenie componentu z state
+//2 - łączenie componentu z state 
 export default connect(
   //podczas łączenie się ze state aplikacji wymagane jest zmapowanie wszystkich state do props
   mapStateToProps,

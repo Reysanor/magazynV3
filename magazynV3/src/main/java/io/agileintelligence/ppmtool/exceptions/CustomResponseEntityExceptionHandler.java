@@ -32,6 +32,15 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
         UsernameAlreadyExistsResponse exceptionResponse = new UsernameAlreadyExistsResponse(ex.getMessage());
         return  new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler                                          //Parametry to wyjątek i WebRequest (HttpStatus)
+    public final ResponseEntity<Object> handleAutomatIdException(AutomatIdException ex, WebRequest request){
+        AutomatIdExceptionResponse exceptionResponse = new AutomatIdExceptionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
 
-
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleAutomatNotFoundException (AutomatNotFoundException ex, WebRequest request){
+        AutomatNotFoundExceptionResponse exceptionResponse = new AutomatNotFoundExceptionResponse(ex.getMessage());
+        return  new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
 }

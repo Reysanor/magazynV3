@@ -26,7 +26,7 @@ export const login = LoginRequest => async dispatch => {
     const res = await axios.post("/api/users/login", LoginRequest);
   //extract token from res.data (successful or not)
     const {token} = res.data;
-  //store token in localStorage
+  //store token in localStorage (storage for header in web browser, only on current page)
     localStorage.setItem("jwtToken",token);
   //set our token in header - it will permit to all actions whose need the authorization key 
   //(.anyRequest().authenticated(); w SecurityConfig)
@@ -46,5 +46,13 @@ export const login = LoginRequest => async dispatch => {
       payload: err.response.data
     });
   }  
- 
+}
+//logout and remove token
+export const logout = () => dispatch =>{
+  localStorage.removeItem("jwtToken");
+  setJWTToken(false);
+  dispatch ({
+    type: SET_CURRENT_USER,
+    payload: {}
+  })
 }

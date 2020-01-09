@@ -66,7 +66,7 @@ class ProjectTask extends Component {
     );
   }
 }
-ProjectTask.PropTypes = {
+ProjectTask.propTypes = {
   deleteProjectTask: PropTypes.func.isRequired
 };
 export default connect(null, { deleteProjectTask })(ProjectTask);

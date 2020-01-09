@@ -21,6 +21,15 @@ class Register extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+
+ //block registration when log in
+ componentDidMount(){
+  if(this.props.security.validToken){
+    this.props.history.push("/dashboard")
+  }
+}
+
+
   //wymaga bind w formularzu aby wprowadzać dane
   //dluższe rozwiązanie dla każdej zmiennej -> this.setState({projectName: e.target.value});
   //e.target - setState ustawia value wybranego elementu po evencie na danym name
@@ -139,11 +148,13 @@ Register.propTypes = {
   //przekazuje funkcje, isRequired oznacza że jest niezbędna do działania componentu
   //jednocześnie określa wymagany typ uzyskanego prop
   createNewUser: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  security: PropTypes.object.isRequired
 };
 //przyjmuje parametr state i podłącza errory to state errors (mappuje do componentu aplikacji)
 const mapStateToProps = state => ({
-  errors: state.errors
+  errors: state.errors,
+  security : state.security
 });
 //łączenie componentu z state
 export default connect(

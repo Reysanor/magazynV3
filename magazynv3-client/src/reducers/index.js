@@ -19,6 +19,7 @@ import securityReducer from "./securityReducer";
 //redux - sluzy do sterowania stanem aplikacji - przechowuje go w jednym store
 //przekazuje akcje do odpowiedniego reducera
 export default combineReducers({
+  
   errors: errorReducer,
   project: projectReducer,
   backlog: backlogReducer,

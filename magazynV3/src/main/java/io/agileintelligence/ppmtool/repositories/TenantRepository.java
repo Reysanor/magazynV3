@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TenantRepository extends CrudRepository<Tenant, Long> {
-    Tenant findByNip(Long nip);
+    Tenant findByNip(Integer nip);
 
 
 }

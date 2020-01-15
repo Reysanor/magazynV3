@@ -33,6 +33,7 @@ public class Tenant {
 
     //one to many with automat
 
+    private String tenantLeader;
 
     public Long getId() {
         return id;
@@ -88,6 +89,14 @@ public class Tenant {
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
+    }
+
+    public String getTenantLeader() {
+        return tenantLeader;
+    }
+
+    public void setTenantLeader(String tenantLeader) {
+        this.tenantLeader = tenantLeader;
     }
 
     @Override

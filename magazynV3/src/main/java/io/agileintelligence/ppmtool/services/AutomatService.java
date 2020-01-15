@@ -19,9 +19,10 @@ public class AutomatService {
 
         if (automat.getId() != null) {
             Automat existingAutomat = automatRepository.findBySerialNumber(automat.getSerialNumber());
-            if (existingAutomat != null && (!existingAutomat.getAutomatLeader().equals(username))) {
-                throw new AutomatNotFoundException(" Automat is not your ");
-            } else if (existingAutomat == null) {
+//            if (existingAutomat != null && (!existingAutomat.getAutomatLeader().equals(username))) {
+//                throw new AutomatNotFoundException(" Automat is not your ");
+//            } else
+                if (existingAutomat == null) {
                 throw new AutomatNotFoundException("Automat with Serial Number: " + automat.getSerialNumber() + " doesn't exists");
             }
         }
@@ -43,9 +44,9 @@ public class AutomatService {
         if (automat == null) {
             throw new AutomatNotFoundException("Automat with serial number " + serialNumber + " does not exist");
         }
-        if (!automat.getAutomatLeader().equals(username)) {
-            throw new AutomatNotFoundException("Automat is not your");
-        }
+//        if (!automat.getAutomatLeader().equals(username)) {
+//            throw new AutomatNotFoundException("Automat is not your");
+//        }
 
         return automat;
     }

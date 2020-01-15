@@ -36,12 +36,26 @@ public class AutomatService {
     }
 
 
+    public Automat findBySerialNumber(String serialNumber, String username) {
 
+        Automat automat = automatRepository.findBySerialNumber(serialNumber);
 
+        if (automat == null) {
+            throw new AutomatNotFoundException("Automat with serial number " + serialNumber + " does not exist");
+        }
+        if (!automat.getAutomatLeader().equals(username)) {
+            throw new AutomatNotFoundException("Automat is not your");
+        }
 
-    public Iterable<Automat> findAllAutomats(String username){
+        return automat;
+    }
+
+    public Iterable<Automat> findAllAutomats(String username) {
 
         return automatRepository.findAll();
     }
 
+    public void deleteAutomatBySerialNumber(String serialNumber, String username) {
+        automatRepository.delete(findBySerialNumber(serialNumber, username));
+    }
 }

@@ -16,13 +16,13 @@ public class Automat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "Automat is required")
+    @NotBlank(message = "Name is required")
     private String name;
     @NotBlank(message = "Serial number is required")
     @Size(min=10, max=10, message = "Please use 10 characters")
     @Column(updatable = false, unique = true)
     private String serialNumber;
-    @NotBlank(message = "Type is required")
+    //@NotBlank(message = "Type is required")
     private String type;
     @Column(updatable = false)
     @NotNull(message = "Capacity is required")
@@ -40,9 +40,9 @@ public class Automat {
     //who own the Automat
     private String automatLeader;
 
-    //One to many with Product
-    //@OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "automat", orphanRemoval = true)
-    //private List<Product> products = new ArrayList<>();
+    //many to many with Product
+
+    //many to one with tenant
 
     public Long getId() {
         return id;

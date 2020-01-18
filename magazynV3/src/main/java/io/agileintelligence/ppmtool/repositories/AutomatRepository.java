@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AutomatRepository extends CrudRepository<Automat, Long> {
- Automat findBySerialNumber (String serialNumber);
- Automat getById (Long id);
+
+    Automat findBySerialNumber(String serialNumber);
 }

@@ -30,29 +30,28 @@ public class ProjectController {
     private MapValidationErrorService mapValidationErrorService;
 
     //testowanie - postman - localhost:8080/api/project {"projectName" : "Tsettet, "projectIdentifier: "12345",//"description" : "test opis"}
-    @PostMapping("")
+
     //response entity - opakowanie obiektu i headery HTTP,Valid - daje 400 request i zwraca komunikaty walidacji czytelnie
     //BindingResult - zwraca listę błędów, wywołuje walidator
     //RequestBody - przekształć odpowiedź (JSONa) w obiekt Project
     //Valid - Wyświetla listę wszystkich dostępnych błędów
     //Principal - owner of project
-    public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result, Principal principal){
-
+    @PostMapping("")
+    public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result, Principal principal) {
         // błąd dla danej zmiennej, mozna przypisac do List i wtedy result.getFieldErrors()
         //if(result.hasErrors(){ return new ResponseEntity<String>(body: "tresc błedu", HttpStatus.BAD_REQUEST);}
-
         //mapa z błędami walidacji w formie jsona
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         //zwracam listę błędów i potem je wyświetlam
-        if(errorMap!=null) return errorMap;
+        if (errorMap != null) return errorMap;
         //zapis do bazy danych
-        Project project1 = projectService.saveOrUpdateProject(project,principal.getName());
+        Project project1 = projectService.saveOrUpdateProject(project, principal.getName());
         return new ResponseEntity<Project>(project1, HttpStatus.CREATED);
     }
 
     //{} - path variable, mapping i nazwa string musza byc takie same
     @GetMapping("/{projectId}")
-    public ResponseEntity<?> getProjectById(@PathVariable String projectId, Principal principal){
+    public ResponseEntity<?> getProjectById(@PathVariable String projectId, Principal principal) {
 
         Project project = projectService.findProjectByIdentifier(projectId, principal.getName());
 
@@ -61,15 +60,15 @@ public class ProjectController {
 
 
     @GetMapping("/all")
-    public Iterable<Project> getAllProjects(Principal principal){
+    public Iterable<Project> getAllProjects(Principal principal) {
         return projectService.findAllProjects(principal.getName());
     }
 
 
     @DeleteMapping("/{projectId}")
-    public ResponseEntity<?> deleteProject(@PathVariable String projectId, Principal principal){
+    public ResponseEntity<?> deleteProject(@PathVariable String projectId, Principal principal) {
         projectService.deleteProjectByIdentifier(projectId, principal.getName());
 
-        return new ResponseEntity<String>("Project with ID: '"+projectId+"' was deleted", HttpStatus.OK);
+        return new ResponseEntity<String>("Project with ID: '" + projectId + "' was deleted", HttpStatus.OK);
     }
 }

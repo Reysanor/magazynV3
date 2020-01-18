@@ -29,12 +29,15 @@ public class TenantController {
         Tenant tenant1 = tenantService.saveOrUpdateTenant(tenant,principal.getName());
         return  new ResponseEntity<Tenant>(tenant1, HttpStatus.CREATED);
     }
+
     @GetMapping("/{tenantId}")
     public  ResponseEntity<?> getTenantById(@PathVariable String tenantId, Principal principal){
         Tenant tenant = tenantService.findByNip(tenantId,principal.getName());
+        System.out.println(tenant.getNip());
+        return new ResponseEntity<Tenant>(tenant,HttpStatus.OK);
     }
 
-    @GetMapping("/{all}")
+    @GetMapping("/all")
     public Iterable<Tenant> getAllTenants(Principal principal){
         return  tenantService.findAllTenants(principal.getName());
     }
@@ -42,7 +45,7 @@ public class TenantController {
     @DeleteMapping("/{tenantId}")
     public ResponseEntity<?> deleteTenant(@PathVariable String tenantId, Principal principal){
         tenantService.deleteTenantByNip(tenantId,principal.getName());
-        return new ResponseEntity<String>("Tenant with ID: " + tenantId + " was deleted",HttpStatus.OK);
+        return new ResponseEntity<String>("Tenant with Nip: " + tenantId + " was deleted",HttpStatus.OK);
     }
 
 }

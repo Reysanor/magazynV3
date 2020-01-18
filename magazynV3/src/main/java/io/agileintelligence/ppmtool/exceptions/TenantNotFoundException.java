@@ -1,4 +1,12 @@
 package io.agileintelligence.ppmtool.exceptions;
 
-public class TenantNotFoundException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.BAD_REQUEST) //format odpowiedzi
+
+public class TenantNotFoundException extends RuntimeException{
+    public TenantNotFoundException(String message) {
+        super(message);
+    }
 }

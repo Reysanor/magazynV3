@@ -12,6 +12,7 @@ public class Product {
     @Column(updatable = false, unique = true)
     @NotBlank(message = "Name is required")
     private String name;
+    @NotBlank(message = "Type is required")
     private String type;
 
     private String productLeader;

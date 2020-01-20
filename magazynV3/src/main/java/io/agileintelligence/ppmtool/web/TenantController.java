@@ -1,6 +1,8 @@
 package io.agileintelligence.ppmtool.web;
 
+import io.agileintelligence.ppmtool.domain.Automat;
 import io.agileintelligence.ppmtool.domain.Tenant;
+import io.agileintelligence.ppmtool.services.AutomatService;
 import io.agileintelligence.ppmtool.services.MapValidationErrorService;
 import io.agileintelligence.ppmtool.services.TenantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,23 @@ public class TenantController {
 
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
+
+    @Autowired
+    private
+    AutomatService automatService;
+
+    @PostMapping("/{tenant_id}")
+    public ResponseEntity<?> addAutomatToTenant(@Valid @RequestBody Automat automat, BindingResult result,
+                                                @PathVariable String tenant_id, Principal principal) {
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+        if (errorMap != null) return errorMap;
+
+        Automat automat1 = automatService.addTenant(tenant_id,automat, principal.getName());
+
+        return new ResponseEntity<Automat>(automat1,HttpStatus.CREATED);
+    }
+
+
 
     @PostMapping("")
     public ResponseEntity<?> createNewTenant(@Valid @RequestBody Tenant tenant, BindingResult result, Principal principal){

@@ -19,6 +19,7 @@ public class Product {
 
     //many to many with Automat
 
+
     public Long getId() {
         return id;
     }

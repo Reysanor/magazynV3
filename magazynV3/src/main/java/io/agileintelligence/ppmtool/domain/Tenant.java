@@ -2,6 +2,7 @@ package io.agileintelligence.ppmtool.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.List;
 import java.util.StringJoiner;
 
 @Entity
@@ -11,22 +12,24 @@ public class Tenant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank(message = "NIP is required")
-    @Size(min=10, max=10, message = "Please use 10 characters")
+    @Size(min = 10, max = 10, message = "Please use 10 characters")
     @Column(updatable = false, unique = true)
     private String nip;
     @NotBlank(message = "Street is required")
     private String street;
     @NotBlank(message = "Zip Code is required")
-    @Size(min=5, max=5, message = "Please use 5 characters")
+    @Size(min = 5, max = 5, message = "Please use 5 characters")
     private String zipCode;
     @NotBlank(message = "City is required")
     private String city;
     @NotBlank(message = "Phone number is required")
-    @Size(min=9, max=9, message = "Please use 9 characters")
+    @Size(min = 9, max = 9, message = "Please use 9 characters")
     private String phoneNumber;
     private String emailAddress;
 
     //one to many with automat
+    @OneToMany(mappedBy = "tenant", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    private List<Automat> automaty;
 
     private String tenantLeader;
 

@@ -37,12 +37,11 @@ public class BacklogController {
         ProjectTask projectTask1 = projectTaskService.addProjectTask(backlog_id, projectTask, principal.getName());
 
         return new ResponseEntity<ProjectTask>(projectTask1, HttpStatus.CREATED);
-
     }
 
     @GetMapping("/{backlog_id}")
     public Iterable<ProjectTask> getProjectBacklog(@PathVariable String backlog_id, Principal principal) {
-        return (projectTaskService.findBacklogById(backlog_id,principal.getName()));
+        return (projectTaskService.findBacklogById(backlog_id, principal.getName()));
     }
 
     @GetMapping("/{backlog_id}/{pt_id}")
@@ -54,7 +53,7 @@ public class BacklogController {
     //update
     @PatchMapping("/{backlog_id}/{pt_id}")      //@Valid - sprawdza z istniejącym
     public ResponseEntity<?> updateProjectTask(@Valid @RequestBody ProjectTask projectTask, BindingResult result,
-                                               @PathVariable String backlog_id, @PathVariable String pt_id,Principal principal) {
+                                               @PathVariable String backlog_id, @PathVariable String pt_id, Principal principal) {
         //sprawdza wszystkie pola na obecność błędów
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if (errorMap != null) return errorMap;
@@ -65,7 +64,7 @@ public class BacklogController {
     }
 
     @DeleteMapping("/{backlog_id}/{pt_id}")
-    public ResponseEntity<?> deleteProjectTask(@PathVariable String backlog_id, @PathVariable String pt_id,Principal principal) {
+    public ResponseEntity<?> deleteProjectTask(@PathVariable String backlog_id, @PathVariable String pt_id, Principal principal) {
         projectTaskService.deletePTByProjectSequence(backlog_id, pt_id, principal.getName());
         return new ResponseEntity<String>("Project Task '" + pt_id + "' was deleted succesfully: '", HttpStatus.OK);
     }

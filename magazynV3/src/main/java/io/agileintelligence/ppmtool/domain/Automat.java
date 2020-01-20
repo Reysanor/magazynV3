@@ -1,6 +1,8 @@
 package io.agileintelligence.ppmtool.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import javax.persistence.*;
@@ -19,7 +21,7 @@ public class Automat {
     @NotBlank(message = "Name is required")
     private String name;
     @NotBlank(message = "Serial number is required")
-    @Size(min=10, max=10, message = "Please use 10 characters")
+    @Size(min = 10, max = 10, message = "Please use 10 characters")
     @Column(updatable = false, unique = true)
     private String serialNumber;
     //@NotBlank(message = "Type is required")
@@ -36,13 +38,16 @@ public class Automat {
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date productionDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_id")
+    @JsonIgnore
+    private Tenant tenant;
 
     //who own the Automat
     private String automatLeader;
 
     //many to many with Product
 
-    //many to one with tenant
 
     public Long getId() {
         return id;
@@ -106,6 +111,14 @@ public class Automat {
 
     public void setAutomatLeader(String automatLeader) {
         this.automatLeader = automatLeader;
+    }
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
     }
 
     @Override

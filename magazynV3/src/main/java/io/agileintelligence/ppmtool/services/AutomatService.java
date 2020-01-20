@@ -1,10 +1,12 @@
 package io.agileintelligence.ppmtool.services;
 
 import io.agileintelligence.ppmtool.domain.Automat;
+import io.agileintelligence.ppmtool.domain.Tenant;
 import io.agileintelligence.ppmtool.domain.User;
 import io.agileintelligence.ppmtool.exceptions.AutomatIdException;
 import io.agileintelligence.ppmtool.exceptions.AutomatNotFoundException;
 import io.agileintelligence.ppmtool.repositories.AutomatRepository;
+import io.agileintelligence.ppmtool.repositories.TenantRepository;
 import io.agileintelligence.ppmtool.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,31 @@ public class AutomatService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    TenantRepository tenantRepository;
+
+    @Autowired
+    TenantService tenantService;
+
+    public Automat addTenant(String tenant_id, Automat automat, String username) {
+        String automatSerialNumberGet = automat.getSerialNumber().toUpperCase();
+
+        if (automat.getId() != null) {
+            Automat existingAutomat = automatRepository.findBySerialNumber(automat.getSerialNumber());
+
+            if (existingAutomat != null && (!existingAutomat.getAutomatLeader().equals(username))) {
+                throw new AutomatNotFoundException("Cannot add tenant - Automat is not your ");
+            } else if (existingAutomat == null) {
+                throw new AutomatNotFoundException("Cannot add tenant - Automat with Serial Number: " + automat.getSerialNumber() + " doesn't exists");
+            }
+        }
+        //czy istnieje tenant
+        Tenant tenant = tenantService.findByNip(tenant_id, username);
+        automat.setTenant(tenant);
+        return automatRepository.save(automat);
+
+    }
+
     public Automat saveOrUpdateAutomat(Automat automat, String username) {
         String automatSerialNumberGet = automat.getSerialNumber().toUpperCase();
 
@@ -24,8 +51,7 @@ public class AutomatService {
             Automat existingAutomat = automatRepository.findBySerialNumber(automat.getSerialNumber());
             if (existingAutomat != null && (!existingAutomat.getAutomatLeader().equals(username))) {
                 throw new AutomatNotFoundException(" Automat is not your ");
-            } else
-                if (existingAutomat == null) {
+            } else if (existingAutomat == null) {
                 throw new AutomatNotFoundException("Automat with Serial Number: " + automat.getSerialNumber() + " doesn't exists");
             }
         }
@@ -66,4 +92,6 @@ public class AutomatService {
     public void deleteAutomatBySerialNumber(String serialNumber, String username) {
         automatRepository.delete(findBySerialNumber(serialNumber, username));
     }
+
+
 }

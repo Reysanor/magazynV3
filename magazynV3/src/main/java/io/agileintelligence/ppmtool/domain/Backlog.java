@@ -17,15 +17,15 @@ public class Backlog {
     private String projectIdentifier;
 
     //OneToOne with project
-                    //nazwa jak mappedBy w Backlog
+    //nazwa jak mappedBy w Backlog
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="project_id",nullable = false)
-    //blokada infinice recursion
+    @JoinColumn(name = "project_id", nullable = false)
+    //block infinite recursion
     @JsonIgnore
     private Project project;
     //OneToMany projecttasks,
     // CascadeType.REFRESH - odświeżanie - po stronie Parent (Backlog), orphanRemoval - usuwa porzucone dzieci
-    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER,mappedBy = "backlog", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "backlog", orphanRemoval = true)
     private List<ProjectTask> projectTaskList = new ArrayList<>();
 
     public Backlog() {

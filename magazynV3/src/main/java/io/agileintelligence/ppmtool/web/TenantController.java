@@ -28,13 +28,13 @@ public class TenantController {
     private
     AutomatService automatService;
 
-    @PostMapping("/{tenant_id}")
-    public ResponseEntity<?> addAutomatToTenant(@Valid @RequestBody Automat automat, BindingResult result,
+    @PostMapping("/{tenant_id}/{automat_id}")
+    public ResponseEntity<?> addAutomatToTenant( BindingResult result, @PathVariable String automat_id,
                                                 @PathVariable String tenant_id, Principal principal) {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if (errorMap != null) return errorMap;
 
-        Automat automat1 = automatService.addTenant(tenant_id,automat, principal.getName());
+        Automat automat1 = automatService.addTenant(tenant_id,automat_id, principal.getName());
 
         return new ResponseEntity<Automat>(automat1,HttpStatus.CREATED);
     }

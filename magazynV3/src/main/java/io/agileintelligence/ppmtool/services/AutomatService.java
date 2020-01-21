@@ -25,24 +25,26 @@ public class AutomatService {
     @Autowired
     TenantService tenantService;
 
-    public Automat addTenant(String tenant_id, Automat automat, String username) {
-        String automatSerialNumberGet = automat.getSerialNumber().toUpperCase();
+    public Automat addTenant(String tenant_id, String automat_id, String username) {
+        Automat automatGet = automatRepository.findBySerialNumber(automat_id);
 
-        if (automat.getId() != null) {
-            Automat existingAutomat = automatRepository.findBySerialNumber(automat.getSerialNumber());
+        if (automatGet.getId() != null) {
+            Automat existingAutomat = automatRepository.findBySerialNumber(automatGet.getSerialNumber());
 
             if (existingAutomat != null && (!existingAutomat.getAutomatLeader().equals(username))) {
                 throw new AutomatNotFoundException("Cannot add tenant - Automat is not your ");
             } else if (existingAutomat == null) {
-                throw new AutomatNotFoundException("Cannot add tenant - Automat with Serial Number: " + automat.getSerialNumber() + " doesn't exists");
+                throw new AutomatNotFoundException("Cannot add tenant - Automat with Serial Number: " + automatGet.getSerialNumber() + " doesn't exists");
             }
         }
         //czy istnieje tenant
         Tenant tenant = tenantService.findByNip(tenant_id, username);
-        automat.setTenant(tenant);
-        return automatRepository.save(automat);
+        automatGet.setTenant(tenant);
+        return automatRepository.save(automatGet);
 
     }
+
+
 
     public Automat saveOrUpdateAutomat(Automat automat, String username) {
         String automatSerialNumberGet = automat.getSerialNumber().toUpperCase();

@@ -27,11 +27,8 @@ public class AutomatController {
     @PostMapping("")
     public ResponseEntity<?> createNewAutomat(@Valid @RequestBody Automat automat, BindingResult result, Principal principal) {
 
-
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
-
         if (errorMap != null) return errorMap;
-
         Automat automat1 = automatService.saveOrUpdateAutomat(automat, principal.getName());
         return new ResponseEntity<Automat>(automat1, HttpStatus.CREATED);
 
@@ -53,4 +50,6 @@ public class AutomatController {
         automatService.deleteAutomatBySerialNumber(automatId, principal.getName());
         return new ResponseEntity<String>("Automat with SerialNumber: " + automatId + " was deleted", HttpStatus.OK);
     }
+
+
 }

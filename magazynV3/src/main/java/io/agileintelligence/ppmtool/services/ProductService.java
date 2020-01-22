@@ -35,7 +35,6 @@ public class ProductService {
                 throw new ProjectNotFoundException("Product with Name: " + product.getName() + " doesn't exists");
             }
         }
-
         try {
             //set owner
             User user = userRepository.findByUsername(username);

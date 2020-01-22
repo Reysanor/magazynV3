@@ -31,8 +31,7 @@ public class ProjectService {
             Project existingProject = projectRepository.findByProjectIdentifier(project.getProjectIdentifier());
             if (existingProject != null && (!existingProject.getProjectLeader().equals(username))) {
                 throw new ProjectNotFoundException(" Project is not your ");
-            } else
-                if (existingProject == null) {
+            } else if (existingProject == null) {
                 throw new ProjectNotFoundException("Project with ID: " + project.getProjectIdentifier() + " doesn't exists");
             }
         }

@@ -1,15 +1,20 @@
 package io.agileintelligence.ppmtool.services;
 
 import io.agileintelligence.ppmtool.domain.Automat;
+import io.agileintelligence.ppmtool.domain.Product;
 import io.agileintelligence.ppmtool.domain.Tenant;
 import io.agileintelligence.ppmtool.domain.User;
 import io.agileintelligence.ppmtool.exceptions.AutomatIdException;
 import io.agileintelligence.ppmtool.exceptions.AutomatNotFoundException;
+import io.agileintelligence.ppmtool.exceptions.ProjectNotFoundException;
 import io.agileintelligence.ppmtool.repositories.AutomatRepository;
+import io.agileintelligence.ppmtool.repositories.ProductRepository;
 import io.agileintelligence.ppmtool.repositories.TenantRepository;
 import io.agileintelligence.ppmtool.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class AutomatService {
@@ -25,12 +30,13 @@ public class AutomatService {
     @Autowired
     TenantService tenantService;
 
-    public Automat addTenant(String tenant_id, String automat_id, String username) {
-        Automat automatGet = automatRepository.findBySerialNumber(automat_id);
+    @Autowired
+    ProductRepository productRepository;
 
+    public Automat setTenant(String tenant_id, String automat_id, String username) {
+        Automat automatGet = automatRepository.findBySerialNumber(automat_id);
         if (automatGet.getId() != null) {
             Automat existingAutomat = automatRepository.findBySerialNumber(automatGet.getSerialNumber());
-
             if (existingAutomat != null && (!existingAutomat.getAutomatLeader().equals(username))) {
                 throw new AutomatNotFoundException("Cannot add tenant - Automat is not your ");
             } else if (existingAutomat == null) {
@@ -44,7 +50,30 @@ public class AutomatService {
 
     }
 
+    public Automat addProduct(String automat_id, Long product_id, String username){
+        Automat automatGet = automatRepository.findBySerialNumber(automat_id);
+        Automat existingAutomat = automatRepository.findBySerialNumber(automatGet.getSerialNumber());
+        if (automatGet.getId() != null) {
+            if (existingAutomat != null && (!existingAutomat.getAutomatLeader().equals(username))) {
+                throw new AutomatNotFoundException("Cannot add tenant - Automat is not your ");
+            } else if (existingAutomat == null) {
+                throw new AutomatNotFoundException("Cannot add tenant - Automat with Serial Number: " + automatGet.getSerialNumber() + " doesn't exists");
+            }
+        }
+        Optional<Product> productGet = productRepository.findById(product_id);
+        Product existingProduct = productGet.get();
 
+        if (product.getId() != null) {
+            Optional<Product> optionalExistingProduct = productRepository.findById(productGetId);
+            if (optionalExistingProduct.isPresent() && (!optionalExistingProduct.get().getProductLeader().equals(username))) {
+                throw new ProjectNotFoundException(" Product is not your ");
+            } else
+            if (optionalExistingProduct.get() == null) {
+                throw new ProjectNotFoundException("Product with Name: " + product.getName() + " doesn't exists");
+            }
+        }
+
+    }
 
     public Automat saveOrUpdateAutomat(Automat automat, String username) {
         String automatSerialNumberGet = automat.getSerialNumber().toUpperCase();
@@ -70,7 +99,6 @@ public class AutomatService {
             throw new AutomatIdException("Automat with Serial Number  '" + automatSerialNumberGet + "' already exists");
         }
     }
-
 
     public Automat findBySerialNumber(String serialNumber, String username) {
 

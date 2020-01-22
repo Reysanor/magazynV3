@@ -2,6 +2,7 @@ package io.agileintelligence.ppmtool.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -18,6 +19,8 @@ public class Product {
     private String productLeader;
 
     //many to many with Automat
+    @ManyToMany(mappedBy = "products")
+    List<Automat> autoamts;
 
 
     public Long getId() {

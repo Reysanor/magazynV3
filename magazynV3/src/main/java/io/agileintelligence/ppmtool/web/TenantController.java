@@ -34,7 +34,7 @@ public class TenantController {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if (errorMap != null) return errorMap;
 
-        Automat automat1 = automatService.addTenant(tenant_id,automat_id, principal.getName());
+        Automat automat1 = automatService.setTenant(tenant_id,automat_id, principal.getName());
 
         return new ResponseEntity<Automat>(automat1,HttpStatus.CREATED);
     }

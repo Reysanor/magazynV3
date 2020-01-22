@@ -47,7 +47,14 @@ public class Automat {
     private String automatLeader;
 
     //many to many with Product
-
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "automat_product",
+            joinColumns = @JoinColumn(name = "automat_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    List<Product> products;
 
     public Long getId() {
         return id;

@@ -29,42 +29,41 @@ public class TenantController {
     AutomatService automatService;
 
     @PostMapping("/{tenant_id}/{automat_id}")
-    public ResponseEntity<?> addAutomatToTenant( BindingResult result, @PathVariable String automat_id,
-                                                @PathVariable String tenant_id, Principal principal) {
-        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
-        if (errorMap != null) return errorMap;
+    public ResponseEntity<?> addAutomatToTenant(
+                                                @PathVariable String tenant_id, @PathVariable String automat_id, Principal principal) {
+       // ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+        //if (errorMap != null) return errorMap;
 
-        Automat automat1 = automatService.setTenant(tenant_id,automat_id, principal.getName());
+        Automat automat1 = automatService.setTenant(tenant_id, automat_id, principal.getName());
 
-        return new ResponseEntity<Automat>(automat1,HttpStatus.CREATED);
+        return new ResponseEntity<Automat>(automat1, HttpStatus.CREATED);
     }
-
 
 
     @PostMapping("")
-    public ResponseEntity<?> createNewTenant(@Valid @RequestBody Tenant tenant, BindingResult result, Principal principal){
+    public ResponseEntity<?> createNewTenant(@Valid @RequestBody Tenant tenant, BindingResult result, Principal principal) {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if (errorMap != null) return errorMap;
-        Tenant tenant1 = tenantService.saveOrUpdateTenant(tenant,principal.getName());
-        return  new ResponseEntity<Tenant>(tenant1, HttpStatus.CREATED);
+        Tenant tenant1 = tenantService.saveOrUpdateTenant(tenant, principal.getName());
+        return new ResponseEntity<Tenant>(tenant1, HttpStatus.CREATED);
     }
 
     @GetMapping("/{tenantId}")
-    public  ResponseEntity<?> getTenantById(@PathVariable String tenantId, Principal principal){
-        Tenant tenant = tenantService.findByNip(tenantId,principal.getName());
+    public ResponseEntity<?> getTenantById(@PathVariable String tenantId, Principal principal) {
+        Tenant tenant = tenantService.findByNip(tenantId, principal.getName());
         System.out.println(tenant.getNip());
-        return new ResponseEntity<Tenant>(tenant,HttpStatus.OK);
+        return new ResponseEntity<Tenant>(tenant, HttpStatus.OK);
     }
 
     @GetMapping("/all")
-    public Iterable<Tenant> getAllTenants(Principal principal){
-        return  tenantService.findAllTenants(principal.getName());
+    public Iterable<Tenant> getAllTenants(Principal principal) {
+        return tenantService.findAllTenants(principal.getName());
     }
 
     @DeleteMapping("/{tenantId}")
-    public ResponseEntity<?> deleteTenant(@PathVariable String tenantId, Principal principal){
-        tenantService.deleteTenantByNip(tenantId,principal.getName());
-        return new ResponseEntity<String>("Tenant with Nip: " + tenantId + " was deleted",HttpStatus.OK);
+    public ResponseEntity<?> deleteTenant(@PathVariable String tenantId, Principal principal) {
+        tenantService.deleteTenantByNip(tenantId, principal.getName());
+        return new ResponseEntity<String>("Tenant with Nip: " + tenantId + " was deleted", HttpStatus.OK);
     }
 
 }

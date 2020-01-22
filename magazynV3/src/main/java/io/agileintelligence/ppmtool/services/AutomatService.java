@@ -4,9 +4,7 @@ import io.agileintelligence.ppmtool.domain.Automat;
 import io.agileintelligence.ppmtool.domain.Product;
 import io.agileintelligence.ppmtool.domain.Tenant;
 import io.agileintelligence.ppmtool.domain.User;
-import io.agileintelligence.ppmtool.exceptions.AutomatIdException;
-import io.agileintelligence.ppmtool.exceptions.AutomatNotFoundException;
-import io.agileintelligence.ppmtool.exceptions.ProjectNotFoundException;
+import io.agileintelligence.ppmtool.exceptions.*;
 import io.agileintelligence.ppmtool.repositories.AutomatRepository;
 import io.agileintelligence.ppmtool.repositories.ProductRepository;
 import io.agileintelligence.ppmtool.repositories.TenantRepository;
@@ -35,6 +33,9 @@ public class AutomatService {
 
     public Automat setTenant(String tenant_id, String automat_id, String username) {
         Automat automatGet = automatRepository.findBySerialNumber(automat_id);
+        if (automatGet == null) {
+            throw new AutomatNotFoundException("Cannot add tenant - Automat with Serial Number: " + automat_id + " doesn't exists");
+        }
         if (automatGet.getId() != null) {
             Automat existingAutomat = automatRepository.findBySerialNumber(automatGet.getSerialNumber());
             if (existingAutomat != null && (!existingAutomat.getAutomatLeader().equals(username))) {
@@ -45,34 +46,39 @@ public class AutomatService {
         }
         //czy istnieje tenant
         Tenant tenant = tenantService.findByNip(tenant_id, username);
+        if (tenant == null) {
+            throw new TenantNotFoundException(" Tenant with ID: " + tenant.getId() + "  does not exist ");
+        }
         automatGet.setTenant(tenant);
         return automatRepository.save(automatGet);
 
     }
 
-    public Automat addProduct(String automat_id, Long product_id, String username){
-        Automat automatGet = automatRepository.findBySerialNumber(automat_id);
-        Automat existingAutomat = automatRepository.findBySerialNumber(automatGet.getSerialNumber());
-        if (automatGet.getId() != null) {
+    public Automat addProduct(String automat_id, Long product_id, String username) {
+        Automat existingAutomat = automatRepository.findBySerialNumber(automat_id);
+        if (automat_id != null) {
             if (existingAutomat != null && (!existingAutomat.getAutomatLeader().equals(username))) {
                 throw new AutomatNotFoundException("Cannot add tenant - Automat is not your ");
             } else if (existingAutomat == null) {
-                throw new AutomatNotFoundException("Cannot add tenant - Automat with Serial Number: " + automatGet.getSerialNumber() + " doesn't exists");
+                throw new AutomatNotFoundException("Cannot add tenant - Automat with Serial Number: " + automat_id + " doesn't exists");
             }
         }
-        Optional<Product> productGet = productRepository.findById(product_id);
-        Product existingProduct = productGet.get();
-
-        if (product.getId() != null) {
-            Optional<Product> optionalExistingProduct = productRepository.findById(productGetId);
+        Optional<Product> optionalExistingProduct = productRepository.findById(product_id);
+        if (product_id != null) {
             if (optionalExistingProduct.isPresent() && (!optionalExistingProduct.get().getProductLeader().equals(username))) {
-                throw new ProjectNotFoundException(" Product is not your ");
-            } else
-            if (optionalExistingProduct.get() == null) {
-                throw new ProjectNotFoundException("Product with Name: " + product.getName() + " doesn't exists");
+                throw new ProductNotFoundException(" Product is not your ");
+            } else if (!optionalExistingProduct.isPresent()) {
+                throw new ProductNotFoundException("Product with Name: " + product_id + " doesn't exists");
             }
         }
-
+        if (optionalExistingProduct.isPresent()) {
+            Product existingProduct = optionalExistingProduct.get();
+            existingAutomat.getProducts().add(existingProduct);
+            existingProduct.getAutomats().add(existingAutomat);
+        } else {
+            throw new ProductNotFoundException("Product with ID: " + product_id + " doesn't exists");
+        }
+        return automatRepository.save(existingAutomat);
     }
 
     public Automat saveOrUpdateAutomat(Automat automat, String username) {

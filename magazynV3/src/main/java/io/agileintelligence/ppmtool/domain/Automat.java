@@ -54,7 +54,7 @@ public class Automat {
     @JoinTable(name = "automat_product",
             joinColumns = @JoinColumn(name = "automat_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    List<Product> products;
+    private List<Product> products;
 
     public Long getId() {
         return id;
@@ -126,6 +126,18 @@ public class Automat {
 
     public void setTenant(Tenant tenant) {
         this.tenant = tenant;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     @Override

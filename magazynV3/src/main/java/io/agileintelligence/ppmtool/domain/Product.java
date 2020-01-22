@@ -1,5 +1,7 @@
 package io.agileintelligence.ppmtool.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -20,7 +22,8 @@ public class Product {
 
     //many to many with Automat
     @ManyToMany(mappedBy = "products")
-    List<Automat> autoamts;
+    @JsonIgnore
+    private List<Automat> automats;
 
 
     public Long getId() {
@@ -53,6 +56,14 @@ public class Product {
 
     public void setProductLeader(String productLeader) {
         this.productLeader = productLeader;
+    }
+
+    public List<Automat> getAutomats() {
+        return automats;
+    }
+
+    public void setAutomats(List<Automat> automats) {
+        this.automats = automats;
     }
 
     @Override

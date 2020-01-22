@@ -19,7 +19,6 @@ public class TenantService {
     public Tenant saveOrUpdateTenant(Tenant tenant, String username) {
         String tenantNipGet = tenant.getNip().toUpperCase();
         if (tenant.getId() != null) {
-            System.out.println("jest");
             Tenant existingTenant = tenantRepository.findByNip(tenant.getNip());
             if (existingTenant != null && (!existingTenant.getTenantLeader().equals(username))) {
                 throw new TenantNotFoundException(" Tenant is not your ");

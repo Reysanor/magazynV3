@@ -22,6 +22,7 @@ class Dashboard extends Component {
             <div className="col-md-12">
               <h1 className="display-4 text-center">Projects</h1>
               <br />
+              {/*przycisk do utworzenia nowego projektu */}
               <CreateProjectButton />
               <br />
               <hr />

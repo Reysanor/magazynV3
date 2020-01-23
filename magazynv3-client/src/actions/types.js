@@ -1,4 +1,8 @@
 export const GET_ERRORS = "GET_ERRORS";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
+
+//Project
+
 export const GET_PROJECTS = "GET_PROJECTS";
 export const GET_PROJECT = "GET_PROJECT";
 export const DELETE_PROJECT = "DELETE_PROJECT";
@@ -10,4 +14,12 @@ export const DELETE_PROJECT = "DELETE_PROJECT";
 export const GET_BACKLOG = "GET_BACKLOG";
 export const GET_PROJECT_TASK = "GET_PROJECT_TASK";
 export const DELETE_PROJECT_TASK = "DELETE_PROJECT_TASK";
-export const SET_CURRENT_USER = "SET_CURRENT_USER";
+
+
+
+//Tenant
+
+
+export const GET_TENANT = "GET_TENANT";
+export const GET_TENANTS = "GET_TENANTS";
+export const DELETE_TENANT= "DELETE_TENANT";

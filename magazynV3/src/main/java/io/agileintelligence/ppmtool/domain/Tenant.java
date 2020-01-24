@@ -15,6 +15,8 @@ public class Tenant {
     @Size(min = 10, max = 10, message = "Please use 10 characters")
     @Column(updatable = false, unique = true)
     private String nip;
+    @NotBlank(message = "Name is required")
+    private String name;
     @NotBlank(message = "Street is required")
     private String street;
     @NotBlank(message = "Zip Code is required")
@@ -97,16 +99,33 @@ public class Tenant {
         this.tenantLeader = tenantLeader;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Automat> getAutomaty() {
+        return automaty;
+    }
+
+    public void setAutomaty(List<Automat> automaty) {
+        this.automaty = automaty;
+    }
+
     @Override
     public String toString() {
-        return new StringJoiner(", ", Tenant.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
-                .add("nip='" + nip + "'")
-                .add("street='" + street + "'")
-                .add("zipCode='" + zipCode + "'")
-                .add("city='" + city + "'")
-                .add("phoneNumber='" + phoneNumber + "'")
-                .add("emailAddress='" + emailAddress + "'")
-                .toString();
+        return "Tenant{" +
+                "id=" + id +
+                ", nip='" + nip + '\'' +
+                ", name='" + name + '\'' +
+                ", street='" + street + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", city='" + city + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                '}';
     }
 }

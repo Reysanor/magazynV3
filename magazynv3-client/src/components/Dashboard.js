@@ -3,6 +3,7 @@ import ProjectItem from "./Project/ProjectItem";
 import CreateProjectButton from "./Project/CreateProjectButton";
 import { connect } from "react-redux";
 import { getProjects } from "../actions/projectActions";
+import { getTenants } from "../actions/tenantActions";
 import PropTypes from "prop-types";
 
 class Dashboard extends Component {
@@ -14,22 +15,43 @@ class Dashboard extends Component {
   render() {
     //pobieram projekty
     const { projects } = this.props.project;
+    const { tenants } = this.props.tenant;
     //mapuje przycisk z linkiem do tworzenia nowego projektu a poniżej utworzone projekty
     return (
-      <div className="projects">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <h1 className="display-4 text-center">Projects</h1>
-              <br />
-              {/*przycisk do utworzenia nowego projektu */}
-              <CreateProjectButton />
-              <br />
-              <hr />
-              {/*mapuje projekty i wyswietlam je jako projectItemy */}
-              {projects.map(project => (
-                <ProjectItem key={project.id} project={project} /> 
-              ))}
+      <div>
+
+        <div className="tenants">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                <h1 className="display-4 text-center">Tenants</h1>
+              
+                <hr />
+                {/*mapuje projekty i wyswietlam je jako projectItemy */}
+                {tenants.map(tenant => (
+                  <TenantItem key={tenant.id} tenant={tenant} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div className="projects">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                <h1 className="display-4 text-center">Projects</h1>
+                <br />
+                {/*przycisk do utworzenia nowego projektu */}
+                <CreateProjectButton />
+                <br />
+                <hr />
+                {/*mapuje projekty i wyswietlam je jako projectItemy */}
+                {projects.map(project => (
+                  <ProjectItem key={project.id} project={project} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -39,8 +61,8 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-//przekazuje funkcje, isRequired oznacza że jest niezbędna do działania componentu
-//jednocześnie określa wymagany typ uzyskanego prop
+  //przekazuje funkcje, isRequired oznacza że jest niezbędna do działania componentu
+  //jednocześnie określa wymagany typ uzyskanego prop
   project: PropTypes.object.isRequired,
   getProjects: PropTypes.func.isRequired
 };
@@ -50,7 +72,7 @@ const mapStateToProps = state => ({
 });
 //łączenie componentu z state
 export default connect(
-//podczas łączenie się ze state aplikacji wymagane jest zmapowanie wszystkich state do props
+  //podczas łączenie się ze state aplikacji wymagane jest zmapowanie wszystkich state do props
   mapStateToProps,
   { getProjects }
 )(Dashboard);

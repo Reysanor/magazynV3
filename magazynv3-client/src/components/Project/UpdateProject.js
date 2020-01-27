@@ -28,7 +28,7 @@ class UpdateProject extends Component {
     //jezeli mam błędy wstawiam je do obiektu errors 
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
-    } 
+    }
     //ustalenia wartosci this.state na dane z wybranego obiektu na starcie
     const {
       id,
@@ -99,11 +99,11 @@ class UpdateProject extends Component {
                 <div className="form-group">
                   <input
                     type="text"
-                      //https://getbootstrap.com/docs/4.3/components/forms/#how-it-works
-                      //           () = zbiór ciągów znaków dzięki classnames, 
-                      //wewnetrzny {} = zbiór zmiennych wartości, tutaj klasa bootstrapa invalid class dla errorów,
-                      //zewnetrzny {} = opakowanie dla className
-                      //is-invalid - kolor obwodu pola w formularzu na czerwony              
+                    //https://getbootstrap.com/docs/4.3/components/forms/#how-it-works
+                    //           () = zbiór ciągów znaków dzięki classnames, 
+                    //wewnetrzny {} = zbiór zmiennych wartości, tutaj klasa bootstrapa invalid class dla errorów,
+                    //zewnetrzny {} = opakowanie dla className
+                    //is-invalid - kolor obwodu pola w formularzu na czerwony              
                     className={classnames("form-control form-control-lg", {
                       "is-invalid": errors.projectName
                     })}
@@ -113,8 +113,9 @@ class UpdateProject extends Component {
                     onChange={this.onChange}
                   />
                   {errors.projectName && (
-                                       //Bootstrap klasa do zwracania informacji o błędzie na czerwono
-                    <div className="invalid-feedback">{errors.projectName}</div>
+                    //Bootstrap klasa do zwracania informacji o błędzie na czerwono
+                    <div className="invalid-feedback">{errors.projectName}
+                    </div>
                   )}
                 </div>
                 <div className="form-group">
@@ -176,9 +177,9 @@ class UpdateProject extends Component {
     );
   }
 }
-  //przekazuje funkcje, isRequired oznacza że jest niezbędna do działania componentu
-  //jednocześnie określa wymagany typ uzyskanego prop
-  //3 - tworze prop dla każdego z obiektów
+//przekazuje funkcje, isRequired oznacza że jest niezbędna do działania componentu
+//jednocześnie określa wymagany typ uzyskanego prop
+//3 - tworze prop dla każdego z obiektów
 UpdateProject.propTypes = {
   getProject: PropTypes.func.isRequired,
   createProject: PropTypes.func.isRequired,

@@ -22,7 +22,7 @@ class TenantItem extends Component {
                             <span className="mx-auto">{tenant.nip}</span>
                         </div>
                         <div className="col-lg-6 col-md-4 col-8">
-                            <h3>{tenant.name}</h3>
+                            <p>{tenant.name}</p>
                             <p>{tenant.street}</p>
                         </div>
                         </div>

@@ -56,7 +56,7 @@ export const getTenant = (id, history) => async dispatch => {
   }
 };
 
-export const deleteProject = id => async dispatch => {
+export const deleteTenant = id => async dispatch => {
   if (
     window.confirm(
       "Are you sure? This will delete the tenant and all the data related to it"

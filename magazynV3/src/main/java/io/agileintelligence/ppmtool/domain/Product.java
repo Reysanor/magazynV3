@@ -21,9 +21,9 @@ public class Product {
     private String productLeader;
 
     //many to many with Automat
-    @ManyToMany(mappedBy = "products")
-    @JsonIgnore
-    private List<Automat> automats;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    private List<AutomatToProduct> automatToProducts;
+
 
 
     public Long getId() {
@@ -58,12 +58,12 @@ public class Product {
         this.productLeader = productLeader;
     }
 
-    public List<Automat> getAutomats() {
-        return automats;
+    public List<AutomatToProduct> getAutomatToProducts() {
+        return automatToProducts;
     }
 
-    public void setAutomats(List<Automat> automats) {
-        this.automats = automats;
+    public void setAutomatToProducts(List<AutomatToProduct> automatToProducts) {
+        this.automatToProducts = automatToProducts;
     }
 
     @Override

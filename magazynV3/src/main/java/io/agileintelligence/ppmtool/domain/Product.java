@@ -21,9 +21,15 @@ public class Product {
     private String productLeader;
 
     //many to many with Automat
+<<<<<<< HEAD
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
 
     private List<AutomatToProduct> automatToProducts;
+=======
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    private List<AutomatToProduct> automatToProducts;
+
+>>>>>>> deda832bbb66852305e5f739b3460850a14edd12
 
 
     public Long getId() {
@@ -58,6 +64,16 @@ public class Product {
         this.productLeader = productLeader;
     }
 
+<<<<<<< HEAD
+=======
+    public List<AutomatToProduct> getAutomatToProducts() {
+        return automatToProducts;
+    }
+
+    public void setAutomatToProducts(List<AutomatToProduct> automatToProducts) {
+        this.automatToProducts = automatToProducts;
+    }
+>>>>>>> deda832bbb66852305e5f739b3460850a14edd12
 
     @Override
     public String toString() {

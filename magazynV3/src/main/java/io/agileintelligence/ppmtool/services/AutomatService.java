@@ -73,8 +73,13 @@ public class AutomatService {
         }
         if (optionalExistingProduct.isPresent()) {
             Product existingProduct = optionalExistingProduct.get();
+<<<<<<< HEAD
            // existingAutomat.getProducts().add(existingProduct);
            // existingProduct.getAutomats().add(existingAutomat);
+=======
+            //existingAutomat.getProducts().add(existingProduct);
+            //existingProduct.getAutomats().add(existingAutomat);
+>>>>>>> deda832bbb66852305e5f739b3460850a14edd12
         } else {
             throw new ProductNotFoundException("Product with ID: " + product_id + " doesn't exists");
         }

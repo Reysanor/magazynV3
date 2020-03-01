@@ -10,6 +10,7 @@ class TenantItem extends Component {
     onDeleteClick = id => {
         this.props.deleteTenant(id);
     };
+
     render() {
         //pobieram dane tenanta od dashboard
         //<span className="mx-auto">{tenant.nip}</span> = przykład wyświetlenia danych
@@ -25,9 +26,33 @@ class TenantItem extends Component {
                             <p>{tenant.name}</p>
                             <p>{tenant.street}</p>
                         </div>
-                        </div>
-                    </div>
+                        <div className="col-md-4 d-none d-lg-block">
+              <ul className="list-group">
+              
+                           {/*Link z parametrem (id tego tenanta)*/}
+                <Link to={`/updateTenant/${tenant.nip}`}>
+                  <li className="list-group-item update">
+                    <i className="fa fa-edit pr-1"> Update Tenant Info</i>
+                  </li>
+                </Link>
+
+                <li
+                  className="list-group-item delete"
+                  onClick={this.onDeleteClick.bind(
+                    this,
+                    //uzyskuje z props od rodzica (Wybranego tenanta na liscie Projektów)
+                    tenant.nip
+                  )}
+                >
+                  {/* funkcja kasowania z routera */}
+                  <i className="fa fa-minus-circle pr-1"> Delete Tenant</i>
+                </li>
+              </ul>
             </div>
+          </div>
+                     
+     </div>
+    </div>
         );
     }
 }

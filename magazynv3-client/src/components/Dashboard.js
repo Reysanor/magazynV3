@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ProjectItem from "./Project/ProjectItem";
 import TenantItem from "./Tenant/TenantItem";
 import CreateProjectButton from "./Project/CreateProjectButton";
+import CreateTenantButton from "./Tenant/CreateTenantButton";
 import { connect } from "react-redux";
 import { getProjects } from "../actions/projectActions";
 import { getTenants } from "../actions/tenantActions";
@@ -28,7 +29,10 @@ class Dashboard extends Component {
         <div className="row">
           <div className="col-md-12">
             <h1 className="display-4 text-center">Tenants</h1>
-          
+            <br />
+          {/*przycisk do utworzenia nowego Wynajmujacego */}
+          <CreateTenantButton />
+          <br />
             <hr />
             {/*mapuje projekty i wyswietlam je jako projectItemy */}
             {tenants.map(tenant => (

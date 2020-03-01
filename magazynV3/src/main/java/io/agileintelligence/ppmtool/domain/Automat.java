@@ -47,11 +47,7 @@ public class Automat {
     private String automatLeader;
 
     //many to many with Product
-<<<<<<< HEAD
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "automat")
-=======
-    @OneToMany(mappedBy = "automat", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
->>>>>>> deda832bbb66852305e5f739b3460850a14edd12
     private List<AutomatToProduct> automatToProducts;
 
     public Long getId() {
@@ -130,17 +126,7 @@ public class Automat {
         this.capacity = capacity;
     }
 
-<<<<<<< HEAD
 
-=======
-    public List<AutomatToProduct> getAutomatToProducts() {
-        return automatToProducts;
-    }
-
-    public void setAutomatToProducts(List<AutomatToProduct> automatToProducts) {
-        this.automatToProducts = automatToProducts;
-    }
->>>>>>> deda832bbb66852305e5f739b3460850a14edd12
 
     @Override
     public String toString() {

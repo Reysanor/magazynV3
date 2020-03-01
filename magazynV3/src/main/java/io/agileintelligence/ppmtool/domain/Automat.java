@@ -47,14 +47,8 @@ public class Automat {
     private String automatLeader;
 
     //many to many with Product
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(name = "automat_product",
-            joinColumns = @JoinColumn(name = "automat_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> products;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "automat")
+    private List<AutomatToProduct> automatToProducts;
 
     public Long getId() {
         return id;
@@ -132,13 +126,7 @@ public class Automat {
         this.capacity = capacity;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
 
     @Override
     public String toString() {

@@ -38,6 +38,14 @@ public class AutomatController {
         return new ResponseEntity<Automat>(automat1, HttpStatus.CREATED);
 
     }
+/*
+    @PostMapping("/{automatId}/{productId}")
+    public ResponseEntity<?> addProductToAutomat(@PathVariable String automatId,@PathVariable Long productId, Principal principal){
+        Automat automat = automatService.addProduct(automatId,productId,principal.getName());
+        return  new ResponseEntity<Automat>(automat,HttpStatus.OK);
+
+    }
+*/
 
     @PostMapping("/{automatId}/{productId}")
     public ResponseEntity<?> addProductToAutomat(@PathVariable String automatId,@PathVariable Long productId, Principal principal){
@@ -45,6 +53,7 @@ public class AutomatController {
         return  new ResponseEntity<Automat>(automat,HttpStatus.OK);
 
     }
+
 
     @GetMapping("/{automatId}")
     public ResponseEntity<?> getAutomatById(@PathVariable String automatId, Principal principal) {

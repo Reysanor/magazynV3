@@ -27,10 +27,12 @@ public class Automat {
     //@NotBlank(message = "Type is required")
     private String type;
     @Column(updatable = false)
+
     @NotNull(message = "Capacity is required")
     @Min(value = 18, message = "Capacity should not be less than 18")
     @Max(value = 150, message = "Capacity should not be greater than 150")
     private Integer capacity;
+
     @NotBlank(message = "State is required")
     private String state;
     @NotNull(message = "Production date is required")
@@ -47,7 +49,8 @@ public class Automat {
     private String automatLeader;
 
     //many to many with Product
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "automat")
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "automat")
     private List<AutomatToProduct> automatToProducts;
 
     public Long getId() {
@@ -126,7 +129,13 @@ public class Automat {
         this.capacity = capacity;
     }
 
+    public List<AutomatToProduct> getAutomatToProducts() {
+        return automatToProducts;
+    }
 
+    public void setAutomatToProducts(List<AutomatToProduct> automatToProducts) {
+        this.automatToProducts = automatToProducts;
+    }
 
     @Override
     public String toString() {

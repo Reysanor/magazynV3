@@ -1,18 +1,14 @@
 package io.agileintelligence.ppmtool.services;
 
-import io.agileintelligence.ppmtool.domain.Automat;
-import io.agileintelligence.ppmtool.domain.Product;
-import io.agileintelligence.ppmtool.domain.Tenant;
-import io.agileintelligence.ppmtool.domain.User;
+import io.agileintelligence.ppmtool.domain.*;
 import io.agileintelligence.ppmtool.exceptions.*;
-import io.agileintelligence.ppmtool.repositories.AutomatRepository;
-import io.agileintelligence.ppmtool.repositories.ProductRepository;
-import io.agileintelligence.ppmtool.repositories.TenantRepository;
-import io.agileintelligence.ppmtool.repositories.UserRepository;
+import io.agileintelligence.ppmtool.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
+import static java.lang.Long.parseLong;
 
 @Service
 public class AutomatService {
@@ -30,6 +26,9 @@ public class AutomatService {
 
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    AutomatToProductRepository automatToProductRepository;
 
     public Automat setTenant(String tenant_id, String automat_id, String username) {
         Automat automatGet = automatRepository.findBySerialNumber(automat_id);
@@ -54,32 +53,7 @@ public class AutomatService {
 
     }
 
-    public Automat addProduct(String automat_id, Long product_id, String username) {
-        Automat existingAutomat = automatRepository.findBySerialNumber(automat_id);
-        if (automat_id != null) {
-            if (existingAutomat != null && (!existingAutomat.getAutomatLeader().equals(username))) {
-                throw new AutomatNotFoundException("Cannot add tenant - Automat is not your ");
-            } else if (existingAutomat == null) {
-                throw new AutomatNotFoundException("Cannot add tenant - Automat with Serial Number: " + automat_id + " doesn't exists");
-            }
-        }
-        Optional<Product> optionalExistingProduct = productRepository.findById(product_id);
-        if (product_id != null) {
-            if (optionalExistingProduct.isPresent() && (!optionalExistingProduct.get().getProductLeader().equals(username))) {
-                throw new ProductNotFoundException(" Product is not your ");
-            } else if (!optionalExistingProduct.isPresent()) {
-                throw new ProductNotFoundException("Product with Name: " + product_id + " doesn't exists");
-            }
-        }
-        if (optionalExistingProduct.isPresent()) {
-            Product existingProduct = optionalExistingProduct.get();
-           // existingAutomat.getProducts().add(existingProduct);
-           // existingProduct.getAutomats().add(existingAutomat);
-        } else {
-            throw new ProductNotFoundException("Product with ID: " + product_id + " doesn't exists");
-        }
-        return automatRepository.save(existingAutomat);
-    }
+
 
     public Automat saveOrUpdateAutomat(Automat automat, String username) {
         String automatSerialNumberGet = automat.getSerialNumber().toUpperCase();
@@ -125,9 +99,11 @@ public class AutomatService {
         return automatRepository.findAll();
     }
 
+
     public void deleteAutomatBySerialNumber(String serialNumber, String username) {
         automatRepository.delete(findBySerialNumber(serialNumber, username));
     }
+
 
 
 }

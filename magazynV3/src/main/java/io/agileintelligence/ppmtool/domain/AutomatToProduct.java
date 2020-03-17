@@ -5,21 +5,23 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 import java.util.StringJoiner;
 
 @Entity
-@IdClass(AutomatToProductId.class)
+//@IdClass(AutomatToProductId.class)
 public class AutomatToProduct  {
 
     @Id
-    private String key;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Id
+   // @Id
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "automat_id")
     private Automat automat;
-    @Id
+    //@Id
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "product_id")
     private Product product;
@@ -27,7 +29,10 @@ public class AutomatToProduct  {
     @NotNull(message = "Price is required")
     @Min(value = 1, message = "Price should not be less than 1")
     @Max(value = 5, message = "Price should not be greater than 5")
-    private Integer price;
+    private Double price;
+
+    @OneToMany(mappedBy = "automatToProduct", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private Set<InsertedProduct> insertedProducts;
 
     public Automat getAutomat() {
         return automat;
@@ -45,11 +50,11 @@ public class AutomatToProduct  {
         this.product = product;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -63,12 +68,20 @@ public class AutomatToProduct  {
         return super.equals(obj);
     }
 
-    public String getKey() {
-        return key;
+    public Long getId() {
+        return id;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Set<InsertedProduct> getInsertedProducts() {
+        return insertedProducts;
+    }
+
+    public void setInsertedProducts(Set<InsertedProduct> insertedProducts) {
+        this.insertedProducts = insertedProducts;
     }
 
     @Override
@@ -80,28 +93,31 @@ public class AutomatToProduct  {
                 .toString();
     }
 }
+/*
 
+    class AutomatToProductId implements Serializable {
+        private Automat automat; // Corresponds to the type of Person ID
+        private Product product; // Corresponds to the type of Branch ID
 
-class AutomatToProductId implements Serializable {
-    private Automat automat; // Corresponds to the type of Person ID
-    private Product product; // Corresponds to the type of Branch ID
+        public AutomatToProductId(){
 
-    public AutomatToProductId(){
+        }
 
+        public AutomatToProductId(Automat automat, Product product){
+            this.automat=automat;
+            this.product=product;
+        }
+
+        @Override
+        public int hashCode() {
+            return super.hashCode();
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return super.equals(obj);
+        }
     }
 
-    public AutomatToProductId(Automat automat, Product product){
-        this.automat=automat;
-        this.product=product;
-    }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
-}
+ */

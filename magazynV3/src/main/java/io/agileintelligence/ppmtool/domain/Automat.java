@@ -7,10 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.StringJoiner;
+import java.util.*;
 
 @Entity
 public class Automat {
@@ -52,6 +49,10 @@ public class Automat {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "automat")
     private List<AutomatToProduct> automatToProducts;
+
+
+    @OneToMany(mappedBy = "automat", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private Set<FundsDrawn> fundsDrawns;
 
     public Long getId() {
         return id;
@@ -131,6 +132,14 @@ public class Automat {
 
     public List<AutomatToProduct> getAutomatToProducts() {
         return automatToProducts;
+    }
+
+    public Set<FundsDrawn> getFundsDrawns() {
+        return fundsDrawns;
+    }
+
+    public void setFundsDrawns(Set<FundsDrawn> fundsDrawns) {
+        this.fundsDrawns = fundsDrawns;
     }
 
     public void setAutomatToProducts(List<AutomatToProduct> automatToProducts) {

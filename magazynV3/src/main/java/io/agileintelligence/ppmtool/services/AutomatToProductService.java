@@ -64,4 +64,11 @@ public class AutomatToProductService {
         Product existingProduct = optionalExistingProduct.get();
         automatToProductRepository.delete(automatToProductRepository.findByAutomatAndProduct(existingAutomat, existingProduct));
     }
+
+    public AutomatToProduct findAutomatToProduct(String automatId, Long productId, String name) {
+        Automat existingAutomat = automatRepository.findBySerialNumber(automatId);
+        Optional<Product> optionalExistingProduct = productRepository.findById(productId);
+        Product existingProduct = optionalExistingProduct.get();
+        return automatToProductRepository.findByAutomatAndProduct(existingAutomat,existingProduct);
+    }
 }

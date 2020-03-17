@@ -60,7 +60,7 @@ public class AutomatController {
         return new ResponseEntity<String>("Automat with SerialNumber: " + automatId + " was deleted", HttpStatus.OK);
     }
 
-    @PostMapping("/{automatId}/{productId}")
+    @PostMapping("/products/{automatId}/{productId}")
     public ResponseEntity<?> addProductToAutomat(@PathVariable String automatId, @PathVariable Long productId, @Valid @RequestBody AutomatToProduct automatToProduct, BindingResult result, Principal principal) {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if (errorMap != null) return errorMap;
@@ -74,10 +74,16 @@ public class AutomatController {
         return automatToProductService.findAllAutomatsToProducts(automatId,principal.getName());
     }
 
+    @GetMapping("/products/{automatId}/{productId}")
+    public AutomatToProduct getAutomatToProduct(@PathVariable String automatId, @PathVariable Long productId,Principal principal) {
+        return automatToProductService.findAutomatToProduct(automatId,productId,principal.getName());
+    }
+
     @DeleteMapping("/products/{automatId}/{productId}")
     public ResponseEntity<?> deleteAutomatToProduct(@PathVariable String automatId, @PathVariable Long productId, Principal principal) {
         automatToProductService.deleteAutomatToProduct(automatId,productId, principal.getName());
         return new ResponseEntity<String>("Connection between automat: " + automatId + " and product" + productId + " was deleted", HttpStatus.OK);
     }
+
 
 }

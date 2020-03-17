@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Product {
@@ -23,9 +24,12 @@ public class Product {
     //many to many with Automat
     @JsonIgnore
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true ,mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     private List<AutomatToProduct> automatToProducts;
 
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private Set<PurchasedProduct> purchasedProducts;
 
     public Long getId() {
         return id;

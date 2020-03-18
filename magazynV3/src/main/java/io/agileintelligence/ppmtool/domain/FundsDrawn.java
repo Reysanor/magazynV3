@@ -20,9 +20,40 @@ public class FundsDrawn {
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date dateOfDrawn;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "automat_id")
     @JsonIgnore
     private Automat automat;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public Date getDateOfDrawn() {
+        return dateOfDrawn;
+    }
+
+    public void setDateOfDrawn(Date dateOfDrawn) {
+        this.dateOfDrawn = dateOfDrawn;
+    }
+
+    public Automat getAutomat() {
+        return automat;
+    }
+
+    public void setAutomat(Automat automat) {
+        this.automat = automat;
+    }
 }

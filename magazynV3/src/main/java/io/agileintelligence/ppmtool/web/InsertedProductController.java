@@ -23,30 +23,29 @@ public class InsertedProductController {
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
-    @PostMapping("")
-    public ResponseEntity<?> createNewInsertedProduct(@Valid @RequestBody InsertedProduct insertedProduct, BindingResult result, Principal principal) {
+    @PostMapping("{automatToProductId}")
+    public ResponseEntity<?> createNewInsertedProduct(@Valid @RequestBody InsertedProduct insertedProduct,BindingResult result, @PathVariable Long automatToProductId, Principal principal) {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
-
         if (errorMap != null) return errorMap;
 
-        InsertedProduct insertedProduct1 = insertedProductService.saveOrUpdateInsertedProduct(insertedProduct, principal.getName());
+        InsertedProduct insertedProduct1 = insertedProductService.saveOrUpdateInsertedProduct(insertedProduct,automatToProductId);
         return new ResponseEntity<InsertedProduct>(insertedProduct1, HttpStatus.CREATED);
     }
 
     @GetMapping("/{insertedProductId}")
     public ResponseEntity<?> getInsertedProductById(@PathVariable Long insertedProductId, Principal principal) {
-        InsertedProduct insertedProduct = insertedProductService.findById(insertedProductId,principal.getName());
+        InsertedProduct insertedProduct = insertedProductService.findById(insertedProductId);
         return new ResponseEntity<InsertedProduct>(insertedProduct, HttpStatus.OK);
     }
 
     @GetMapping("/all")
     public Iterable<InsertedProduct> getAllInsertedProducts(Principal principal) {
-        return insertedProductService.findAllInsertedProducts(principal.getName());
+        return insertedProductService.findAllInsertedProducts();
     }
 
     @DeleteMapping("/{insertedProductId}")
     public ResponseEntity<?> deleteInsertedProduct(@PathVariable Long insertedProductId, Principal principal) {
-        insertedProductService.deleteInsertedProductByName(insertedProductId, principal.getName());
+        insertedProductService.deleteInsertedProductByName(insertedProductId);
         return new ResponseEntity<String>("Inserted Product with id " + insertedProductId + " was deleted", HttpStatus.OK);
     }
 }

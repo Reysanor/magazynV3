@@ -26,27 +26,26 @@ public class FundsDrawnController {
     @PostMapping("")
     public ResponseEntity<?> createNewFundDrawn(@Valid @RequestBody FundsDrawn fundsDrawn, BindingResult result, Principal principal) {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
-
         if (errorMap != null) return errorMap;
 
-        FundsDrawn fundsDrawn1 = fundsDrawnService.saveOrUpdateFundDrawn(fundsDrawn, principal.getName());
+        FundsDrawn fundsDrawn1 = fundsDrawnService.saveOrUpdateFundDrawn(fundsDrawn);
         return new ResponseEntity<FundsDrawn>(fundsDrawn1, HttpStatus.CREATED);
     }
 
     @GetMapping("/{fundDrawnId}")
     public ResponseEntity<?> getFundDrawnById(@PathVariable Long fundDrawnId, Principal principal) {
-        FundsDrawn fundsDrawn = fundsDrawnService.findById(fundDrawnId,principal.getName());
+        FundsDrawn fundsDrawn = fundsDrawnService.findById(fundDrawnId);
         return new ResponseEntity<FundsDrawn>(fundsDrawn, HttpStatus.OK);
     }
 
     @GetMapping("/all")
     public Iterable<FundsDrawn> getAllFundDrawns(Principal principal) {
-        return fundsDrawnService.findAllFundsDrawns(principal.getName());
+        return fundsDrawnService.findAllFundsDrawns();
     }
 
     @DeleteMapping("/{fundDrawnId}")
     public ResponseEntity<?> deleteFundDrawn(@PathVariable Long fundDrawnId, Principal principal) {
-        fundsDrawnService.deleteFundsDrawnByName(fundDrawnId, principal.getName());
+        fundsDrawnService.deleteFundsDrawnByName(fundDrawnId);
         return new ResponseEntity<String>("Funds Drawn with id " + fundDrawnId + " was deleted", HttpStatus.OK);
     }
 }

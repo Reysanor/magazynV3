@@ -24,28 +24,29 @@ public class PurchasedProductController {
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
-    @PostMapping("")
-    public ResponseEntity<?> createNewPurchasedProduct(@Valid @RequestBody PurchasedProduct purchasedProduct, BindingResult result, Principal principal) {
+    @PostMapping("{productId}")
+    public ResponseEntity<?> createNewPurchasedProduct(@Valid @RequestBody PurchasedProduct purchasedProduct,BindingResult result, @PathVariable Long productId, Principal principal) {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if (errorMap != null) return errorMap;
-        PurchasedProduct purchasedProduct1 = purchasedProductService.createNewPurchase(purchasedProduct,principal);
+
+        PurchasedProduct purchasedProduct1 = purchasedProductService.createNewPurchase(purchasedProduct,productId);
         return new ResponseEntity<PurchasedProduct>(purchasedProduct1, HttpStatus.CREATED);
 
     }
     @GetMapping("/{purchasedId}")
     public ResponseEntity<?> getPurchaseById(@PathVariable Long purchasedId, Principal principal) {
-        PurchasedProduct purchasedProduct1 = purchasedProductService.findById(purchasedId,principal);
+        PurchasedProduct purchasedProduct1 = purchasedProductService.findById(purchasedId);
         return new ResponseEntity<PurchasedProduct>(purchasedProduct1, HttpStatus.OK);
     }
 
     @GetMapping("/all")
     public Iterable<PurchasedProduct> getAllPurchases(Principal principal) {
-        return purchasedProductService.findAllPurchasedProducts(principal.getName());
+        return purchasedProductService.findAllPurchasedProducts();
     }
 
     @DeleteMapping("/{purchasedId}")
     public ResponseEntity<?> deleteAutomat(@PathVariable Long purchasedId, Principal principal) {
-        purchasedProductService.deletePurchasedProductById(purchasedId, principal.getName());
+        purchasedProductService.deletePurchasedProductById(purchasedId);
         return new ResponseEntity<String>("Purchase with Id: " + purchasedId + " was deleted", HttpStatus.OK);
     }
 }

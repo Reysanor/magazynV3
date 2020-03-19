@@ -42,8 +42,6 @@ public class Automat {
     @JsonIgnore
     private Tenant tenant;
 
-    //who own the Automat
-    private String automatLeader;
 
     //many to many with Product
     @JsonIgnore
@@ -108,14 +106,6 @@ public class Automat {
 
     public void setProductionDate(Date productionDate) {
         this.productionDate = productionDate;
-    }
-
-    public String getAutomatLeader() {
-        return automatLeader;
-    }
-
-    public void setAutomatLeader(String automatLeader) {
-        this.automatLeader = automatLeader;
     }
 
     public Tenant getTenant() {

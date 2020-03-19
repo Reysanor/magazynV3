@@ -14,7 +14,6 @@ public class FundsDrawn {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @NotNull(message = "Amount is required")
     private Double amount;
     @JsonFormat(pattern = "yyyy-mm-dd")

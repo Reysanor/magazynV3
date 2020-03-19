@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -20,7 +18,6 @@ public class InsertedProduct {
     private Integer number;
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date dateOfInsert;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "automat_to_product_id")
     @JsonIgnore

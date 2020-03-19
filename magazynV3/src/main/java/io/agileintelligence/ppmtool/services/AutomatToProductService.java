@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-
 @Service
 public class AutomatToProductService {
     @Autowired
@@ -30,16 +29,14 @@ public class AutomatToProductService {
         Optional<Product> optionalExistingProduct = productRepository.findById(productId);
         automatRepository.save(existingAutomat);
         if (automatId != null) {
-            if (existingAutomat != null && (!existingAutomat.getAutomatLeader().equals(username))) {
-                throw new AutomatNotFoundException("Cannot add tenant - Automat is not your ");
-            } else if (existingAutomat == null) {
+
+            if (existingAutomat == null) {
                 throw new AutomatNotFoundException("Cannot add tenant - Automat with Serial Number: " + automatId + " doesn't exists");
             }
         }
         if (productId != null) {
-            if (optionalExistingProduct.isPresent() && (!optionalExistingProduct.get().getProductLeader().equals(username))) {
-                throw new ProductNotFoundException(" Product is not your ");
-            } else if (!optionalExistingProduct.isPresent()) {
+
+             if (!optionalExistingProduct.isPresent()) {
                 throw new ProductNotFoundException("Product with Name: " + productId + " doesn't exists");
             }
         }

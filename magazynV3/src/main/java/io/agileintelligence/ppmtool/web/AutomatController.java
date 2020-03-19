@@ -46,7 +46,7 @@ public class AutomatController {
 
     @GetMapping("/all")
     public Iterable<Automat> getAllAutomats(Principal principal) {
-        return automatService.findAllAutomats(principal.getName());
+        return automatService.findAllAutomats();
     }
 
     @DeleteMapping("/{automatId}")

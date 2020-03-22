@@ -28,24 +28,24 @@ public class AutomatToProductController {
     public ResponseEntity<?> addProductToAutomat(@PathVariable String automatId, @PathVariable Long productId, @Valid @RequestBody AutomatToProduct automatToProduct, BindingResult result, Principal principal) {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if (errorMap != null) return errorMap;
-        automatToProductService.addProductToAutomat(automatId, productId, automatToProduct, principal.getName());
+        automatToProductService.addProductToAutomat(automatId, productId, automatToProduct);
         return new ResponseEntity<AutomatToProduct>(automatToProduct, HttpStatus.OK);
 
     }
 
     @GetMapping("/{automatId}")
     public Iterable<AutomatToProduct> getAllAutomatsToProducts(@PathVariable String automatId, Principal principal) {
-        return automatToProductService.findAllAutomatsToProducts(automatId,principal.getName());
+        return automatToProductService.findAllAutomatsToProducts(automatId);
     }
 
     @GetMapping("/{automatId}/{productId}")
     public AutomatToProduct getAutomatToProduct(@PathVariable String automatId, @PathVariable Long productId,Principal principal) {
-        return automatToProductService.findAutomatToProduct(automatId,productId,principal.getName());
+        return automatToProductService.findAutomatToProduct(automatId,productId);
     }
 
     @DeleteMapping("/{automatId}/{productId}")
     public ResponseEntity<?> deleteAutomatToProduct(@PathVariable String automatId, @PathVariable Long productId, Principal principal) {
-        automatToProductService.deleteAutomatToProduct(automatId,productId, principal.getName());
+        automatToProductService.deleteAutomatToProduct(automatId,productId);
         return new ResponseEntity<String>("Connection between automat: " + automatId + " and product" + productId + " was deleted", HttpStatus.OK);
     }
 

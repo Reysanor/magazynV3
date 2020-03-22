@@ -71,4 +71,56 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleFundsDrawnNotFoundException(FundsDrawnNotFoundException ex, WebRequest request) {
+
+        FundsDrawnNotFoundExceptionResponse exceptionResponse = new FundsDrawnNotFoundExceptionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleFundsDrawnIdException(FundsDrawnIdException ex, WebRequest request) {
+        FundsDrawnIdException exceptionResponse = new FundsDrawnIdException(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handlePurchasedProductNotFoundException(PurchasedProductNotFoundException ex, WebRequest request) {
+
+        PurchasedProductNotFoundExceptionResponse exceptionResponse = new PurchasedProductNotFoundExceptionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handlePurchasedProductIdException(PurchasedProductIdException ex, WebRequest request) {
+        PurchasedProductIdException exceptionResponse = new PurchasedProductIdException(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleInsertedProductNotFoundException(InsertedProductNotFoundException ex, WebRequest request) {
+
+        InsertedProductNotFoundExceptionResponse exceptionResponse = new InsertedProductNotFoundExceptionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleInsertedProductIdException(InsertedProductIdException ex, WebRequest request) {
+        InsertedProductIdException exceptionResponse = new InsertedProductIdException(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleAutomatToProductNotFoundException(AutomatToProductNotFoundException ex, WebRequest request) {
+
+        AutomatToProductNotFoundExceptionResponse exceptionResponse = new AutomatToProductNotFoundExceptionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleAutomatToProductIdException(AutomatToProductIdException ex, WebRequest request) {
+        AutomatToProductIdException exceptionResponse = new AutomatToProductIdException(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
 }

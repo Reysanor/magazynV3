@@ -34,7 +34,7 @@ public class TenantController {
        // ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         //if (errorMap != null) return errorMap;
 
-        Automat automat1 = automatService.setTenant(tenant_id, automat_id, principal.getName());
+        Automat automat1 = automatService.setTenant(tenant_id, automat_id);
 
         return new ResponseEntity<Automat>(automat1, HttpStatus.CREATED);
     }
@@ -50,7 +50,7 @@ public class TenantController {
 
     @GetMapping("/{tenantId}")
     public ResponseEntity<?> getTenantById(@PathVariable String tenantId, Principal principal) {
-        Tenant tenant = tenantService.findByNip(tenantId, principal.getName());
+        Tenant tenant = tenantService.findByNip(tenantId);
         System.out.println(tenant.getNip());
         return new ResponseEntity<Tenant>(tenant, HttpStatus.OK);
     }

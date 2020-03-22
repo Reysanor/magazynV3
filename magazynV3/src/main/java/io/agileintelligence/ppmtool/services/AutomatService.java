@@ -27,10 +27,7 @@ public class AutomatService {
     @Autowired
     ProductRepository productRepository;
 
-    @Autowired
-    AutomatToProductRepository automatToProductRepository;
-
-    public Automat setTenant(String tenant_id, String automat_id, String username) {
+    public Automat setTenant(String tenant_id, String automat_id) {
         Automat automatGet = automatRepository.findBySerialNumber(automat_id);
         if (automatGet == null) {
             throw new AutomatNotFoundException("Cannot add tenant - Automat with Serial Number: " + automat_id + " doesn't exists");
@@ -42,15 +39,16 @@ public class AutomatService {
             }
         }
         //czy istnieje tenant
-        Tenant tenant = tenantService.findByNip(tenant_id, username);
+        Tenant tenant = tenantService.findByNip(tenant_id);
         if (tenant == null) {
-            throw new TenantNotFoundException(" Tenant with ID: " + tenant.getId() + "  does not exist ");
+            throw new TenantNotFoundException(" Tenant with ID: " + tenant_id + "  does not exist ");
         }
         automatGet.setTenant(tenant);
         return automatRepository.save(automatGet);
 
     }
-    public Automat saveOrUpdateAutomat(Automat automat, String username) {
+
+    public Automat saveOrUpdateAutomat(Automat automat) {
         String automatSerialNumberGet = automat.getSerialNumber().toUpperCase();
 
         if (automat.getId() != null) {
@@ -69,7 +67,12 @@ public class AutomatService {
         }
     }
 
-    public Automat findBySerialNumber(String serialNumber, String username) {
+
+
+
+
+
+    public Automat findBySerialNumber(String serialNumber) {
 
         Automat automat = automatRepository.findBySerialNumber(serialNumber);
         if (automat == null) {
@@ -81,8 +84,10 @@ public class AutomatService {
     public Iterable<Automat> findAllAutomats() {
         return automatRepository.findAll();
     }
-    public void deleteAutomatBySerialNumber(String serialNumber, String username) {
-        automatRepository.delete(findBySerialNumber(serialNumber, username));
+
+
+    public void deleteAutomatBySerialNumber(String serialNumber) {
+        automatRepository.delete(findBySerialNumber(serialNumber));
     }
 
 

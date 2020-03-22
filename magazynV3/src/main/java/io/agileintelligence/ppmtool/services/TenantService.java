@@ -39,7 +39,7 @@ public class TenantService {
         }
     }
 
-    public Tenant findByNip(String nip, String username){
+    public Tenant findByNip(String nip){
 
         Tenant tenant = tenantRepository.findByNip(nip);
 
@@ -57,6 +57,6 @@ public class TenantService {
     }
 
     public void deleteTenantByNip(String nip, String username){
-        tenantRepository.delete(findByNip(nip,username));
+        tenantRepository.delete(findByNip(nip));
     }
 }

@@ -31,7 +31,7 @@ public class ProductService {
             if (optionalExistingProduct.isPresent() && (!optionalExistingProduct.get().getProductLeader().equals(username))) {
                 throw new ProjectNotFoundException(" Product is not your ");
             } else
-                if (optionalExistingProduct.get() == null) {
+                if (!optionalExistingProduct.isPresent()) {
                 throw new ProjectNotFoundException("Product with Name: " + product.getName() + " doesn't exists");
             }
         }

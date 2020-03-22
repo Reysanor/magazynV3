@@ -3,8 +3,7 @@ package io.agileintelligence.ppmtool.services;
 import io.agileintelligence.ppmtool.domain.Automat;
 import io.agileintelligence.ppmtool.domain.AutomatToProduct;
 import io.agileintelligence.ppmtool.domain.Product;
-import io.agileintelligence.ppmtool.exceptions.AutomatNotFoundException;
-import io.agileintelligence.ppmtool.exceptions.ProductNotFoundException;
+import io.agileintelligence.ppmtool.exceptions.*;
 import io.agileintelligence.ppmtool.repositories.AutomatRepository;
 import io.agileintelligence.ppmtool.repositories.AutomatToProductRepository;
 import io.agileintelligence.ppmtool.repositories.ProductRepository;
@@ -24,7 +23,7 @@ public class AutomatToProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public void addProductToAutomat(String automatId, Long productId, AutomatToProduct automatToProduct, String username) {
+    public void addProductToAutomat(String automatId, Long productId, AutomatToProduct automatToProduct) {
         Automat existingAutomat = automatRepository.findBySerialNumber(automatId);
         Optional<Product> optionalExistingProduct = productRepository.findById(productId);
         automatRepository.save(existingAutomat);
@@ -36,7 +35,7 @@ public class AutomatToProductService {
         }
         if (productId != null) {
 
-             if (!optionalExistingProduct.isPresent()) {
+            if (!optionalExistingProduct.isPresent()) {
                 throw new ProductNotFoundException("Product with Name: " + productId + " doesn't exists");
             }
         }
@@ -51,21 +50,28 @@ public class AutomatToProductService {
         automatRepository.save(existingAutomat);
     }
 
-    public Iterable<AutomatToProduct> findAllAutomatsToProducts(String automatId, String username) {
+    public Iterable<AutomatToProduct> findAllAutomatsToProducts(String automatId) {
         return automatToProductRepository.findByAutomat(automatRepository.findBySerialNumber(automatId));
     }
 
-    public void deleteAutomatToProduct(String automatId, Long productId, String username) {
-        Automat existingAutomat = automatRepository.findBySerialNumber(automatId);
-        Optional<Product> optionalExistingProduct = productRepository.findById(productId);
-        Product existingProduct = optionalExistingProduct.get();
-        automatToProductRepository.delete(automatToProductRepository.findByAutomatAndProduct(existingAutomat, existingProduct));
+    public void deleteAutomatToProduct(String automatId, Long productId) {
+
+        automatToProductRepository.delete(findAutomatToProduct(automatId, productId));
     }
 
-    public AutomatToProduct findAutomatToProduct(String automatId, Long productId, String name) {
+    public AutomatToProduct findAutomatToProduct(String automatId, Long productId) {
         Automat existingAutomat = automatRepository.findBySerialNumber(automatId);
         Optional<Product> optionalExistingProduct = productRepository.findById(productId);
+
+        if (!optionalExistingProduct.isPresent()) {
+            throw new ProductIdException("Product with id: " + productId + " doesn't exists");
+        }
         Product existingProduct = optionalExistingProduct.get();
-        return automatToProductRepository.findByAutomatAndProduct(existingAutomat,existingProduct);
+
+        if (existingAutomat == null) {
+            throw new AutomatIdException("Automat with Serial Number  '" + automatId + "' already exists");
+
+        }
+        return automatToProductRepository.findByAutomatAndProduct(existingAutomat, existingProduct);
     }
 }

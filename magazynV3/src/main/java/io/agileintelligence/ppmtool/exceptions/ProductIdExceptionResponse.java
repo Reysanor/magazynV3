@@ -1,19 +1,17 @@
 package io.agileintelligence.ppmtool.exceptions;
 
 public class ProductIdExceptionResponse {
-    private String automatNotFound;
+    private String productNotFound;
 
-    public String getAutomatNotFound() {
-        return automatNotFound;
+    public String getProductNotFound() {
+        return productNotFound;
     }
 
-    public void setAutomatNotFound(String automatNotFound) {
-        this.automatNotFound = automatNotFound;
+    public void setProductNotFound(String productNotFound) {
+        this.productNotFound = productNotFound;
     }
 
-    public ProductIdExceptionResponse(String automatNotFound) {
-        this.automatNotFound = automatNotFound;
-
-
+    public ProductIdExceptionResponse(String productNotFound) {
+        this.productNotFound = productNotFound;
     }
 }

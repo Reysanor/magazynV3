@@ -23,12 +23,12 @@ public class FundsDrawnController {
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
-    @PostMapping("")
-    public ResponseEntity<?> createNewFundDrawn(@Valid @RequestBody FundsDrawn fundsDrawn, BindingResult result, Principal principal) {
+    @PostMapping("/{automat_id}")
+    public ResponseEntity<?> createNewFundDrawn(@Valid @RequestBody FundsDrawn fundsDrawn, BindingResult result,@PathVariable String automat_id, Principal principal) {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if (errorMap != null) return errorMap;
 
-        FundsDrawn fundsDrawn1 = fundsDrawnService.saveOrUpdateFundDrawn(fundsDrawn);
+        FundsDrawn fundsDrawn1 = fundsDrawnService.saveOrUpdateFundDrawn(fundsDrawn,automat_id);
         return new ResponseEntity<FundsDrawn>(fundsDrawn1, HttpStatus.CREATED);
     }
 

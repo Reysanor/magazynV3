@@ -4,13 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST) //format odpowiedzi
-public class AutomatIdException extends RuntimeException {
 
-    public  AutomatIdException (String message) {
+public class InsertedProductNotFoundException extends  RuntimeException{
+    public InsertedProductNotFoundException(String message) {
         super(message);
-
     }
 }
-
-
-

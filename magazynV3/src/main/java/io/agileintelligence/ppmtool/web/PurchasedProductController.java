@@ -25,11 +25,11 @@ public class PurchasedProductController {
     private MapValidationErrorService mapValidationErrorService;
 
     @PostMapping("{productId}")
-    public ResponseEntity<?> createNewPurchasedProduct(@Valid @RequestBody PurchasedProduct purchasedProduct,BindingResult result, @PathVariable Long productId, Principal principal) {
+    public ResponseEntity<?> createOrUpdatePurchasedProduct(@Valid @RequestBody PurchasedProduct purchasedProduct,BindingResult result, @PathVariable Long productId, Principal principal) {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if (errorMap != null) return errorMap;
 
-        PurchasedProduct purchasedProduct1 = purchasedProductService.createNewPurchase(purchasedProduct,productId);
+        PurchasedProduct purchasedProduct1 = purchasedProductService.createOrUpdatePurchasedProduct(purchasedProduct,productId);
         return new ResponseEntity<PurchasedProduct>(purchasedProduct1, HttpStatus.CREATED);
 
     }

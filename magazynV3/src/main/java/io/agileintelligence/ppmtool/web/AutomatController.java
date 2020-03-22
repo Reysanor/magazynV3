@@ -34,13 +34,13 @@ public class AutomatController {
     public ResponseEntity<?> createNewAutomat(@Valid @RequestBody Automat automat, BindingResult result, Principal principal) {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if (errorMap != null) return errorMap;
-        Automat automat1 = automatService.saveOrUpdateAutomat(automat, principal.getName());
+        Automat automat1 = automatService.saveOrUpdateAutomat(automat);
         return new ResponseEntity<Automat>(automat1, HttpStatus.CREATED);
 
     }
     @GetMapping("/{automatId}")
     public ResponseEntity<?> getAutomatById(@PathVariable String automatId, Principal principal) {
-        Automat automat = automatService.findBySerialNumber(automatId, principal.getName());
+        Automat automat = automatService.findBySerialNumber(automatId);
         return new ResponseEntity<Automat>(automat, HttpStatus.OK);
     }
 
@@ -51,7 +51,7 @@ public class AutomatController {
 
     @DeleteMapping("/{automatId}")
     public ResponseEntity<?> deleteAutomat(@PathVariable String automatId, Principal principal) {
-        automatService.deleteAutomatBySerialNumber(automatId, principal.getName());
+        automatService.deleteAutomatBySerialNumber(automatId);
         return new ResponseEntity<String>("Automat with SerialNumber: " + automatId + " was deleted", HttpStatus.OK);
     }
 }

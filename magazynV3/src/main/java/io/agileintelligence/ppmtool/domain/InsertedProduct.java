@@ -15,6 +15,7 @@ public class InsertedProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull(message = "Number is required")
+
     private Integer number;
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date dateOfInsert;

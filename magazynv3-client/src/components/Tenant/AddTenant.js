@@ -11,7 +11,7 @@ class AddTenant extends Component {
     constructor() {
         super();
 
-        this.setState = {
+        this.state = {
             name: "",
             nip: "",
             street: "",
@@ -141,7 +141,6 @@ render() {
                       </div>
                     )}
                     </div>
-///
 
 <div className="form-group">
                     <textarea

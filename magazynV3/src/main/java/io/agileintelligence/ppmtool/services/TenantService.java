@@ -33,9 +33,11 @@ public class TenantService {
             tenant.setTenantLeader(user.getUsername());
             tenant.setNip(tenantNipGet);
             //Logi
+
+
             return tenantRepository.save(tenant);
         } catch (Exception e) {
-            throw new TenantIdException(" Tenant with Nip: " + tenantNipGet + "  does not exist ");
+            throw new TenantIdException(" Tenant with Nip: " + tenantNipGet + "  does already exist ");
         }
     }
 

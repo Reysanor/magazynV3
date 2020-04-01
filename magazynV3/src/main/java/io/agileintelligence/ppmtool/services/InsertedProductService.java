@@ -31,7 +31,7 @@ public class InsertedProductService {
         }
         Optional<AutomatToProduct> automatToProduct = automatToProductRepository.findById(automatToProductId);
         if(!automatToProduct.isPresent()){
-            throw new AutomatNotFoundException("Cannot add - automat to product with Serial Number: " + automatToProductId + " doesn't exists");
+            throw new AutomatNotFoundException("Cannot add - automat to product with id: " + automatToProductId + " doesn't exists");
         }
         try{
             insertedProduct.setId(insertedProductIdGet);

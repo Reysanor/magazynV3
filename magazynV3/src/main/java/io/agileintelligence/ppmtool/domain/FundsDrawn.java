@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -15,6 +16,7 @@ public class FundsDrawn {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull(message = "Amount is required")
+    @Min(value = 1, message = "Cannot take a value lower than 1")
     private Double amount;
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date dateOfDrawn;

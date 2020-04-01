@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 //łączenie z state
 import { connect } from "react-redux";
 //1 - pobieram funkcje i obiekty
-import { createTenant } from "../../actions/tenantActions"
+import {getTenant, createTenant } from "../../actions/tenantActions"
 import classnames from "classnames";
 
 class UpdateTenant extends Component {
@@ -11,7 +11,7 @@ class UpdateTenant extends Component {
     constructor() {
         super();
 
-        this.setState = {
+        this.state = {
             name: "",
             nip: "",
             street: "",
@@ -168,7 +168,7 @@ class UpdateTenant extends Component {
                                             </div>
                                         )}
                                     </div>
-                                    ///
+                                   
 
                                     <div className="form-group">
                                         <textarea

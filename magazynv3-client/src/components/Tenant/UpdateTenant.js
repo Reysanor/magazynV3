@@ -12,6 +12,7 @@ class UpdateTenant extends Component {
         super();
 
         this.state = {
+            id: "",
             name: "",
             nip: "",
             street: "",
@@ -38,6 +39,7 @@ class UpdateTenant extends Component {
 
         //ustalenia wartosci this.state na dane z wybranego obiektu na starcie
         const {
+            id,
             name,
             nip,
             street,
@@ -50,6 +52,7 @@ class UpdateTenant extends Component {
         //ustawianie wartosci w tym projekcie (this.setState)
         //wywołanie onChange (również przy pierwszym załadowaniu strony)
         this.setState({
+            id,
             name,
             nip,
             street,
@@ -80,6 +83,7 @@ class UpdateTenant extends Component {
         e.preventDefault();
         //tworze nowy Projekt
         const UpdateTenant = {
+            id: this.state.id,
             name: this.state.name,
             nip: this.state.nip,
             street: this.state.street,
@@ -175,7 +179,7 @@ class UpdateTenant extends Component {
                                             className={classnames("form-control form-control-lg", {
                                                 "is-invalid": errors.zipCode
                                             })}
-                                            placeholder="Tenant street"
+                                            placeholder="Tenant zip code"
                                             name="zipCode"
                                             type="number"
                                             min="10000" max="99999"

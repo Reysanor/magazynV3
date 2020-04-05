@@ -31,7 +31,7 @@ public class Automat {
     private Integer capacity;
 
     @NotBlank(message = "State is required")
-    private String state;
+    private String status;
     @NotNull(message = "Production date is required")
     @Column(updatable = false)
     @JsonFormat(pattern = "yyyy-mm-dd")
@@ -44,9 +44,9 @@ public class Automat {
 
 
     //many to many with Product
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "automat")
-    private List<AutomatToProduct> automatToProducts;
+ //   @JsonIgnore
+ //   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "automat")
+ //   private List<AutomatToProduct> automatToProducts;
 
 
     @OneToMany(mappedBy = "automat", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
@@ -92,12 +92,12 @@ public class Automat {
         this.capacity = capacity;
     }
 
-    public String getState() {
-        return state;
+    public String getStatus() {
+        return status;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Date getProductionDate() {
@@ -120,21 +120,15 @@ public class Automat {
         this.capacity = capacity;
     }
 
-    public List<AutomatToProduct> getAutomatToProducts() {
-        return automatToProducts;
-    }
+   // public List<AutomatToProduct> getAutomatToProducts() {
+   //     return automatToProducts;
+   // }
 
-    public Set<FundsDrawn> getFundsDrawns() {
-        return fundsDrawns;
-    }
 
-    public void setFundsDrawns(Set<FundsDrawn> fundsDrawns) {
-        this.fundsDrawns = fundsDrawns;
-    }
 
-    public void setAutomatToProducts(List<AutomatToProduct> automatToProducts) {
-        this.automatToProducts = automatToProducts;
-    }
+   // public void setAutomatToProducts(List<AutomatToProduct> automatToProducts) {
+   //     this.automatToProducts = automatToProducts;
+   // }
 
     @Override
     public String toString() {
@@ -144,7 +138,7 @@ public class Automat {
                 .add("serialNumber='" + serialNumber + "'")
                 .add("type='" + type + "'")
                 .add("capacity=" + capacity)
-                .add("state='" + state + "'")
+                .add("status='" + status + "'")
                 .add("productionDate=" + productionDate)
                 .toString();
     }

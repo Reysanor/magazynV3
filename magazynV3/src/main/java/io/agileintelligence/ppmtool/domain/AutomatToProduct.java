@@ -18,9 +18,9 @@ public class AutomatToProduct  {
     private Long id;
 
    // @Id
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn (name = "automat_id")
-    private Automat automat;
+ //   @ManyToOne(fetch = FetchType.EAGER)
+ //   @JoinColumn (name = "automat_id")
+ //   private Automat automat;
     //@Id
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "product_id")
@@ -34,13 +34,13 @@ public class AutomatToProduct  {
     @OneToMany(mappedBy = "automatToProduct", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<InsertedProduct> insertedProducts;
 
-    public Automat getAutomat() {
-        return automat;
-    }
+  //  public Automat getAutomat() {
+  //      return automat;
+   // }
 
-    public void setAutomat(Automat automat) {
-        this.automat = automat;
-    }
+  //  public void setAutomat(Automat automat) {
+  //      this.automat = automat;
+  //  }
 
     public Product getProduct() {
         return product;
@@ -68,6 +68,7 @@ public class AutomatToProduct  {
         return super.equals(obj);
     }
 
+
     public Long getId() {
         return id;
     }
@@ -87,7 +88,7 @@ public class AutomatToProduct  {
     @Override
     public String toString() {
         return new StringJoiner(", ", AutomatToProduct.class.getSimpleName() + "[", "]")
-                .add("automat=" + automat)
+               // .add("automat=" + automat)
                 .add("product=" + product)
                 .add("price=" + price)
                 .toString();

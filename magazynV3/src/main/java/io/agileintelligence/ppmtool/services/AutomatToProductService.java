@@ -17,41 +17,42 @@ public class AutomatToProductService {
     @Autowired
     AutomatToProductRepository automatToProductRepository;
 
-    @Autowired
-    private AutomatRepository automatRepository;
+   // @Autowired
+   // private AutomatRepository automatRepository;
 
     @Autowired
     private ProductRepository productRepository;
 
     public void addProductToAutomat(String automatId, Long productId, AutomatToProduct automatToProduct) {
-        Automat existingAutomat = automatRepository.findBySerialNumber(automatId);
+       // Automat existingAutomat = automatRepository.findBySerialNumber(automatId);
         Optional<Product> optionalExistingProduct = productRepository.findById(productId);
-        automatRepository.save(existingAutomat);
+        //automatRepository.save(existingAutomat);
         if (automatId != null) {
-
-            if (existingAutomat == null) {
-                throw new AutomatNotFoundException("Cannot add tenant - Automat with Serial Number: " + automatId + " doesn't exists");
-            }
+           // if (existingAutomat == null) {
+           //     throw new AutomatNotFoundException("Cannot add tenant - Automat with Serial Number: " + automatId + " doesn't exists");
+           // }
         }
         if (productId != null) {
-
             if (!optionalExistingProduct.isPresent()) {
                 throw new ProductNotFoundException("Product with Name: " + productId + " doesn't exists");
             }
         }
         if (optionalExistingProduct.isPresent()) {
             Product existingProduct = optionalExistingProduct.get();
-            automatToProduct.setAutomat(existingAutomat);
+          //  automatToProduct.setAutomat(existingAutomat);
             automatToProduct.setProduct(existingProduct);
             existingProduct.getAutomatToProducts().add(automatToProduct);
         } else {
             throw new ProductNotFoundException("Product with ID: " + productId + " doesn't exists");
         }
-        automatRepository.save(existingAutomat);
+        //existingAutomat.setId(1L);
+    //    automatRepository.save(existingAutomat);
+        //automatToProductRepository.save(automatToProduct);
     }
 
     public Iterable<AutomatToProduct> findAllAutomatsToProducts(String automatId) {
-        return automatToProductRepository.findByAutomat(automatRepository.findBySerialNumber(automatId));
+       // return automatToProductRepository.findByAutomat(automatRepository.findBySerialNumber(automatId));
+        return  automatToProductRepository.findAll();
     }
 
     public void deleteAutomatToProduct(String automatId, Long productId) {
@@ -60,7 +61,7 @@ public class AutomatToProductService {
     }
 
     public AutomatToProduct findAutomatToProduct(String automatId, Long productId) {
-        Automat existingAutomat = automatRepository.findBySerialNumber(automatId);
+      //  Automat existingAutomat = automatRepository.findBySerialNumber(automatId);
         Optional<Product> optionalExistingProduct = productRepository.findById(productId);
 
         if (!optionalExistingProduct.isPresent()) {
@@ -68,10 +69,11 @@ public class AutomatToProductService {
         }
         Product existingProduct = optionalExistingProduct.get();
 
-        if (existingAutomat == null) {
-            throw new AutomatIdException("Automat with Serial Number  '" + automatId + "' already exists");
+       // if (existingAutomat == null) {
+       //     throw new AutomatIdException("Automat with Serial Number  '" + automatId + "' already exists");
 
-        }
-        return automatToProductRepository.findByAutomatAndProduct(existingAutomat, existingProduct);
+      //  }
+      //  return automatToProductRepository.findByAutomatAndProduct(existingAutomat, existingProduct);
+        return  automatToProductRepository.findById(productId).get();
     }
 }

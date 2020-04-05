@@ -31,7 +31,7 @@ public class TenantService {
             //set owner
             User user = userRepository.findByUsername(username);
             tenant.setTenantLeader(user.getUsername());
-            tenant.setNip(tenantNipGet);
+          //  tenant.setNip(tenantNipGet);
             //Logi
 
 

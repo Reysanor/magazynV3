@@ -1,6 +1,5 @@
 package io.agileintelligence.ppmtool.web;
 
-
 import io.agileintelligence.ppmtool.domain.Automat;
 import io.agileintelligence.ppmtool.domain.AutomatToProduct;
 import io.agileintelligence.ppmtool.domain.Product;
@@ -31,7 +30,7 @@ public class AutomatController {
 
 
     @PostMapping("")
-    public ResponseEntity<?> createNewAutomat(@Valid @RequestBody Automat automat, BindingResult result, Principal principal) {
+    public ResponseEntity<?> createNewAutomat(@Valid @RequestBody Automat automat, BindingResult result) {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if (errorMap != null) return errorMap;
         Automat automat1 = automatService.saveOrUpdateAutomat(automat);

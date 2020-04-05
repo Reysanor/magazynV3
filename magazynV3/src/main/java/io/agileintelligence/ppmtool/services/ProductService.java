@@ -19,45 +19,28 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    @Autowired
-    private UserRepository userRepository;
 
-    public Product saveOrUpdateProduct(Product product, String username) {
+    public Product saveOrUpdateProduct(Product product) {
         Long productGetId = product.getId();
         String productGetName = product.getName();
-
         if (product.getId() != null) {
             Optional<Product> optionalExistingProduct = productRepository.findById(productGetId);
-            if (optionalExistingProduct.isPresent() && (!optionalExistingProduct.get().getProductLeader().equals(username))) {
-                throw new ProjectNotFoundException(" Product is not your ");
-            } else
                 if (!optionalExistingProduct.isPresent()) {
                 throw new ProjectNotFoundException("Product with Name: " + product.getName() + " doesn't exists");
             }
         }
         try {
-            //set owner
-            User user = userRepository.findByUsername(username);
-            product.setProductLeader(user.getUsername());
-            product.setId(productGetId);
-
-            //Logi
-            //zapis do bazy
             return productRepository.save(product);
-
         } catch (Exception e) {
-            throw new ProductIdException("Product with name: " + productGetName + " doesn't exists");
+            throw new ProductIdException("Product with name: " + productGetName + " already exists");
         }
     }
 
-    public Product findById(Long id, String username) {
+    public Product findById(Long id) {
         Optional<Product> product = productRepository.findById(id);
         if (product.isPresent()) {
-            Product product1 = product.get();
-            if (!product1.getProductLeader().equals(username)) {
-                throw new ProjectNotFoundException(" Product is not your ");
-            }
-            return product1;
+
+            return product.get();
 
         } else {
             throw new ProjectNotFoundException("Product with id: " + id + " doesn't exists");
@@ -68,7 +51,7 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public void deleteProductByName(Long id, String username) {
-        productRepository.delete(findById(id, username));
+    public void deleteProductById(Long id) {
+        productRepository.delete(findById(id));
     }
 }

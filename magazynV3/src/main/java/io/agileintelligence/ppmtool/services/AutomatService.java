@@ -45,7 +45,6 @@ public class AutomatService {
         }
         automatGet.setTenant(tenant);
         return automatRepository.save(automatGet);
-
     }
 
     public Automat saveOrUpdateAutomat(Automat automat) {
@@ -59,18 +58,11 @@ public class AutomatService {
             }
         }
         try {
-            automat.setSerialNumber(automatSerialNumberGet);
-
             return automatRepository.save(automat);
         } catch (Exception e) {
             throw new AutomatIdException("Automat with Serial Number  '" + automatSerialNumberGet + "' already exists");
         }
     }
-
-
-
-
-
 
     public Automat findBySerialNumber(String serialNumber) {
 

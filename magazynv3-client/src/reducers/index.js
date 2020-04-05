@@ -4,6 +4,8 @@ import projectReducer from "./projectReducer";
 import backlogReducer from "./backlogReducer";
 import securityReducer from "./securityReducer";
 import tenantReducer from "./tenantReducer";
+import automatReducer from "./automatReducer";
+import productReducer from "./productReducer";
 //store - A store holds the whole state tree of your application.
 //The only way to change the state inside it is to dispatch an action on it.
 
@@ -25,5 +27,7 @@ export default combineReducers({
   project: projectReducer,
   backlog: backlogReducer,
   security: securityReducer,
-  tenant: tenantReducer
+  tenant: tenantReducer,
+  product: productReducer,
+  automat: automatReducer
 });

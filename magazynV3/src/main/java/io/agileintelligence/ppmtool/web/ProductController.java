@@ -24,19 +24,18 @@ public class ProductController {
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
+
     @PostMapping("")
-    public ResponseEntity<?> createNewProduct(@Valid @RequestBody Product product, BindingResult result, Principal principal) {
+    public ResponseEntity<?> createNewProduct(@Valid @RequestBody Product product, BindingResult result) {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
-
         if (errorMap != null) return errorMap;
-
-        Product product1 = productService.saveOrUpdateProduct(product, principal.getName());
+        Product product1 = productService.saveOrUpdateProduct(product);
         return new ResponseEntity<Product>(product1, HttpStatus.CREATED);
     }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<?> getProductById(@PathVariable Long productId, Principal principal) {
-        Product product = productService.findById(productId,principal.getName());
+    public ResponseEntity<?> getProductById(@PathVariable Long productId) {
+        Product product = productService.findById(productId);
        // Product product = productService (productId, principal.getName());
         return new ResponseEntity<Product>(product, HttpStatus.OK);
     }
@@ -47,8 +46,8 @@ public class ProductController {
     }
 
     @DeleteMapping("/{productId}")
-    public ResponseEntity<?> deleteProduct(@PathVariable Long productId, Principal principal) {
-        productService.deleteProductByName(productId, principal.getName());
+    public ResponseEntity<?> deleteProduct(@PathVariable Long productId) {
+        productService.deleteProductById(productId);
         return new ResponseEntity<String>("Product with id " + productId + " was deleted", HttpStatus.OK);
     }
 }

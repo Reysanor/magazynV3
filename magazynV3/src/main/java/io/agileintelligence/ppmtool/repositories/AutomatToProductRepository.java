@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface AutomatToProductRepository extends CrudRepository<AutomatToProduct, Long> {
 
-    List<AutomatToProduct> findByAutomat(Automat automat_id);
+   // List<AutomatToProduct> findByAutomat(Automat automat_id);
 
-    AutomatToProduct findByAutomatAndProduct(Automat automat, Product product);
+ //   AutomatToProduct findByAutomatAndProduct(Automat automat, Product product);
 }

@@ -13,7 +13,11 @@ import ProjectBoard from "./components/ProjectBoard/ProjectBoard";
 import AddProjectTask from "./components/ProjectBoard/ProjectTasks/AddProjectTask";
 import UpdateProjectTask from "./components/ProjectBoard/ProjectTasks/UpdateProjectTask";
 import AddTenant from "./components/Tenant/AddTenant";
+import AddProduct from "./components/Product/AddProduct";
+import AddAutomat from "./components/Automat/AddAutomat";
 import UpdateTenant from "./components/Tenant/UpdateTenant";
+import UpdateProduct from "./components/Product/UpdateProduct";
+import UpdateAutomat from "./components/Automat/UpdateAutomat";
 import Landing from "./components/Layout/Landing";
 import Register from "./components/UserManagement/Register";
 import Login from "./components/UserManagement/Login";
@@ -88,11 +92,27 @@ class App extends Component {
               />
               <SecuredRoute
                 exact
-                path="/updateTenant/:id"
-                component={UpdateTenant}
+                path="/updateAutomat/:id"
+                component={UpdateAutomat}
               />
-              <SecuredRoute exact path="/addTenant" component={AddTenant} />
+              <SecuredRoute exact path="/addAutomat" component={AddAutomat} />
              
+              <SecuredRoute
+                exact
+                path="/updateProduct/:id"
+                component={UpdateProduct}
+              />
+              <SecuredRoute exact path="/addProduct" component={AddProduct} />
+             
+
+              <SecuredRoute
+              exact
+              path="/updateTenant/:id"
+              component={UpdateTenant}
+            />
+            <SecuredRoute exact path="/addTenant" component={AddTenant} />
+           
+
           
             </Switch>
           </div>

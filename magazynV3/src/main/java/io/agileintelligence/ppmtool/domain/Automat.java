@@ -43,14 +43,22 @@ public class Automat {
     private Tenant tenant;
 
 
-    //many to many with Product
- //   @JsonIgnore
- //   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "automat")
- //   private List<AutomatToProduct> automatToProducts;
+    @OneToMany(mappedBy = "automat")
+    private List<ProductToAutomat> productToAutomats;
+
 
 
     @OneToMany(mappedBy = "automat", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<FundsDrawn> fundsDrawns;
+
+
+    public List<ProductToAutomat> getProductToAutomats() {
+        return productToAutomats;
+    }
+
+    public void setProductToAutomats(List<ProductToAutomat> productToAutomats) {
+        this.productToAutomats = productToAutomats;
+    }
 
     public Long getId() {
         return id;

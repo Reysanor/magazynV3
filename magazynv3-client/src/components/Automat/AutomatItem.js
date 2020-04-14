@@ -36,7 +36,11 @@ class AutomatItem extends Component {
                     <i className="fa fa-edit pr-1"> Update Automat Info</i>
                   </li>
                 </Link>
-
+                <Link to={`/automat/${automat.serialNumber}/automatBoard`}>
+                <li className="list-group-item board">
+                  <i className="fa fa-flag-checkered pr-1"> Automat Board </i>
+                </li>
+              </Link>
                 <li
                   className="list-group-item delete"
                   onClick={this.onDeleteClick.bind(

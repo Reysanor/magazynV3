@@ -25,6 +25,9 @@ public class AutomatService {
     TenantService tenantService;
 
     @Autowired
+    ProductToAutomatRepository productToAutomatRepository;
+
+    @Autowired
     ProductRepository productRepository;
 
     public Automat setTenant(String tenant_id, String automat_id) {
@@ -82,5 +85,35 @@ public class AutomatService {
         automatRepository.delete(findBySerialNumber(serialNumber));
     }
 
+    ///////////////////////////////////////////////////////////////////
+    public ProductToAutomat saveOrUpdatePtA(String automatId, Long productId, ProductToAutomat productToAutomat) {
+        Automat automat = automatRepository.findBySerialNumber(automatId);
+        Optional<Product> product = productRepository.findById(productId);
+        Product product1 = product.get();
+        productToAutomat.setAutomat(automat);
+        productToAutomat.setProduct(product1);
+        automat.addProductToAutomats(productToAutomat);
+        automatRepository.save(automat);
+        return productToAutomat;
+    }
 
+
+    public ProductToAutomat findPta(String automatId, Long productId){
+        Automat automat = automatRepository.findBySerialNumber(automatId);
+        Optional<Product> product = productRepository.findById(productId);
+        Product product1 = product.get();
+        ProductToAutomat productToAutomat = productToAutomatRepository.findByAutomatAndProduct(automat,product1);
+        return productToAutomat;
+
+
+    }
+
+    public Iterable<ProductToAutomat> getAllPta(String automatId) {
+        Automat automat = automatRepository.findBySerialNumber(automatId);
+        return productToAutomatRepository.findAllByAutomat(automat);
+    }
+
+    public void deletePta(String automatId, Long productId){
+        productToAutomatRepository.delete(findPta(automatId,productId));
+    }
 }

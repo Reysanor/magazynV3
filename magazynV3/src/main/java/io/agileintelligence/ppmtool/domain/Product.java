@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,21 +28,28 @@ public class Product {
     @JsonIgnore
     @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     private List<AutomatToProduct> automatToProducts;
-
-
-    @OneToMany(mappedBy = "product")
-    private List<ProductToAutomat> productToAutomats;
+    @JsonIgnore
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<ProductToAutomat> productToAutomats = new ArrayList<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<PurchasedProduct> purchasedProducts;
 
 
     public List<ProductToAutomat> getProductToAutomats() {
+
         return productToAutomats;
     }
 
     public void setProductToAutomats(List<ProductToAutomat> productToAutomats) {
         this.productToAutomats = productToAutomats;
+    }
+
+    public void addProductToAutomats(ProductToAutomat productToAutomat) {
+        // ProductToAutomat productToAutomat= new ProductToAutomat(this,product);
+        //1 productToAutomats.add(productToAutomat);
+        //product.getProductToAutomats().add(productToAutomat);
+        productToAutomats.add(productToAutomat);
     }
 
     public Long getId() {

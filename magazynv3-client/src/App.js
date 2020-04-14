@@ -26,6 +26,7 @@ import setJWTToken from "./securityUtils/setJWTToken";
 import { SET_CURRENT_USER, GET_ERRORS } from "./actions/types";
 import { logout } from "./actions/securityActions";
 import SecuredRoute from "./securityUtils/SecuredRoute";
+import AutomatBoard from "./components/AutomatBoard/AutomatBoard";
 
 //every time I load other path I again set token
 const jwtToken = localStorage.jwtToken;
@@ -34,7 +35,7 @@ if (jwtToken) {
   const decoded_jwtToken = jwt_decode(jwtToken);
   store.dispatch({
     type: SET_CURRENT_USER,
-    payload: decoded_jwtToken
+    payload: decoded_jwtToken,
   });
 
   //logout after time
@@ -96,24 +97,25 @@ class App extends Component {
                 component={UpdateAutomat}
               />
               <SecuredRoute exact path="/addAutomat" component={AddAutomat} />
-             
+
               <SecuredRoute
                 exact
                 path="/updateProduct/:id"
                 component={UpdateProduct}
               />
               <SecuredRoute exact path="/addProduct" component={AddProduct} />
-             
+              <SecuredRoute
+                exact
+                path="/automat/:id/automatBoard"
+                component={AutomatBoard}
+              />
 
               <SecuredRoute
-              exact
-              path="/updateTenant/:id"
-              component={UpdateTenant}
-            />
-            <SecuredRoute exact path="/addTenant" component={AddTenant} />
-           
-
-          
+                exact
+                path="/updateTenant/:id"
+                component={UpdateTenant}
+              />
+              <SecuredRoute exact path="/addTenant" component={AddTenant} />
             </Switch>
           </div>
         </Router>

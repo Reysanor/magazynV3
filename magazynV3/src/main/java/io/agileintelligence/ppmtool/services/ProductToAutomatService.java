@@ -21,13 +21,15 @@ public class ProductToAutomatService {
     @Autowired
     ProductToAutomatRepository productToAutomatRepository;
     public ProductToAutomat saveOrUpdatePtA(String automatId, Long productId, ProductToAutomat productToAutomat) {
-
-
         Automat automat = automatRepository.findBySerialNumber(automatId);
         Product product = productRepository.findById(productId).get();
+       //1 productToAutomat.setAutomat(automat);
+       //1 productToAutomat.setProduct(product);
         productToAutomat.setAutomat(automat);
         productToAutomat.setProduct(product);
-        automat.getProductToAutomats().add(productToAutomat);
+        //automat.getProductToAutomats().add(productToAutomat);
+       automat.addProductToAutomats(productToAutomat);
+        //product.getProductToAutomats().add(productToAutomat);
         automatRepository.save(automat);
         return productToAutomat;
     }

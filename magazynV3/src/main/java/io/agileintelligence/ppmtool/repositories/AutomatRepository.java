@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface AutomatRepository extends CrudRepository<Automat, Long> {
 
     Automat findBySerialNumber(String serialNumber);
+
 }

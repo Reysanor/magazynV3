@@ -26,7 +26,7 @@ public class AutomatToProduct  {
     @JoinColumn (name = "product_id")
     private Product product;
 
-    @NotNull(message = "Price is required")
+   // @NotNull(message = "Price is required")
     @Min(value = 1, message = "Price should not be less than 1")
     @Max(value = 5, message = "Price should not be greater than 5")
     private Double price;

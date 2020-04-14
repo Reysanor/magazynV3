@@ -42,9 +42,9 @@ public class Automat {
     @JsonIgnore
     private Tenant tenant;
 
-
-    @OneToMany(mappedBy = "automat")
-    private List<ProductToAutomat> productToAutomats;
+    @JsonIgnore
+    @OneToMany(mappedBy = "automat", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductToAutomat> productToAutomats = new ArrayList<>();;
 
 
 
@@ -56,8 +56,11 @@ public class Automat {
         return productToAutomats;
     }
 
-    public void setProductToAutomats(List<ProductToAutomat> productToAutomats) {
-        this.productToAutomats = productToAutomats;
+    public void addProductToAutomats(ProductToAutomat productToAutomat) {
+       // ProductToAutomat productToAutomat= new ProductToAutomat(this,product);
+       //1 productToAutomats.add(productToAutomat);
+        //product.getProductToAutomats().add(productToAutomat);
+        productToAutomats.add(productToAutomat);
     }
 
     public Long getId() {
@@ -149,5 +152,18 @@ public class Automat {
                 .add("status='" + status + "'")
                 .add("productionDate=" + productionDate)
                 .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Automat automat = (Automat) o;
+        return Objects.equals(name, automat.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

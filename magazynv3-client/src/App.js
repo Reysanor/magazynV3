@@ -27,6 +27,7 @@ import { SET_CURRENT_USER, GET_ERRORS } from "./actions/types";
 import { logout } from "./actions/securityActions";
 import SecuredRoute from "./securityUtils/SecuredRoute";
 import AutomatBoard from "./components/AutomatBoard/AutomatBoard";
+import AddProductToAutomat from "./components/AutomatBoard/ProductToAutomats/AddProductToAutomat";
 
 //every time I load other path I again set token
 const jwtToken = localStorage.jwtToken;
@@ -91,6 +92,14 @@ class App extends Component {
                 path="/addProjectTask/:id"
                 component={AddProjectTask}
               />
+
+              <SecuredRoute
+                exact
+                path="/updateProjectTask/:id"
+                component={UpdateProjectTask}
+              />
+
+
               <SecuredRoute
                 exact
                 path="/updateAutomat/:id"
@@ -106,9 +115,16 @@ class App extends Component {
               <SecuredRoute exact path="/addProduct" component={AddProduct} />
               <SecuredRoute
                 exact
-                path="/automat/:id/automatBoard"
+                path="/automatBoard/:id/"
                 component={AutomatBoard}
               />
+
+              <SecuredRoute
+                exact
+                path="/addProductToAutomat/:id/"
+                component={AddProductToAutomat}
+              />
+
 
               <SecuredRoute
                 exact

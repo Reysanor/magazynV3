@@ -58,11 +58,11 @@ public class AutomatController {
 //////////////////////automat to product
 
 
-    @PostMapping("/{automatId}/pta/{productId}")
-    public ResponseEntity<?> addProductToAutomat(@PathVariable String automatId, @PathVariable Long productId, @Valid @RequestBody ProductToAutomat productToAutomat, BindingResult result) {
+    @PostMapping("/{automat_id}/pta/{product_id}")
+    public ResponseEntity<?> addProductToAutomat(@PathVariable String automat_id, @PathVariable Long product_id, @Valid @RequestBody ProductToAutomat productToAutomat, BindingResult result) {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if (errorMap != null) return errorMap;
-        ProductToAutomat productToAutomat1 = automatService.saveOrUpdatePtA(automatId,productId,productToAutomat);
+        ProductToAutomat productToAutomat1 = automatService.saveOrUpdatePtA(automat_id,product_id,productToAutomat);
         return new ResponseEntity<ProductToAutomat>(productToAutomat1, HttpStatus.CREATED);
     }
 

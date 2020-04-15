@@ -4,7 +4,7 @@
 
 import axios from "axios";
 //axios służy do komunikacji z backendem 
-import { GET_ERRORS, GET_PRODUCTTOAUTOMATS } from "./types";
+import { GET_ERRORS, GET_PRODUCT_TO_AUTOMATS } from "./types";
 //history pozwala na przekierowanie przy podsumowaniu formularza
 //async oznacza dodanie do kolejki wywolywania funkcji, dispatch przeslanie żądania
 //https://redux.js.org/advanced/async-actions
@@ -14,11 +14,16 @@ import { GET_ERRORS, GET_PRODUCTTOAUTOMATS } from "./types";
 //przekazuje productToAutomat jako obiekt i history co pozwoli na przekierowanie w index.js
                                                 // czeka na promise i zwraca result (E6)
 
+export const addProductToAutomat = (automat_id, product_id, product_to_automat, history)=> async dispatch =>{
+  await axios.post(`/api/automat/${automat_id}/pta/${product_id}`, product_to_automat);
+  history.push(`/automatBoard/${automat_id}`);
+}
+
 
 export const getProductToAutomats = automat_id => async dispatch => {
     const res = await axios.get(`/api/automat/${automat_id}/pta/all`);
     dispatch({
-      type: GET_PRODUCTTOAUTOMATS, //typ reducera
+      type: GET_PRODUCT_TO_AUTOMATS, //typ reducera
       payload: res.data //dane z bazy
     });
   };

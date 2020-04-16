@@ -33,6 +33,7 @@ public class ProductController {
         return new ResponseEntity<Product>(product1, HttpStatus.CREATED);
     }
 
+
     @GetMapping("/{productId}")
     public ResponseEntity<?> getProductById(@PathVariable Long productId) {
         Product product = productService.findById(productId);
@@ -40,9 +41,14 @@ public class ProductController {
         return new ResponseEntity<Product>(product, HttpStatus.OK);
     }
 
+    @GetMapping("/all/{automatId}")
+    public Iterable<Product> findAllProductsNotInAutomat(@PathVariable String automatId){
+        return productService.findAllProductsNotInAutomat(automatId);
+    }
+
     @GetMapping("/all")
-    public Iterable<Product> getAllProducts(Principal principal) {
-        return productService.findAllAutomats(principal.getName());
+    public Iterable<Product> getAllProducts() {
+        return productService.findAllProducts();
     }
 
     @DeleteMapping("/{productId}")

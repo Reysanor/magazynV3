@@ -4,18 +4,12 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import { addProductToAutomat } from "../../../actions/productToAutomatActions";
-
-//import ProductItem from "../../Product/ProductItem";
-//import { getProducts } from "../../../actions/productActions";
-
+import {getFreeProducts} from "../../../actions/productActions";
 class AddProductToAutomat extends Component {
-  componentDidMount() {
-    //this.props.getProducts();
-  }
-
   constructor(props) {
     super(props);
     const { id } = this.props.match.params;
+
 
     this.state = {
       price: "",
@@ -27,6 +21,11 @@ class AddProductToAutomat extends Component {
         this.onChange = this.onChange.bind(this);
         // //funkcja bind  przesyła stan
         this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    this.props.getFreeProducts(id);
   }
 
   onChange(e) {
@@ -45,20 +44,23 @@ class AddProductToAutomat extends Component {
       //product: this.state.product
       //komponent po wyrenderowaniu za pomoca rendera przekazuje props do komponentu
     };
-    console.log(this.state.automat);
+    //console.log(this.state.automat);
     //console.log(newTask);
     //przekazuje id projektu, nowy task, history do backlogActions.js
 
     this.props.addProductToAutomat(
         this.state.automat,
-         2, //tu wstawić wybrany z listy product
+        this.state.product, //tu wstawić wybrany z listy product
          newProductToAutomat,
         this.props.history
       );
   
   }
   render() {
-    const { id } = this.props.match.params.id;
+    const { id } = this.props.match.params;
+    const { products} = this.props.product;
+ //iteracja przez project_task_propsy i wrzucanie do mapy ProjectTask o nazwie project_task
+   
     return (
       <div className="add-PBI">
         <div className="container">
@@ -82,7 +84,22 @@ class AddProductToAutomat extends Component {
                   />
                 </div>
 
-                {/*products.map((product) => ( <ProductItem key={product.id} product={product} /> )) */}
+
+                <div className="form-group">
+                <select
+                  className="form-control form-control-lg"
+                  name="product"
+                  value={this.state.product}
+                  onChange={this.onChange}
+                >
+                <option value="">Select option</option>
+                {products.map((item,i) =>
+                  <option key={i}  value={item.id}>
+                   {item.name}
+                  </option>
+                 )}
+                </select>
+              </div>
 
                 <input
                   type="submit"
@@ -98,13 +115,15 @@ class AddProductToAutomat extends Component {
 }
 
 AddProductToAutomat.propTypes = {
-  // getProducts: PropTypes.func.isRequired,
-  // product: PropTypes.object.isRequired,
+  getFreeProducts: PropTypes.func.isRequired,
+  product: PropTypes.object.isRequired,
+
   addProductToAutomat: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state) => ({
-  //product: state.product
+  product: state.product
+
 });
-export default connect(mapStateToProps, { addProductToAutomat })(
+export default connect(mapStateToProps, { addProductToAutomat,getFreeProducts })(
   AddProductToAutomat
 );

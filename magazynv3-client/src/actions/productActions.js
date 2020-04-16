@@ -43,6 +43,14 @@ export const getProducts = () => async dispatch => {
   });
 };
 
+export const getFreeProducts = (id) => async dispatch => {
+  const res = await axios.get(`/api/product/all/${id}`);
+  dispatch({
+    type: GET_PRODUCTS, //typ reducera
+    payload: res.data //dane z bazy
+  });
+};
+
 export const getProduct = (id, history) => async dispatch => {
   try {
     const res = await axios.get(`/api/product/${id}`);

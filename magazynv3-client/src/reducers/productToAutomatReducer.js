@@ -21,15 +21,14 @@ export default function (state = initialState, action) {
     case GET_PRODUCT_TO_AUTOMAT:
       return {
         ...state,
-        product_to_automat: action.payload
+        product_to_automat: action.payload,
       };
 
-      case DELETE_PRODUCT_TO_AUTOMAT:
-        return {
-          ...state
-          //TO DO
-
-        }
+    case DELETE_PRODUCT_TO_AUTOMAT:
+      return {
+        ...state,
+        //TO DO
+      };
     default:
       return state;
   }

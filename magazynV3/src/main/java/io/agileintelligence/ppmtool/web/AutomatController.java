@@ -79,7 +79,6 @@ public class AutomatController {
     }
 
 
-
     @DeleteMapping("/{automatId}/pta/{productId}")
     public ResponseEntity<?> deletePta(@PathVariable String automatId, @PathVariable Long productId) {
         automatService.deletePta(automatId,productId);

@@ -3,22 +3,22 @@ import { GET_PRODUCT, GET_PRODUCTS, DELETE_PRODUCT } from "../actions/types";
 
 const initialState = {
   products: [], //array
-  product: {} //single
+  product: {}, //single
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCTS:
       //...state - Adds old state properties to the new object by copying
       return {
         ...state,
-        products: action.payload // dane z listą projektów, które zaktualizują state
+        products: action.payload, // dane z listą projektów, które zaktualizują state
       };
 
     case GET_PRODUCT:
       return {
         ...state,
-        product: action.payload
+        product: action.payload,
       };
 
     case DELETE_PRODUCT:
@@ -27,8 +27,8 @@ export default function(state = initialState, action) {
         //zwraca do wyswietlenia projekty sprzeczne z action.payload (id do skasowania)
         ...state,
         products: state.products.filter(
-          product => product.id !== action.payload
-        )
+          (product) => product.id !== action.payload
+        ),
       };
     default:
       return state;

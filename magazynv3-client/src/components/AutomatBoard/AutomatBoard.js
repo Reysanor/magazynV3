@@ -4,65 +4,43 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { getProductToAutomats } from "../../actions/productToAutomatActions";
+import ProductToAutomatsWithPrices from "./ProductToAutomatsWithPrices";
 
 class AutomatBoard extends Component {
   //constructor to errors
 
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    this.props.getProductToAutomats(id);
+
+  }
+
   render() {
     const { id } = this.props.match.params;
-
+    const { product_to_automats } = this.props.product_to_automats; 
     return (
       <div className="container">
         <Link to={`/addProductToAutomat/${id}`} className="btn btn-primary mb-3">
-          <i className="fas fa-plus-circle"> Create Project Task</i>
+          <i className="fas fa-plus-circle"> Add product to automat</i>
         </Link>
         <br />
         <hr />
-        <div className="container">
-          <div className="row">
-            <div className="col-md-4">
-              <div className="card text-center mb-2">
-                <div className="card-header bg-secondary text-white">
-                  <h3>TO DO</h3>
-                </div>
-              </div>
-
-              <div className="card mb-1 bg-light">
-                <div className="card-header text-primary">
-                  ID: projectSequence -- Priority: priorityString
-                </div>
-                <div className="card-body bg-light">
-                  <h5 className="card-title">project_task.summary</h5>
-                  <p className="card-text text-truncate ">
-                    project_task.acceptanceCriteria
-                  </p>
-                  <Link to="" className="btn btn-primary">
-                    View / Update
-                  </Link>
-
-                  <button className="btn btn-danger ml-4">Delete</button>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="card text-center mb-2">
-                <div className="card-header bg-primary text-white">
-                  <h3>In Progress</h3>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="card text-center mb-2">
-                <div className="card-header bg-success text-white">
-                  <h3>Done</h3>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ProductToAutomatsWithPrices />
       </div>
     );
   }
 }
 
-export default AutomatBoard;
+PropTypes.propTypes= {
+  product: PropTypes.object.isRequired,
+  getProductToAutomats: PropTypes.func.isRequired,
+  product_to_automats: PropTypes.object.isRequired
+
+}
+
+const mapStateToProps = state =>({
+  product: state.product,
+  product_to_automats: state.product_to_automats
+})
+
+export default connect(mapStateToProps,{getProductToAutomats})(AutomatBoard);

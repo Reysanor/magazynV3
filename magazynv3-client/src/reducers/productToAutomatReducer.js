@@ -1,8 +1,4 @@
-import {
-  GET_PRODUCT_TO_AUTOMAT,
-  GET_PRODUCT_TO_AUTOMATS,
-  DELETE_PRODUCT_TO_AUTOMAT,
-} from "../actions/types";
+import {GET_PRODUCT_TO_AUTOMAT, GET_PRODUCT_TO_AUTOMATS, DELETE_PRODUCT_TO_AUTOMAT, } from "../actions/types";
 
 //co wyświetla w błędzie - puste więc pobierze error
 const initialState = {
@@ -25,10 +21,14 @@ export default function (state = initialState, action) {
       };
 
     case DELETE_PRODUCT_TO_AUTOMAT:
-      return {
+      //jeżeli delete się uda to ma odświeżyć poprzez odfiltrowanie usuniętego obiektu
+      //zwraca do wyswietlenia projekty sprzeczne z action.payload (id do skasowania)
+      return{
         ...state,
-        //TO DO
-      };
+        product_to_automats: state.product_to_automats.filter(
+          product_to_automat => product_to_automat.product.id !== action.payload
+          )
+    }
     default:
       return state;
   }

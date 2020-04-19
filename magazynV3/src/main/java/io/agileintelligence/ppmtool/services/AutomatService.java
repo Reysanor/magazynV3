@@ -30,6 +30,9 @@ public class AutomatService {
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    ProductService productService;
+
     public Automat setTenant(String tenant_id, String automat_id) {
         Automat automatGet = automatRepository.findBySerialNumber(automat_id);
         if (automatGet == null) {
@@ -87,11 +90,10 @@ public class AutomatService {
 
     ///////////////////////////////////////////////////////////////////
     public ProductToAutomat saveOrUpdatePtA(String automatId, Long productId, ProductToAutomat productToAutomat) {
-        Automat automat = automatRepository.findBySerialNumber(automatId);
-        Optional<Product> product = productRepository.findById(productId);
-        Product product1 = product.get();
+        Automat automat = findBySerialNumber(automatId);
+        Product product = productService.findById(productId);
         productToAutomat.setAutomat(automat);
-        productToAutomat.setProduct(product1);
+        productToAutomat.setProduct(product);
         automat.addProductToAutomats(productToAutomat);
         automatRepository.save(automat);
         return productToAutomat;
@@ -99,21 +101,27 @@ public class AutomatService {
 
 
     public ProductToAutomat findPta(String automatId, Long productId){
-        Automat automat = automatRepository.findBySerialNumber(automatId);
-        Optional<Product> product = productRepository.findById(productId);
-        Product product1 = product.get();
-        ProductToAutomat productToAutomat = productToAutomatRepository.findByAutomatAndProduct(automat,product1);
+        Automat automat = findBySerialNumber(automatId);
+        Product product = productService.findById(productId);
+        ProductToAutomat productToAutomat = productToAutomatRepository.findByAutomatAndProduct(automat,product);
         return productToAutomat;
 
 
     }
 
     public Iterable<ProductToAutomat> getAllPta(String automatId) {
-        Automat automat = automatRepository.findBySerialNumber(automatId);
+        Automat automat = findBySerialNumber(automatId);
         return productToAutomatRepository.findAllByAutomat(automat);
     }
 
     public void deletePta(String automatId, Long productId){
         productToAutomatRepository.delete(findPta(automatId,productId));
+    }
+
+    public ProductToAutomat UpdatePtA(String automat_id, Long product_id, ProductToAutomat updatedProductToAutomat) {
+        ProductToAutomat productToAutomat = findPta(automat_id,product_id);
+        productToAutomat=updatedProductToAutomat;
+
+        return productToAutomatRepository.save(productToAutomat);
     }
 }

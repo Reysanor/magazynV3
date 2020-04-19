@@ -31,5 +31,5 @@ export default combineReducers({
   tenant: tenantReducer,
   product: productReducer,
   automat: automatReducer,
-  productToAutomat: productToAutomatReducer
+  product_to_automat: productToAutomatReducer
 });

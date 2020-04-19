@@ -1,9 +1,6 @@
 package io.agileintelligence.ppmtool.web;
 
-import io.agileintelligence.ppmtool.domain.Automat;
-import io.agileintelligence.ppmtool.domain.AutomatToProduct;
-import io.agileintelligence.ppmtool.domain.Product;
-import io.agileintelligence.ppmtool.domain.ProductToAutomat;
+import io.agileintelligence.ppmtool.domain.*;
 import io.agileintelligence.ppmtool.repositories.AutomatToProductRepository;
 import io.agileintelligence.ppmtool.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,5 +81,15 @@ public class AutomatController {
         automatService.deletePta(automatId,productId);
         return new ResponseEntity<String>("Automat with SerialNumber: " + automatId + " was deleted", HttpStatus.OK);
     }
+
+
+    @PatchMapping("/{automat_id}/pta/{product_id}")
+    public ResponseEntity<?> updateProductToAutomat(@PathVariable String automat_id, @PathVariable Long product_id, @Valid @RequestBody ProductToAutomat productToAutomat, BindingResult result) {
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+        if (errorMap != null) return errorMap;
+        ProductToAutomat updatedProductToAutomat1 = automatService.UpdatePtA(automat_id,product_id,productToAutomat);
+        return new ResponseEntity<ProductToAutomat>(updatedProductToAutomat1, HttpStatus.OK);
+    }
+
 
 }

@@ -16,7 +16,6 @@ import { getProjects } from "../actions/projectActions";
 import { getAutomats } from "../actions/automatActions";
 import { getProducts } from "../actions/productActions";
 import { getTenants } from "../actions/tenantActions";
-
 import PropTypes from "prop-types";
 
 class Dashboard extends Component {
@@ -133,15 +132,16 @@ Dashboard.propTypes = {
   automat: PropTypes.object.isRequired,
 
   getProducts: PropTypes.func.isRequired,
-  product: PropTypes.object.isRequired
+  product: PropTypes.object.isRequired,
+
+ 
 };
 //przyjmuje parametr state i podłącza project to state project (mappuje do componentu aplikacji)
 const mapStateToProps = (state) => ({
   project: state.project,
   tenant: state.tenant,
   automat: state.automat,
-  product: state.product
-});
+  product: state.product});
 //łączenie componentu z state
 export default connect(
   //podczas łączenie się ze state aplikacji wymagane jest zmapowanie wszystkich state do props

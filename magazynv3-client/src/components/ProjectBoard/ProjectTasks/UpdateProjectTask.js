@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import classnames from "classnames";
+import PropTypes from "prop-types";
+
 import {
   getProjectTask,
-  updateProjectTask
+  updateProjectTask,
 } from "../../../actions/backlogActions";
-import PropTypes from "prop-types";
 
 class UpdateProjectTask extends Component {
   constructor() {
@@ -22,7 +23,7 @@ class UpdateProjectTask extends Component {
       dueDate: null,
       projectIdentifier: "",
       create_At: "",
-      errors:{}
+      errors: {},
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -34,10 +35,9 @@ class UpdateProjectTask extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
-if(nextProps.errors){
-  this.setState({errors: nextProps.errors});
-}
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
 
     const {
       id,
@@ -48,7 +48,7 @@ if(nextProps.errors){
       priority,
       dueDate,
       projectIdentifier,
-      create_At
+      create_At,
     } = nextProps.project_task;
 
     this.setState({
@@ -60,7 +60,7 @@ if(nextProps.errors){
       priority,
       dueDate,
       projectIdentifier,
-      create_At
+      create_At,
     });
   }
 
@@ -80,7 +80,7 @@ if(nextProps.errors){
       priority: this.state.priority,
       dueDate: this.state.dueDate,
       projectIdentifier: this.state.projectIdentifier,
-      create_At: this.state.create_At
+      create_At: this.state.create_At,
     };
     //console.log(UpdateProjectTask);
     this.props.updateProjectTask(
@@ -92,15 +92,17 @@ if(nextProps.errors){
   }
 
   render() {
-
-const {errors} = this.state;
+    const { errors } = this.state;
 
     return (
       <div className="add-PBI">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <Link to={`/projectBoard/${this.state.projectIdentifier}`} className="btn btn-light">
+              <Link
+                to={`/projectBoard/${this.state.projectIdentifier}`}
+                className="btn btn-light"
+              >
                 Back to Project Board
               </Link>
               <h4 className="display-4 text-center">
@@ -115,19 +117,17 @@ const {errors} = this.state;
                 <div className="form-group">
                   <input
                     type="text"
-                    className={classnames("form-control form-control-lg",{
-                      "is-invalid":errors.summary
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.summary,
                     })}
                     name="summary"
                     placeholder="Project Task summary"
                     value={this.state.summary}
                     onChange={this.onChange}
                   />
-                  {
-                    errors.summary && (
-                      <div className="invalid-feedback">{errors.summary}</div>
-                    )
-                  }
+                  {errors.summary && (
+                    <div className="invalid-feedback">{errors.summary}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <textarea
@@ -193,12 +193,12 @@ UpdateProjectTask.propTypes = {
   getProjectTask: PropTypes.func.isRequired,
   project_task: PropTypes.object.isRequired,
   updateProjectTask: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   project_task: state.backlog.project_task,
-  errors: state.errors
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { getProjectTask, updateProjectTask })(

@@ -110,17 +110,17 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler
-    public final ResponseEntity<Object> handleAutomatToProductNotFoundException(AutomatToProductNotFoundException ex, WebRequest request) {
 
-        AutomatToProductNotFoundExceptionResponse exceptionResponse = new AutomatToProductNotFoundExceptionResponse(ex.getMessage());
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleProductToAutomatNotFoundException(ProductToAutomatNotFoundException ex, WebRequest request) {
+
+        ProductToAutomatNotFoundExceptionResponse exceptionResponse = new ProductToAutomatNotFoundExceptionResponse(ex.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler
-    public final ResponseEntity<Object> handleAutomatToProductIdException(AutomatToProductIdException ex, WebRequest request) {
-        AutomatToProductIdException exceptionResponse = new AutomatToProductIdException(ex.getMessage());
+    public final ResponseEntity<Object> handleProductToAutomatIdException(ProductToAutomatIdException ex, WebRequest request) {
+        ProductToAutomatIdException exceptionResponse = new ProductToAutomatIdException(ex.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
-
 }

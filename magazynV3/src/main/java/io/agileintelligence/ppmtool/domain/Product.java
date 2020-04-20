@@ -25,9 +25,7 @@ public class Product {
 
 
     //many to many with Automat
-    @JsonIgnore
-    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    private List<AutomatToProduct> automatToProducts;
+
     @JsonIgnore
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<ProductToAutomat> productToAutomats = new ArrayList<>();
@@ -84,13 +82,7 @@ public class Product {
         this.productLeader = productLeader;
     }
 
-    public List<AutomatToProduct> getAutomatToProducts() {
-        return automatToProducts;
-    }
 
-    public void setAutomatToProducts(List<AutomatToProduct> automatToProducts) {
-        this.automatToProducts = automatToProducts;
-    }
 
     @Override
     public String toString() {

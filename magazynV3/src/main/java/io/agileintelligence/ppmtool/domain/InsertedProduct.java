@@ -19,10 +19,10 @@ public class InsertedProduct {
     private Integer number;
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date dateOfInsert;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "automat_to_product_id")
-    @JsonIgnore
-    private AutomatToProduct automatToProduct;
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "automat_to_product_id")
+    //@JsonIgnore
+    //private AutomatToProduct automatToProduct;
 
     public Long getId() {
         return id;
@@ -48,11 +48,5 @@ public class InsertedProduct {
         this.dateOfInsert = dateOfInsert;
     }
 
-    public AutomatToProduct getAutomatToProduct() {
-        return automatToProduct;
-    }
 
-    public void setAutomatToProduct(AutomatToProduct automatToProduct) {
-        this.automatToProduct = automatToProduct;
-    }
 }

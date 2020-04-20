@@ -16,6 +16,9 @@ import java.util.Optional;
 
 public class PurchasedProductService {
 
+
+
+
     @Autowired
     PurchasedProductRepository purchasedProductRepository;
 
@@ -57,6 +60,8 @@ public class PurchasedProductService {
     public Iterable<PurchasedProduct> findAllPurchasedProducts() {
         return purchasedProductRepository.findAll();
     }
+
+
 
     public void deletePurchasedProductById(Long purchasedId) {
         purchasedProductRepository.delete(findById(purchasedId));

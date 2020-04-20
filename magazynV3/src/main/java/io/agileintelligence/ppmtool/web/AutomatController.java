@@ -1,7 +1,6 @@
 package io.agileintelligence.ppmtool.web;
 
 import io.agileintelligence.ppmtool.domain.*;
-import io.agileintelligence.ppmtool.repositories.AutomatToProductRepository;
 import io.agileintelligence.ppmtool.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,8 +19,7 @@ public class AutomatController {
     @Autowired
     private AutomatService automatService;
 
-    @Autowired
-    private ProductToAutomatService productToAutomatService;
+
 
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
@@ -59,7 +57,7 @@ public class AutomatController {
     public ResponseEntity<?> addProductToAutomat(@PathVariable String automat_id, @PathVariable Long product_id, @Valid @RequestBody ProductToAutomat productToAutomat, BindingResult result) {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if (errorMap != null) return errorMap;
-        ProductToAutomat productToAutomat1 = automatService.saveOrUpdatePtA(automat_id,product_id,productToAutomat);
+        ProductToAutomat productToAutomat1 = automatService.addPtA(automat_id,product_id,productToAutomat);
         return new ResponseEntity<ProductToAutomat>(productToAutomat1, HttpStatus.CREATED);
     }
 

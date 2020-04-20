@@ -61,18 +61,8 @@ public class ProductService {
         productRepository.delete(findById(id));
     }
 
-    public Iterable<Product> findAllProductsByAutomat(String automatId) {
-        Iterable<ProductToAutomat> list = productToAutomatRepository.findAllByAutomat(automatRepository.findBySerialNumber(automatId));
-        List<Product> products = new ArrayList<>();
-
-        for (ProductToAutomat productToAutomat : list) {
-            products.add(productToAutomat.getProduct());
-        }
-        return products;
-    }
 
     public Iterable<Product> findAllProductsNotInAutomat(String automatId) {
-        Iterable<Product> allProducts = findAllProducts();
         List<Product> userProducts = new ArrayList<>();
         Iterable<ProductToAutomat> list = productToAutomatRepository.findAllByAutomat(automatRepository.findBySerialNumber(automatId));
         List<Product> freeProducts = new ArrayList<>();
@@ -81,7 +71,7 @@ public class ProductService {
             userProducts.add(productToAutomat.getProduct());
         }
 
-        for (Product product : allProducts) {
+        for (Product product : findAllProducts()) {
             if (!userProducts.contains(product)) {
                 freeProducts.add(product);
             }

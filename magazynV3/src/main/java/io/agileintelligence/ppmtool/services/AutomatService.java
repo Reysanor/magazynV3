@@ -34,7 +34,7 @@ public class AutomatService {
     ProductService productService;
 
     public Automat setTenant(String tenant_id, String automat_id) {
-        Automat automatGet = automatRepository.findBySerialNumber(automat_id);
+        Automat automatGet = findBySerialNumber(automat_id);
         if (automatGet == null) {
             throw new AutomatNotFoundException("Cannot add tenant - Automat with Serial Number: " + automat_id + " doesn't exists");
         }
@@ -89,7 +89,7 @@ public class AutomatService {
     }
 
     ///////////////////////////////////////////////////////////////////
-    public ProductToAutomat saveOrUpdatePtA(String automatId, Long productId, ProductToAutomat productToAutomat) {
+    public ProductToAutomat addPtA(String automatId, Long productId, ProductToAutomat productToAutomat) {
         Automat automat = findBySerialNumber(automatId);
         Product product = productService.findById(productId);
         productToAutomat.setAutomat(automat);
@@ -99,14 +99,15 @@ public class AutomatService {
         return productToAutomat;
     }
 
-
-    public ProductToAutomat findPta(String automatId, Long productId){
+    public ProductToAutomat findPta(String automatId, Long productId) {
         Automat automat = findBySerialNumber(automatId);
         Product product = productService.findById(productId);
         ProductToAutomat productToAutomat = productToAutomatRepository.findByAutomatAndProduct(automat,product);
+        if (productToAutomat == null) {
+            throw new ProductToAutomatNotFoundException("Product to automat with serial number " + automatId + " and product id " + productId  +" doesn't exists ");
+        }
+
         return productToAutomat;
-
-
     }
 
     public Iterable<ProductToAutomat> getAllPta(String automatId) {
@@ -121,7 +122,6 @@ public class AutomatService {
     public ProductToAutomat UpdatePtA(String automat_id, Long product_id, ProductToAutomat updatedProductToAutomat) {
         ProductToAutomat productToAutomat = findPta(automat_id,product_id);
         productToAutomat=updatedProductToAutomat;
-
         return productToAutomatRepository.save(productToAutomat);
     }
 }

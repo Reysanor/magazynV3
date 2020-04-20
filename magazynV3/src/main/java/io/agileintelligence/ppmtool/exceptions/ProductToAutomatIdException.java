@@ -1,4 +1,12 @@
 package io.agileintelligence.ppmtool.exceptions;
 
-public class ProductToAutomatIdException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.BAD_REQUEST) //format odpowiedzi
+
+public class ProductToAutomatIdException extends RuntimeException{
+    public ProductToAutomatIdException(String message) {
+        super(message);
+    }
 }

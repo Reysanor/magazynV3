@@ -46,7 +46,7 @@ public class TenantService {
         Tenant tenant = tenantRepository.findByNip(nip);
 
         if(tenant == null){
-            throw new TenantNotFoundException("Tenant with Nip "+ nip + "does not exist");
+            throw new TenantNotFoundException("Tenant with Nip "+ nip + " does not exist");
         }
         //if(!tenant.getTenantLeader().equals(username)){
         //    throw  new TenantNotFoundException("Tenant is not your");

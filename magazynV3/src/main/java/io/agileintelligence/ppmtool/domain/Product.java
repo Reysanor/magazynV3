@@ -34,6 +34,11 @@ public class Product {
     private Set<PurchasedProduct> purchasedProducts;
 
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<InsertedProduct> insertedProducts = new ArrayList<>();
+
+
     public List<ProductToAutomat> getProductToAutomats() {
 
         return productToAutomats;
@@ -44,10 +49,21 @@ public class Product {
     }
 
     public void addProductToAutomats(ProductToAutomat productToAutomat) {
-        // ProductToAutomat productToAutomat= new ProductToAutomat(this,product);
-        //1 productToAutomats.add(productToAutomat);
-        //product.getProductToAutomats().add(productToAutomat);
+
         productToAutomats.add(productToAutomat);
+    }
+
+
+    public List<InsertedProduct> getInsertedProducts() {
+        return insertedProducts;
+    }
+
+    public void setInsertedProducts(List<InsertedProduct> insertedProducts) {
+        this.insertedProducts = insertedProducts;
+    }
+
+    public void addInsertedProduct (InsertedProduct insertedProduct){
+        insertedProducts.add(insertedProduct);
     }
 
     public Long getId() {

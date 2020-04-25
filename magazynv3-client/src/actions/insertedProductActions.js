@@ -4,7 +4,7 @@
 
 import axios from "axios";
 //axios służy do komunikacji z backendem 
-import { GET_ERRORS, GET_AUTOMAT, GET_AUTOMATS, DELETE_AUTOMAT } from "./types";
+import { GET_ERRORS, GET_INSERTED_PRODUCT, GET_INSERTED_PRODUCTS, DELETE_INSERTED_PRODUCT } from "./types";
 //history pozwala na przekierowanie przy podsumowaniu formularza
 //async oznacza dodanie do kolejki wywolywania funkcji, dispatch przeslanie żądania
 //https://redux.js.org/advanced/async-actions
@@ -13,12 +13,11 @@ import { GET_ERRORS, GET_AUTOMAT, GET_AUTOMATS, DELETE_AUTOMAT } from "./types";
 //wykorzystuja odpowiednie typy i prowadza do reducerów w index.js
 //przekazuje project jako obiekt i history co pozwoli na przekierowanie w index.js
                                                 // czeka na promise i zwraca result (E6)
-export const createAutomat = (automat, history) => async dispatch => {
+export const createInsertedProduct = (automat_id,product_id,inserted_product, history) => async dispatch => {
   try {
     //po poprawnym utworzeniu projektu wracam do dashboard (do tego używam parametru history)
-    await axios.post("/api/automat", automat);
-    history.push("/dashboard");
-    //opóźnienie rozgłoszenia (ang. “dispatch) akcji lub rozgłoszenie jej tylko 
+    await axios.post(`/api/inserted/${automat_id}/${product_id}`, inserted_product);
+    history.push(`/automatBoard/${automat_id}`);    //opóźnienie rozgłoszenia (ang. “dispatch) akcji lub rozgłoszenie jej tylko 
     //jeśli zostaną spełnione określone warunki.
     dispatch({
       type: GET_ERRORS,
@@ -26,7 +25,7 @@ export const createAutomat = (automat, history) => async dispatch => {
       payload: {}
     });
   } catch (err) {
-    
+
     dispatch({
       type: GET_ERRORS,
       //zwraca error do reducera
@@ -35,27 +34,19 @@ export const createAutomat = (automat, history) => async dispatch => {
   }
 };
 
-export const getAutomats = () => async dispatch => {
-  const res = await axios.get("/api/automat/all");
+export const getInsertedProducts = () => async dispatch => {
+  const res = await axios.get("/api/inserted/all");
   dispatch({
-    type: GET_AUTOMATS, //typ reducera
+    type: GET_INSERTED_PRODUCTS, //typ reducera
     payload: res.data //dane z bazy
   });
 };
 
-export const getTenantsToAutomat = (tenant_id) => async dispatch => {
-  const res = await axios.get(`api/automat/all/${tenant_id}`);
-  dispatch({
-    type: GET_AUTOMATS, //typ reducera
-    payload: res.data //dane z bazy
-  });
-};
-
-export const getAutomat = (id, history) => async dispatch => {
+export const getInsertedProduct = (id, history) => async dispatch => {
   try {
-    const res = await axios.get(`/api/automat/${id}`);
+    const res = await axios.get(`/api/inserted/${id}`);
     dispatch({
-      type: GET_AUTOMAT,
+      type: GET_INSERTED_PRODUCT,
       payload: res.data
     });
     //w przypadku braku projektu
@@ -64,15 +55,15 @@ export const getAutomat = (id, history) => async dispatch => {
   }
 };
 
-export const deleteAutomat = id => async dispatch => {
+export const deleteInsertedProduct = id => async dispatch => {
   if (
     window.confirm(
-      "Are you sure? This will delete the automat and all the data related to it"
+      "Are you sure? This will delete the inserted product and all the data related to it"
     )
   ) {
-    await axios.delete(`/api/automat/${id}`);
+    await axios.delete(`/api/inserted/${id}`);
     dispatch({
-      type: DELETE_AUTOMAT,
+      type: DELETE_INSERTED_PRODUCT,
       payload: id //zwracam co do usuniecia
     });
   }

@@ -36,6 +36,7 @@ class Backlog extends Component {
     return (
       <div className="container">
         <div className="row">
+        
           <div className="col-md-4">
             <div className="card text-center mb-2">
               <div className="card-header bg-secondary text-white">
@@ -71,6 +72,7 @@ class Backlog extends Component {
               //  <!-- SAMPLE PROJECT TASK ENDS HERE -->
             }
           </div>
+          
         </div>
       </div>
     );

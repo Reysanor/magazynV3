@@ -25,8 +25,16 @@ import { connect } from "react-redux";
             to={`/updateProductToAutomat/${product_to_automat.automat.serialNumber}/${product_to_automat.product.id}`}
             className="btn btn-primary"
           >
-            View / Update
+           Update
           </Link>
+          
+          <Link
+          to={`/insertProductToAutomat/${product_to_automat.automat.serialNumber}/${product_to_automat.product.id}`}
+          className="btn btn-secondary ml-4"
+        >
+          Insert 
+        </Link>
+
           <button
             className="btn btn-danger ml-4"
             onClick={this.onDeleteClick.bind(

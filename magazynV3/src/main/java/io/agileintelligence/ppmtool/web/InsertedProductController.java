@@ -23,12 +23,12 @@ public class InsertedProductController {
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
-    @PostMapping("{automatToProductId}")
-    public ResponseEntity<?> createNewInsertedProduct(@Valid @RequestBody InsertedProduct insertedProduct,BindingResult result, @PathVariable Long automatToProductId, Principal principal) {
+    @PostMapping("{automat_id}/{product_id}")
+    public ResponseEntity<?> createNewInsertedProduct(@PathVariable String automat_id, @PathVariable Long product_id,@Valid @RequestBody InsertedProduct insertedProduct,BindingResult result) {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if (errorMap != null) return errorMap;
 
-        InsertedProduct insertedProduct1 = insertedProductService.saveOrUpdateInsertedProduct(insertedProduct,automatToProductId);
+        InsertedProduct insertedProduct1 = insertedProductService.saveOrUpdateInsertedProduct(insertedProduct,automat_id,product_id);
         return new ResponseEntity<InsertedProduct>(insertedProduct1, HttpStatus.CREATED);
     }
 

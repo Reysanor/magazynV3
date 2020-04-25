@@ -111,8 +111,9 @@ public class Tenant {
         return automaty;
     }
 
-    public void setAutomaty(List<Automat> automaty) {
-        this.automaty = automaty;
+
+    public void addAutomat(Automat automat){
+        automaty.add(automat);
     }
 
     @Override

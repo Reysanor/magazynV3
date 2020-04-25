@@ -1,9 +1,12 @@
 package io.agileintelligence.ppmtool.services;
 
+import io.agileintelligence.ppmtool.domain.Automat;
 import io.agileintelligence.ppmtool.domain.InsertedProduct;
+import io.agileintelligence.ppmtool.domain.Product;
 import io.agileintelligence.ppmtool.exceptions.AutomatNotFoundException;
 import io.agileintelligence.ppmtool.exceptions.InsertedProductIdException;
 import io.agileintelligence.ppmtool.exceptions.InsertedProductNotFoundException;
+import io.agileintelligence.ppmtool.repositories.AutomatRepository;
 import io.agileintelligence.ppmtool.repositories.InsertedProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +19,24 @@ public class InsertedProductService {
     @Autowired
     InsertedProductRepository insertedProductRepository;
 
+    @Autowired
+    ProductService productService;
 
-    public InsertedProduct saveOrUpdateInsertedProduct(InsertedProduct insertedProduct, Long automatToProductId) {
-        return new InsertedProduct();
+    @Autowired
+    AutomatService automatService;
+
+    @Autowired
+    AutomatRepository automatRepository;
+
+
+    public InsertedProduct saveOrUpdateInsertedProduct(InsertedProduct insertedProduct, String automat_id, Long product_id) {
+        Automat automat = automatService.findBySerialNumber(automat_id);
+        Product product = productService.findById(product_id);
+        insertedProduct.setAutomat(automat);
+        insertedProduct.setProduct(product);
+        automat.addInsertedProduct(insertedProduct);
+        automatRepository.save(automat);
+        return insertedProduct;
     }
 
 

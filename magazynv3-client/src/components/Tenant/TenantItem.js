@@ -35,7 +35,11 @@ class TenantItem extends Component {
                     <i className="fa fa-edit pr-1"> Update Tenant Info</i>
                   </li>
                 </Link>
-
+                <Link to={`/tenantBoard/${tenant.nip}`}>
+                <li className="list-group-item board">
+                  <i className="fa fa-flag-checkered pr-1"> Tenant Board </i>
+                </li>
+              </Link>
                 <li
                   className="list-group-item delete"
                   onClick={this.onDeleteClick.bind(

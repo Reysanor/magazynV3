@@ -124,4 +124,11 @@ public class AutomatService {
         productToAutomat=updatedProductToAutomat;
         return productToAutomatRepository.save(productToAutomat);
     }
+
+    public Iterable<Automat> findAllAutomatsToTenant(String tenantId) {
+        Tenant tenant = tenantService.findByNip(tenantId);
+
+        return automatRepository.findAllByTenant(tenantService.findByNip(tenantId));
+
+    }
 }

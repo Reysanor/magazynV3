@@ -7,6 +7,9 @@ import tenantReducer from "./tenantReducer";
 import automatReducer from "./automatReducer";
 import productReducer from "./productReducer";
 import productToAutomatReducer from "./productToAutomatReducer";
+import fundsDrawnReducer from "./fundsDrawnReducer";
+import insertedProductReducer from "./insertedProductReducer";
+import purchasedProductReducer from "./purchasedProductReducer";
 //store - A store holds the whole state tree of your application.
 //The only way to change the state inside it is to dispatch an action on it.
 
@@ -31,5 +34,8 @@ export default combineReducers({
   tenant: tenantReducer,
   product: productReducer,
   automat: automatReducer,
-  product_to_automat: productToAutomatReducer
+  product_to_automat: productToAutomatReducer,
+  funds_drawn: fundsDrawnReducer,
+  inserted_product: insertedProductReducer,
+  purchased_product: purchasedProductReducer
 });

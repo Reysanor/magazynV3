@@ -6,7 +6,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class InsertedProduct {
@@ -14,15 +17,21 @@ public class InsertedProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull(message = "Number is required")
 
+    @NotNull(message = "Number is required")
     private Integer number;
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date dateOfInsert;
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "automat_to_product_id")
-    //@JsonIgnore
-    //private AutomatToProduct automatToProduct;
+
+    @ManyToOne
+    @JoinColumn(name = "automat_id", referencedColumnName = "id")
+    private Automat automat;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    private Product product;
+
+
 
     public Long getId() {
         return id;
@@ -48,5 +57,34 @@ public class InsertedProduct {
         this.dateOfInsert = dateOfInsert;
     }
 
+    public Automat getAutomat() {
+        return automat;
+    }
 
+    public void setAutomat(Automat automat) {
+        this.automat = automat;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        InsertedProduct that = (InsertedProduct) o;
+        return Objects.equals(automat, that.automat) &&
+                Objects.equals(product, that.product);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(automat, product);
+    }
 }

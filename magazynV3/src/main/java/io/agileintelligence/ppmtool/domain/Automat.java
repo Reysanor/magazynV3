@@ -44,13 +44,16 @@ public class Automat {
 
     @JsonIgnore
     @OneToMany(mappedBy = "automat", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductToAutomat> productToAutomats = new ArrayList<>();;
+    private List<ProductToAutomat> productToAutomats = new ArrayList<>();
 
 
 
     @OneToMany(mappedBy = "automat", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<FundsDrawn> fundsDrawns;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "automat", cascade = CascadeType.ALL)
+    private List<InsertedProduct> insertedProducts = new ArrayList<>();
 
     public List<ProductToAutomat> getProductToAutomats() {
         return productToAutomats;
@@ -62,6 +65,10 @@ public class Automat {
         //product.getProductToAutomats().add(productToAutomat);
         productToAutomats.add(productToAutomat);
     }
+
+
+
+
 
     public Long getId() {
         return id;
@@ -131,15 +138,18 @@ public class Automat {
         this.capacity = capacity;
     }
 
-   // public List<AutomatToProduct> getAutomatToProducts() {
-   //     return automatToProducts;
-   // }
+    public List<InsertedProduct> getInsertedProducts() {
+        return insertedProducts;
+    }
 
+    public void setInsertedProducts(List<InsertedProduct> insertedProducts) {
+        this.insertedProducts = insertedProducts;
+    }
 
+    public void addInsertedProduct(InsertedProduct insertedProduct) {
 
-   // public void setAutomatToProducts(List<AutomatToProduct> automatToProducts) {
-   //     this.automatToProducts = automatToProducts;
-   // }
+        insertedProducts.add(insertedProduct);
+    }
 
     @Override
     public String toString() {

@@ -22,7 +22,7 @@ public class PurchasedProduct {
     private Date dateOfPurchase;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "automat_id")
+    @JoinColumn(name = "product_id")
     @JsonIgnore
     private Product product ;
 

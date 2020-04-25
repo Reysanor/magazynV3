@@ -29,6 +29,8 @@ import SecuredRoute from "./securityUtils/SecuredRoute";
 import AutomatBoard from "./components/AutomatBoard/AutomatBoard";
 import AddProductToAutomat from "./components/AutomatBoard/ProductToAutomats/AddProductToAutomat";
 import UpdateProductToAutomat from "./components/AutomatBoard/ProductToAutomats/UpdateProductToAutomat";
+import AddInsertedProduct from "./components/AutomatBoard/InsertedProduct/AddInsertedProduct";
+import TenantBoard from "./components/Tenant/TenantBoard/TenantBoard";
 
 //every time I load other path I again set token
 const jwtToken = localStorage.jwtToken;
@@ -120,7 +122,9 @@ class App extends Component {
                 path="/automatBoard/:id/"
                 component={AutomatBoard}
               />
-
+              {
+                //Automat to product
+              }
               <SecuredRoute
                 exact
                 path="/addProductToAutomat/:id/"
@@ -143,6 +147,25 @@ class App extends Component {
                 component={UpdateTenant}
               />
               <SecuredRoute exact path="/addTenant" component={AddTenant} />
+              <SecuredRoute
+              exact
+              path="/tenantBoard/:nip/"
+              component={TenantBoard}
+            />
+
+
+
+
+              {
+                //Insert product
+              }
+
+              <SecuredRoute
+              exact
+              path="/insertProductToAutomat/:automat_serialNumber/:product_id"
+              component={AddInsertedProduct}
+            />
+
             </Switch>
           </div>
         </Router>

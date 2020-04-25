@@ -16,6 +16,9 @@ import { getProjects } from "../actions/projectActions";
 import { getAutomats } from "../actions/automatActions";
 import { getProducts } from "../actions/productActions";
 import { getTenants } from "../actions/tenantActions";
+import { getFundsDrawns } from "../actions/fundsDrawnActions";
+import { getInsertedProducts } from "../actions/insertedProductActions";
+import { getPurchasedProducts } from "../actions/purchasedProductActions";
 import PropTypes from "prop-types";
 
 class Dashboard extends Component {
@@ -25,6 +28,9 @@ class Dashboard extends Component {
     this.props.getTenants();
     this.props.getAutomats();
     this.props.getProducts();
+    this.props.getFundsDrawns();
+    this.props.getInsertedProducts();
+    this.props.getPurchasedProducts();
   }
 
   render() {
@@ -33,6 +39,9 @@ class Dashboard extends Component {
     const { tenants } = this.props.tenant;
     const { automats } = this.props.automat;
     const { products} = this.props.product;
+    const { funds_drawns } = this.props.funds_drawn;
+    const { inserted_products} = this.props.inserted_product;
+    const { purchased_products } = this.props.purchased_product;
     //mapuje przycisk z linkiem do tworzenia nowego projektu a poniżej utworzone projekty
     return (
       <div>
@@ -40,7 +49,7 @@ class Dashboard extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <h1 className="display-4 text-center">Tenants</h1>
+                <h1 className="display-4 text-center">Miejsce</h1>
                 <br />
                 {/*przycisk do utworzenia nowego Wynajmujacego */}
                 <CreateTenantButton />
@@ -94,8 +103,14 @@ class Dashboard extends Component {
             </div>
           </div>
         </div>
+        <br />
+        <br />
+        <br />
 
-    
+        <h1 className="display-4 text-center">DEVELOPER ONLY CODE</h1>
+        <br />
+        <br />
+        <br />
 
 
         <div className="projects">
@@ -116,6 +131,8 @@ class Dashboard extends Component {
             </div>
           </div>
         </div>
+                
+
       </div>
     );
   }
@@ -134,17 +151,30 @@ Dashboard.propTypes = {
   getProducts: PropTypes.func.isRequired,
   product: PropTypes.object.isRequired,
 
- 
+  getFundsDrawns: PropTypes.func.isRequired,
+  funds_drawn: PropTypes.object.isRequired,
+  getInsertedProducts: PropTypes.func.isRequired,
+  inserted_product: PropTypes.object.isRequired,
+  getPurchasedProducts: PropTypes.func.isRequired,
+  purchased_product: PropTypes.object.isRequired,
+
 };
 //przyjmuje parametr state i podłącza project to state project (mappuje do componentu aplikacji)
 const mapStateToProps = (state) => ({
   project: state.project,
   tenant: state.tenant,
   automat: state.automat,
-  product: state.product});
+  product: state.product,
+  funds_drawn: state.funds_drawn,
+  inserted_product: state.inserted_product,
+  purchased_product: state.purchased_product
+
+
+
+});
 //łączenie componentu z state
 export default connect(
   //podczas łączenie się ze state aplikacji wymagane jest zmapowanie wszystkich state do props
   mapStateToProps,
-  { getTenants, getProjects, getAutomats,getProducts }
+  { getTenants, getProjects, getAutomats,getProducts,getFundsDrawns,getInsertedProducts,getPurchasedProducts }
 )(Dashboard);

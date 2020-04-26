@@ -44,6 +44,11 @@ public class PurchasedProductController {
         return purchasedProductService.findAllPurchasedProducts();
     }
 
+    @GetMapping("/all/per")
+    public Iterable<PurchasedProduct> getAllPurchasesPer() {
+        return purchasedProductService.findAllPurchasedProductsPer();
+    }
+
     @DeleteMapping("/{purchasedId}")
     public ResponseEntity<?> deleteAutomat(@PathVariable Long purchasedId, Principal principal) {
         purchasedProductService.deletePurchasedProductById(purchasedId);

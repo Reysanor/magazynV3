@@ -15,15 +15,14 @@ public class PurchasedProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull(message = "Amount is required")
-    private Double amount;
+    private int amount;
     @NotNull(message = "Price is required")
     private Double price;
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date dateOfPurchase;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_id")
-    @JsonIgnore
     private Product product ;
 
     public Long getId() {
@@ -34,11 +33,11 @@ public class PurchasedProduct {
         this.id = id;
     }
 
-    public Double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 

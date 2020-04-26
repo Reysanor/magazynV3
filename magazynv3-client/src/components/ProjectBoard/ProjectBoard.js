@@ -27,7 +27,7 @@ class ProjectBoard extends Component {
   }
 
   render() {
-    const { id } = this.props.match.params;
+    const { nip } = this.props.match.params;
     const { project_tasks } = this.props.backlog; //pobranie z backloga (tylko te z id projektu )
     const { errors } = this.state;
     //
@@ -66,7 +66,7 @@ class ProjectBoard extends Component {
 
     return (
       <div className="container">
-        <Link to={`/addProjectTask/${id}`} className="btn btn-primary mb-3">
+        <Link to={`/addProjectTask/${nip}`} className="btn btn-primary mb-3">
           <i className="fas fa-plus-circle"> Create Project Task</i>
         </Link>
         <br />

@@ -3,69 +3,66 @@ import PropTypes from "prop-types";
 //łączenie z state
 import { connect } from "react-redux";
 //1 - pobieram funkcje i obiekty
-import { createTenant } from "../../actions/tenantActions"
+import { createTenant } from "../../actions/tenantActions";
 import classnames from "classnames";
 
 class AddTenant extends Component {
-    //construktor z domyślnymi wartościami
-    constructor() {
-        super();
+  //construktor z domyślnymi wartościami
+  constructor() {
+    super();
 
-        this.state = {
-            name: "",
-            nip: "",
-            street: "",
-            zipCode: "",
-            city: "",
-            phoneNumber: "",
-            emailAddress: "",
-            errors: {}
-        };
-        //bind pobiera i manipuluje stanem
-        this.onChange = this.onChange.bind(this);
-        //funkcja bind  przesyła stan
-        this.onSubmit = this.onSubmit.bind(this);
+    this.state = {
+      name: "",
+      nip: "",
+      street: "",
+      zipCode: "",
+      city: "",
+      phoneNumber: "",
+      emailAddress: "",
+      errors: {},
+    };
+    //bind pobiera i manipuluje stanem
+    this.onChange = this.onChange.bind(this);
+    //funkcja bind  przesyła stan
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  //life cycle hooks - po każdym renderowaniu
+  componentWillReceiveProps(nextProps) {
+    //jeżeli mamy zmiany w state (jakieś errory nie null)
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
     }
+  }
 
-    //life cycle hooks - po każdym renderowaniu
-    componentWillReceiveProps(nextProps) {
-        //jeżeli mamy zmiany w state (jakieś errory nie null)
-        if (nextProps.errors) {
-            this.setState({ errors: nextProps.errors });
-        }
-    }
+  //wymaga bind w formularzu aby wprowadzać dane
+  //dluższe rozwiązanie dla każdej zmiennej -> this.setState({projectName: e.target.value});
+  //e.target - setState ustawia value wybranego elementu po evencie na danym name
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
 
-    //wymaga bind w formularzu aby wprowadzać dane
-    //dluższe rozwiązanie dla każdej zmiennej -> this.setState({projectName: e.target.value});
-    //e.target - setState ustawia value wybranego elementu po evencie na danym name 
-    onChange(e) {
-        this.setState({ [e.target.name]: e.target.value });
-    }
+  onSubmit(e) {
+    // blokuje przeladowanie po submit
+    e.preventDefault();
+    //tworze nowy Projekt
+    const newTenant = {
+      name: this.state.name,
+      nip: this.state.nip,
+      street: this.state.street,
+      zipCode: this.state.zipCode,
+      city: this.state.city,
+      phoneNumber: this.state.phoneNumber,
+      emailAddress: this.state.emailAddress,
+      //komponent po wyrenderowaniu za pomoca rendera przekazuje props do komponentu
+    };
 
-    onSubmit(e) {
-        // blokuje przeladowanie po submit
-        e.preventDefault();
-        //tworze nowy Projekt
-        const newTenant = {
-            name: this.state.name,
-            nip: this.state.nip,
-            street: this.state.street,
-            zipCode: this.state.zipCode,
-            city: this.state.city,
-            phoneNumber: this.state.phoneNumber,
-            emailAddress: this.state.emailAddress,
-            //komponent po wyrenderowaniu za pomoca rendera przekazuje props do komponentu
+    //console.log(newTenant);
+    this.props.createTenant(newTenant, this.props.history);
+  }
 
-        };
-
-        //console.log(newTenant);
-        this.props.createTenant(newTenant, this.props.history);
-
-    }
-
-
-render() {
-    //pobieram errory 
+  render() {
+    //pobieram errory
     //https://developer.mozilla.org/pl/docs/Web/JavaScript/Referencje/Operatory/Destructuring_assignment
     const { errors } = this.state;
     //“controlled component” - Is an input form element whose value is controlled by React.
@@ -89,12 +86,12 @@ render() {
                     <input
                       type="text"
                       //https://getbootstrap.com/docs/4.3/components/forms/#how-it-works
-                      //           () = zbiór ciągów znaków dzięki classnames, 
+                      //           () = zbiór ciągów znaków dzięki classnames,
                       //wewnetrzny {} = zbiór zmiennych wartości, tutaj klasa bootstrapa invalid class dla errorów,
                       //zewnetrzny {} = opakowanie dla className
                       //is-invalid - kolor obwodu pola w formularzu na czerwony
                       className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.name
+                        "is-invalid": errors.name,
                       })}
                       placeholder="Tenant Name"
                       name="name"
@@ -102,17 +99,15 @@ render() {
                       onChange={this.onChange}
                     />
                     {errors.name && (
-                                    //Bootstrap klasa do zwracania informacji o błędzie na czerwono
-                      <div className="invalid-feedback">
-                        {errors.name}
-                      </div>
+                      //Bootstrap klasa do zwracania informacji o błędzie na czerwono
+                      <div className="invalid-feedback">{errors.name}</div>
                     )}
                   </div>
                   <div className="form-group">
                     <input
                       type="text"
                       className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.nip
+                        "is-invalid": errors.nip,
                       })}
                       placeholder="Unique Project NIP"
                       name="nip"
@@ -120,15 +115,13 @@ render() {
                       onChange={this.onChange}
                     />
                     {errors.nip && (
-                      <div className="invalid-feedback">
-                        {errors.nip}
-                      </div>
+                      <div className="invalid-feedback">{errors.nip}</div>
                     )}
                   </div>
                   <div className="form-group">
                     <textarea
                       className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.street
+                        "is-invalid": errors.street,
                       })}
                       placeholder="Tenant street"
                       name="street"
@@ -136,35 +129,32 @@ render() {
                       onChange={this.onChange}
                     />
                     {errors.street && (
-                      <div className="invalid-feedback">
-                        {errors.street} 
-                      </div>
+                      <div className="invalid-feedback">{errors.street}</div>
                     )}
-                    </div>
+                  </div>
 
-<div className="form-group">
+                  <div className="form-group">
                     <textarea
                       className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.zipCode
+                        "is-invalid": errors.zipCode,
                       })}
                       placeholder="Tenant street"
                       name="zipCode"
                       type="number"
-                      min="10000" max="99999"
+                      min="10000"
+                      max="99999"
                       value={this.state.zipCode}
                       onChange={this.onChange}
                     />
                     {errors.zipCode && (
-                      <div className="invalid-feedback">
-                        {errors.zipCode} 
-                      </div>
+                      <div className="invalid-feedback">{errors.zipCode}</div>
                     )}
-                    </div>
+                  </div>
 
-                    <div className="form-group">
+                  <div className="form-group">
                     <textarea
                       className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.city
+                        "is-invalid": errors.city,
                       })}
                       placeholder="Tenant city"
                       name="city"
@@ -172,35 +162,35 @@ render() {
                       onChange={this.onChange}
                     />
                     {errors.city && (
-                      <div className="invalid-feedback">
-                        {errors.city} 
-                      </div>
+                      <div className="invalid-feedback">{errors.city}</div>
                     )}
-                    </div>
+                  </div>
 
-                    <div className="form-group">
+                  <div className="form-group">
                     <textarea
                       className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.phoneNumber
+                        "is-invalid": errors.phoneNumber,
                       })}
                       placeholder="Tenant phoneNumber"
                       name="phoneNumber"
                       type="text"
-                      maxlength="9" minlength="9" size="9"
+                      maxlength="9"
+                      minlength="9"
+                      size="9"
                       value={this.state.phoneNumber}
                       onChange={this.onChange}
                     />
                     {errors.phoneNumber && (
                       <div className="invalid-feedback">
-                        {errors.phoneNumber} 
+                        {errors.phoneNumber}
                       </div>
                     )}
-                    </div>
+                  </div>
 
-                    <div className="form-group">
+                  <div className="form-group">
                     <textarea
                       className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.emailAddress
+                        "is-invalid": errors.emailAddress,
                       })}
                       placeholder="Tenant emailAddress"
                       name="emailAddress"
@@ -210,10 +200,10 @@ render() {
                     />
                     {errors.emailAddress && (
                       <div className="invalid-feedback">
-                        {errors.emailAddress} 
+                        {errors.emailAddress}
                       </div>
                     )}
-                    </div>
+                  </div>
                   <input
                     type="submit"
                     className="btn btn-primary btn-block mt-4"
@@ -232,17 +222,15 @@ AddTenant.propTypes = {
   //3 - przekazuje funkcje i obiekty do tej klasy, isRequired oznacza że jest niezbędna do działania componentu
   //jednocześnie określa wymagany typ uzyskanego prop
   createTenant: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 //przyjmuje parametr state i podłącza errory to state errors (mappuje do componentu aplikacji)
-const mapStateToProps = state => ({
-  errors: state.errors
+const mapStateToProps = (state) => ({
+  errors: state.errors,
 });
-//2 - łączenie componentu z state 
+//2 - łączenie componentu z state
 export default connect(
   //podczas łączenie się ze state aplikacji wymagane jest zmapowanie wszystkich state do props
   mapStateToProps,
   { createTenant }
 )(AddTenant);
-
-

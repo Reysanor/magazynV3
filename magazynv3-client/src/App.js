@@ -31,6 +31,11 @@ import AddProductToAutomat from "./components/AutomatBoard/ProductToAutomats/Add
 import UpdateProductToAutomat from "./components/AutomatBoard/ProductToAutomats/UpdateProductToAutomat";
 import AddInsertedProduct from "./components/AutomatBoard/InsertedProduct/AddInsertedProduct";
 import TenantBoard from "./components/Tenant/TenantBoard/TenantBoard";
+import AutomatsList from "./components/Dashboard/AutomatsList";
+import ProductsList from "./components/Dashboard/ProductsList";
+import TenantsList from "./components/Dashboard/TenantsList";
+import AddPurchasedProduct from "./components/Product/ProductBoard/AddPurchasedProduct";
+import RemovePurchasedProduct from "./components/Product/ProductBoard/RemovePurchasedProduct";
 
 //every time I load other path I again set token
 const jwtToken = localStorage.jwtToken;
@@ -78,7 +83,13 @@ class App extends Component {
               //Project
             }
             <Switch>
-              <SecuredRoute exact path="/dashboard" component={Dashboard} />
+            <SecuredRoute exact path="/dashboard" component={Dashboard} />
+            <SecuredRoute exact path="/automats" component={AutomatsList} />
+            <SecuredRoute exact path="/products" component={ProductsList} />
+            <SecuredRoute exact path="/tenants" component={TenantsList} />
+
+
+
               <SecuredRoute exact path="/addProject" component={AddProject} />
               <SecuredRoute
                 exact
@@ -111,12 +122,7 @@ class App extends Component {
               />
               <SecuredRoute exact path="/addAutomat" component={AddAutomat} />
 
-              <SecuredRoute
-                exact
-                path="/updateProduct/:id"
-                component={UpdateProduct}
-              />
-              <SecuredRoute exact path="/addProduct" component={AddProduct} />
+           
               <SecuredRoute
                 exact
                 path="/automatBoard/:id/"
@@ -136,6 +142,28 @@ class App extends Component {
               path="/updateProductToAutomat/:automat_serialNumber/:product_id"
               component={UpdateProductToAutomat}
             />
+            {
+              //Product
+            }
+
+            <SecuredRoute
+              exact
+              path="/updateProduct/:id"
+              component={UpdateProduct}
+            />
+            <SecuredRoute exact path="/addProduct" component={AddProduct} />
+
+            <SecuredRoute
+            exact
+            path="/addPurchasedProduct/:id"
+            component={AddPurchasedProduct}
+          />
+
+          <SecuredRoute
+          exact
+          path="/removePurchasedProduct/:id"
+          component={RemovePurchasedProduct}
+        />
 
               {
                 //Tenant
@@ -149,7 +177,7 @@ class App extends Component {
               <SecuredRoute exact path="/addTenant" component={AddTenant} />
               <SecuredRoute
               exact
-              path="/tenantBoard/:nip/"
+              path="/tenantBoard/:nip"
               component={TenantBoard}
             />
 

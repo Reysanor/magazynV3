@@ -12,7 +12,7 @@ import { connect } from "react-redux";
     //props z product_to_automat
     const { product_to_automat } = this.props;
     return (
-      <div>
+      <div className="card mb-1 bg-light">
         <div className="card-body bg-light">
           <h5 className="card-title">
             {" "}

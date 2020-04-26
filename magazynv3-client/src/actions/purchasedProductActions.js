@@ -17,7 +17,7 @@ export const createPurchasedProduct = (product_id,purchased_product, history) =>
   try {
     //po poprawnym utworzeniu projektu wracam do dashboard (do tego używam parametru history)
     await axios.post(`/api/purchased/${product_id}`, purchased_product);
-    history.push("/dashboard");
+    history.push("/products");
     //opóźnienie rozgłoszenia (ang. “dispatch) akcji lub rozgłoszenie jej tylko 
     //jeśli zostaną spełnione określone warunki.
     dispatch({
@@ -52,9 +52,24 @@ export const getPurchasedProduct = (id, history) => async dispatch => {
     });
     //w przypadku braku projektu
   } catch (error) {
-    history.push("/dashboard");
+    history.push("/products");
   }
 };
+
+export const getPurchasedProductsPer = () => async dispatch => {
+  try {
+    const res = await axios.get("/api/purchased/all/per");
+    dispatch({
+      type: GET_PURCHASED_PRODUCTS,
+      payload: res.data
+    });
+    //w przypadku braku projektu
+  } catch (error) {
+   
+  }
+};
+
+
 
 export const deletePurchasedProduct = id => async dispatch => {
   if (

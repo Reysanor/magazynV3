@@ -30,8 +30,9 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<ProductToAutomat> productToAutomats = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    private Set<PurchasedProduct> purchasedProducts;
+    private List<PurchasedProduct> purchasedProducts;
 
 
     @JsonIgnore
@@ -98,8 +99,18 @@ public class Product {
         this.productLeader = productLeader;
     }
 
+    public List<PurchasedProduct> getPurchasedProducts() {
+        return purchasedProducts;
+    }
 
+    public void setPurchasedProducts(List<PurchasedProduct> purchasedProducts) {
+        this.purchasedProducts = purchasedProducts;
+    }
 
+    public void addPurchasedProducts(PurchasedProduct purchasedProduct) {
+
+        purchasedProducts.add(purchasedProduct);
+    }
     @Override
     public String toString() {
         return "Product{" +

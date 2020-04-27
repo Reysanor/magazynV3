@@ -14,10 +14,12 @@ public class PurchasedProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotNull(message = "Amount is required")
-    private int amount;
+    private Integer amount;
     @NotNull(message = "Price is required")
     private Double price;
+
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date dateOfPurchase;
 
@@ -33,11 +35,11 @@ public class PurchasedProduct {
         this.id = id;
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 

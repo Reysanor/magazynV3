@@ -28,11 +28,18 @@ public class PurchasedProductController {
     public ResponseEntity<?> createOrUpdatePurchasedProduct(@Valid @RequestBody PurchasedProduct purchasedProduct,BindingResult result, @PathVariable Long productId, Principal principal) {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if (errorMap != null) return errorMap;
-
         PurchasedProduct purchasedProduct1 = purchasedProductService.createOrUpdatePurchasedProduct(purchasedProduct,productId);
         return new ResponseEntity<PurchasedProduct>(purchasedProduct1, HttpStatus.CREATED);
-
     }
+
+    @PostMapping("/remove/{productId}")
+    public ResponseEntity<?> removePurchasedProduct(@Valid @RequestBody PurchasedProduct purchasedProduct,BindingResult result, @PathVariable Long productId, Principal principal) {
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+        if (errorMap != null) return errorMap;
+        PurchasedProduct purchasedProduct1 = purchasedProductService.removePurchasedProduct(purchasedProduct,productId);
+        return new ResponseEntity<PurchasedProduct>(purchasedProduct1, HttpStatus.CREATED);
+    }
+
     @GetMapping("/{purchasedId}")
     public ResponseEntity<?> getPurchaseById(@PathVariable Long purchasedId, Principal principal) {
         PurchasedProduct purchasedProduct1 = purchasedProductService.findById(purchasedId);

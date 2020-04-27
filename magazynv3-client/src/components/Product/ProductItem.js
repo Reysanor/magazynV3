@@ -38,7 +38,7 @@ class ProductItem extends Component {
                   </li>
                 </Link>
 
-                <Link to={`/removePurchasedProduct/${purchased_product.product.id}`}>
+                <Link to={`/removePurchasedProduct/${purchased_product.product.id}/${purchased_product.amount}`}>
                   <li className="list-group-item update">
                     <i className="fa fa-minus-circle pr-1">
                       {" "}

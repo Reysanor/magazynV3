@@ -54,6 +54,23 @@ public class PurchasedProductService {
         }
     }
 
+
+    public PurchasedProduct removePurchasedProduct(PurchasedProduct purchasedProduct, Long productId) {
+
+        if(purchasedProduct.getAmount()>=0){
+            throw new PurchasedProductNotFoundException("You cannot remove less than 1 product");
+        }
+
+        PurchasedProduct sumOfPurchased = findAllPurchasedProductsPer(productService.findById(productId));
+        if(purchasedProduct.getAmount()+sumOfPurchased.getAmount()<0){
+            throw new PurchasedProductNotFoundException("You don't have enough of product " + productService.findById(productId).getName() + " to get");
+        }
+        purchasedProduct.setPrice(0.0);
+        return createOrUpdatePurchasedProduct(purchasedProduct,productId);
+    }
+
+
+
     public PurchasedProduct findById(Long purchasedId) {
         Optional<PurchasedProduct> purchasedProduct = purchasedProductRepository.findById(purchasedId);
         if (!purchasedProduct.isPresent()) {
@@ -83,7 +100,7 @@ public class PurchasedProductService {
     public PurchasedProduct findAllPurchasedProductsPer(Product product) {
         int amount = 0;
         Double price = 0.0;
-        int i = 0;
+        int bought = 0;
         PurchasedProduct purchasedProduct = new PurchasedProduct();
         purchasedProduct.setProduct(product);
 
@@ -91,14 +108,15 @@ public class PurchasedProductService {
             Iterable<PurchasedProduct> allPer = purchasedProductRepository.findAllByProduct(product);
 
             for (PurchasedProduct pp : allPer) {
-                
+                if(pp.getAmount()>0){
+                    price = price + pp.getPrice()*pp.getAmount();
+                    bought = bought+ pp.getAmount();
+                }
                 amount = amount + pp.getAmount();
-                price = price + pp.getPrice();
-                i++;
-            }
 
+            }
             purchasedProduct.setAmount(amount);
-            purchasedProduct.setPrice(round(price / i));
+            purchasedProduct.setPrice(round(price / bought));
         } catch (Exception e) {
             purchasedProduct.setAmount(0);
             purchasedProduct.setPrice(0.0);
@@ -115,4 +133,6 @@ public class PurchasedProductService {
         bd = bd.setScale(2, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
+
+
 }

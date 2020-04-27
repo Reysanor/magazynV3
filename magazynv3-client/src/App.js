@@ -161,7 +161,7 @@ class App extends Component {
 
           <SecuredRoute
           exact
-          path="/removePurchasedProduct/:id"
+          path="/removePurchasedProduct/:id/:amount"
           component={RemovePurchasedProduct}
         />
 

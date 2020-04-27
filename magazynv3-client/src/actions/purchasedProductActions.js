@@ -35,6 +35,29 @@ export const createPurchasedProduct = (product_id,purchased_product, history) =>
   }
 };
 
+
+export const removePurchasedProduct = (product_id,purchased_product, history) => async dispatch => {
+  try {
+    //po poprawnym utworzeniu projektu wracam do dashboard (do tego używam parametru history)
+    await axios.post(`/api/purchased/remove/${product_id}`, purchased_product);
+    history.push("/products");
+    //opóźnienie rozgłoszenia (ang. “dispatch) akcji lub rozgłoszenie jej tylko 
+    //jeśli zostaną spełnione określone warunki.
+    dispatch({
+      type: GET_ERRORS,
+      //usuwam errory ze state - są niepotrzebne po poprawnym utworzeniu projektu
+      payload: {}
+    });
+  } catch (err) {
+    
+    dispatch({
+      type: GET_ERRORS,
+      //zwraca error do reducera
+      payload: err.response.data
+    });
+  }
+};
+
 export const getPurchasedProducts= () => async dispatch => {
   const res = await axios.get("/api/purchased/all");
   dispatch({

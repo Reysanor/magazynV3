@@ -28,6 +28,8 @@ public class TenantController {
     private
     AutomatService automatService;
 
+
+    //zmienic na patch
     @PostMapping("/{tenant_id}/{automat_id}")
     public ResponseEntity<?> addAutomatToTenant(
                                                 @PathVariable String tenant_id, @PathVariable String automat_id, Principal principal) {

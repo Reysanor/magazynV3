@@ -51,6 +51,15 @@ export const getTenantsToAutomat = (nip) => async dispatch => {
   });
 };
 
+export const getTenantsToAutomatFree = () => async dispatch => {
+  const res = await axios.get("/api/automat/all/free");
+  dispatch({
+    type: GET_AUTOMATS, //typ reducera
+    payload: res.data //dane z bazy
+  });
+};
+
+
 export const getAutomat = (id, history) => async dispatch => {
   try {
     const res = await axios.get(`/api/automat/${id}`);

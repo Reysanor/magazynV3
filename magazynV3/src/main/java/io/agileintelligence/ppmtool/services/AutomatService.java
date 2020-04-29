@@ -126,9 +126,15 @@ public class AutomatService {
     }
 
     public Iterable<Automat> findAllAutomatsToTenant(String tenantId) {
-        Tenant tenant = tenantService.findByNip(tenantId);
+        //Tenant tenant = tenantService.findByNip(tenantId);
 
         return automatRepository.findAllByTenant(tenantService.findByNip(tenantId));
+
+    }
+
+    public Iterable<Automat> findAllAutomatsToTenantFree() {
+
+        return automatRepository.findAllByTenant(null);
 
     }
 }

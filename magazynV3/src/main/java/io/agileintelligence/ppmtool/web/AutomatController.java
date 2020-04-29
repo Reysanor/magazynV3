@@ -49,6 +49,12 @@ public class AutomatController {
         return automatService.findAllAutomatsToTenant(tenantId);
     }
 
+    @GetMapping("/all/free/")
+    public Iterable<Automat> getAllAutomatsToTenantFree() {
+        return automatService.findAllAutomatsToTenantFree();
+    }
+
+
     @DeleteMapping("/{automatId}")
     public ResponseEntity<?> deleteAutomat(@PathVariable String automatId, Principal principal) {
         automatService.deleteAutomatBySerialNumber(automatId);

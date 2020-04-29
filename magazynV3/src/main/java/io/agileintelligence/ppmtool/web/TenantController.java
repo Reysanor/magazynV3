@@ -29,18 +29,6 @@ public class TenantController {
     AutomatService automatService;
 
 
-    //zmienic na patch
-    @PostMapping("/{tenant_id}/{automat_id}")
-    public ResponseEntity<?> addAutomatToTenant(
-                                                @PathVariable String tenant_id, @PathVariable String automat_id, Principal principal) {
-       // ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
-        //if (errorMap != null) return errorMap;
-
-        Automat automat1 = automatService.setTenant(tenant_id, automat_id);
-
-        return new ResponseEntity<Automat>(automat1, HttpStatus.CREATED);
-    }
-
 
     @PostMapping("")
     public ResponseEntity<?> createNewTenant(@Valid @RequestBody Tenant tenant, BindingResult result, Principal principal) {
@@ -67,5 +55,7 @@ public class TenantController {
         tenantService.deleteTenantByNip(tenantId, principal.getName());
         return new ResponseEntity<String>("Tenant with Nip: " + tenantId + " was deleted", HttpStatus.OK);
     }
+
+
 
 }

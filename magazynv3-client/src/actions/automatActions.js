@@ -3,7 +3,7 @@
 //!!!
 
 import axios from "axios";
-//axios służy do komunikacji z backendem 
+//axios służy do komunikacji z backendem
 import { GET_ERRORS, GET_AUTOMAT, GET_AUTOMATS, DELETE_AUTOMAT } from "./types";
 //history pozwala na przekierowanie przy podsumowaniu formularza
 //async oznacza dodanie do kolejki wywolywania funkcji, dispatch przeslanie żądania
@@ -12,60 +12,58 @@ import { GET_ERRORS, GET_AUTOMAT, GET_AUTOMATS, DELETE_AUTOMAT } from "./types";
 //akcje otrzymują zadanie od springa
 //wykorzystuja odpowiednie typy i prowadza do reducerów w index.js
 //przekazuje project jako obiekt i history co pozwoli na przekierowanie w index.js
-                                                // czeka na promise i zwraca result (E6)
-export const createAutomat = (automat, history) => async dispatch => {
+// czeka na promise i zwraca result (E6)
+export const createAutomat = (automat, history) => async (dispatch) => {
   try {
     //po poprawnym utworzeniu projektu wracam do dashboard (do tego używam parametru history)
     await axios.post("/api/automat", automat);
     history.push("/dashboard");
-    //opóźnienie rozgłoszenia (ang. “dispatch) akcji lub rozgłoszenie jej tylko 
+    //opóźnienie rozgłoszenia (ang. “dispatch) akcji lub rozgłoszenie jej tylko
     //jeśli zostaną spełnione określone warunki.
     dispatch({
       type: GET_ERRORS,
       //usuwam errory ze state - są niepotrzebne po poprawnym utworzeniu projektu
-      payload: {}
+      payload: {},
     });
   } catch (err) {
-    
     dispatch({
       type: GET_ERRORS,
       //zwraca error do reducera
-      payload: err.response.data
+      payload: err.response.data,
     });
   }
 };
 
-export const getAutomats = () => async dispatch => {
+export const getAutomats = () => async (dispatch) => {
   const res = await axios.get("/api/automat/all");
   dispatch({
     type: GET_AUTOMATS, //typ reducera
-    payload: res.data //dane z bazy
+    payload: res.data, //dane z bazy
   });
 };
 
-export const getTenantsToAutomat = (nip) => async dispatch => {
+export const getTenantsToAutomat = (nip) => async (dispatch) => {
   const res = await axios.get(`/api/automat/all/${nip}`);
   dispatch({
     type: GET_AUTOMATS, //typ reducera
-    payload: res.data //dane z bazy
+    payload: res.data, //dane z bazy
   });
 };
 
-export const getTenantsToAutomatFree = () => async dispatch => {
+export const getTenantsToAutomatFree = () => async (dispatch) => {
   const res = await axios.get("/api/automat/all/free");
   dispatch({
     type: GET_AUTOMATS, //typ reducera
-    payload: res.data //dane z bazy
+    payload: res.data, //dane z bazy
   });
 };
 
-
-export const getAutomat = (id, history) => async dispatch => {
+export const getAutomat = (id, history) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/automat/${id}`);
     dispatch({
       type: GET_AUTOMAT,
-      payload: res.data
+      payload: res.data,
     });
     //w przypadku braku projektu
   } catch (error) {
@@ -73,7 +71,7 @@ export const getAutomat = (id, history) => async dispatch => {
   }
 };
 
-export const deleteAutomat = id => async dispatch => {
+export const deleteAutomat = (id) => async (dispatch) => {
   if (
     window.confirm(
       "Are you sure? This will delete the automat and all the data related to it"
@@ -82,7 +80,46 @@ export const deleteAutomat = id => async dispatch => {
     await axios.delete(`/api/automat/${id}`);
     dispatch({
       type: DELETE_AUTOMAT,
-      payload: id //zwracam co do usuniecia
+      payload: id, //zwracam co do usuniecia
+    });
+  }
+};
+
+
+export const addAutomatToTenant = (
+  tenant_id,
+  automat_id,
+  tenant,
+  history
+) => async (dispatch) => {
+  try {
+    await axios.post(`/api/automat/att/${tenant_id}/${automat_id}`, tenant);
+    history.push(`/tenantBoard/${tenant_id}`);
+    dispatch({
+      type: GET_ERRORS,
+      payload: {},
+    });
+  } catch (err) {
+    dispatch({
+      type: GET_ERRORS,
+      //zwraca error do reducera
+      payload: err.response.data,
+    });
+  }
+};
+
+export const deleteAutomatfromTenant = (automat_serialNumber) => async (
+  dispatch
+) => {
+  if (
+    window.confirm(
+      `You want to remove automat with serial number ${automat_serialNumber} from tenant, there is no come back`
+    )
+  ) {
+    await axios.patch(`/api/automat/att/${automat_serialNumber}`);
+    dispatch({
+      type: DELETE_AUTOMAT,
+      payload: automat_serialNumber,
     });
   }
 };

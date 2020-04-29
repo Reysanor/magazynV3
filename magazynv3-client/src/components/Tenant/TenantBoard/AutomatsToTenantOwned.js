@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Automat from "../../Automat/AutomatItem";
+import Automat from "../../Automat/AutomatItemInTenant";
 
 class AutomatsToTenantOwned extends Component {
   render() {

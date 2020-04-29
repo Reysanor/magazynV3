@@ -72,27 +72,6 @@ export const deleteTenant = id => async dispatch => {
 
 
 
-export const addAutomatToTenant = (
-  tenant_id,
-  automat_id,
-  tenant,
-  history
-) => async (dispatch) => {
-  try {
-    await axios.post(
-      `/api/tenant/${tenant_id}/${automat_id}`,
-      tenant
-    );
-    history.push(`/tenantBoard/${tenant_id}`);
-    dispatch({
-      type: GET_ERRORS,
-      payload: {},
-    });
-  } catch (err) {
-    dispatch({
-      type: GET_ERRORS,
-      //zwraca error do reducera
-      payload: err.response.data,
-    });
-  }
-};
+
+
+

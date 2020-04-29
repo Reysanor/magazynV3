@@ -36,6 +36,7 @@ import ProductsList from "./components/Dashboard/ProductsList";
 import TenantsList from "./components/Dashboard/TenantsList";
 import AddPurchasedProduct from "./components/Product/ProductBoard/AddPurchasedProduct";
 import RemovePurchasedProduct from "./components/Product/ProductBoard/RemovePurchasedProduct";
+import AddAutomatToTenant from "./components/Tenant/TenantBoard/AddAutomatToTenant";
 
 //every time I load other path I again set token
 const jwtToken = localStorage.jwtToken;
@@ -181,7 +182,11 @@ class App extends Component {
               component={TenantBoard}
             />
 
-
+            <SecuredRoute
+            exact
+            path="/addAutomatToTenant/:nip"
+            component={AddAutomatToTenant}
+          />
 
 
               {

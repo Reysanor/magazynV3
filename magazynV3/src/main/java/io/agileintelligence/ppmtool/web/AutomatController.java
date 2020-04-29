@@ -49,7 +49,7 @@ public class AutomatController {
         return automatService.findAllAutomatsToTenant(tenantId);
     }
 
-    @GetMapping("/all/free/")
+    @GetMapping("/all/free")
     public Iterable<Automat> getAllAutomatsToTenantFree() {
         return automatService.findAllAutomatsToTenantFree();
     }
@@ -100,5 +100,22 @@ public class AutomatController {
         return new ResponseEntity<ProductToAutomat>(updatedProductToAutomat1, HttpStatus.OK);
     }
 
+    //zmienic na patch
+    @PostMapping("/att/{tenant_id}/{automat_id}")
+    public ResponseEntity<?> addAutomatToTenant(
+            @PathVariable String tenant_id, @PathVariable String automat_id) {
+        // ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+        //if (errorMap != null) return errorMap;
+        Automat automat1 = automatService.setTenant(tenant_id, automat_id);
+        return new ResponseEntity<Automat>(automat1, HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/att/{automat_id}")
+    public ResponseEntity<?> deleteAutomatfromTenant(@PathVariable String automat_id) {
+        // ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+        //if (errorMap != null) return errorMap;
+        Automat automat1 = automatService.removeTenant(automat_id);
+        return new ResponseEntity<Automat>(automat1, HttpStatus.OK);
+    }
 
 }

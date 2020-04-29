@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import {getTenantsToAutomatFree} from "../../../actions/automatActions";
-import {addAutomatToTenant} from "../../../actions/tenantActions";
+import {addAutomatToTenant} from "../../../actions/automatActions";
 class AddProductToAutomat extends Component {
   constructor(props) {
     super(props);
@@ -62,7 +62,7 @@ class AddProductToAutomat extends Component {
   
   }
   render() {
-    const { id } = this.props.match.params;
+    const { nip } = this.props.match.params;
     const { automats} = this.props.automat;
     const { errors } = this.state;
  //iteracja przez project_task_propsy i wrzucanie do mapy ProjectTask o nazwie project_task
@@ -72,7 +72,7 @@ class AddProductToAutomat extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <Link to={`/automatBoard/${id}`} className="btn btn-light">
+              <Link to={`/tenantBoard/${nip}`} className="btn btn-light">
                 Back to Automat Board
               </Link>
               <h4 className="display-4 text-center">Add Automat to Tenant</h4>
@@ -88,7 +88,7 @@ class AddProductToAutomat extends Component {
                 >
                 <option value="">Select option</option>
                 {automats.map((item,i) =>
-                  <option key={i}  value={item.id}>
+                  <option key={i}  value={item.serialNumber}>
                    {item.name}
                   </option>
                  )}

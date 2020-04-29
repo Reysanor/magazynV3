@@ -137,4 +137,11 @@ public class AutomatService {
         return automatRepository.findAllByTenant(null);
 
     }
+
+    public Automat removeTenant(String automat_id) {
+        Automat automat = findBySerialNumber(automat_id);
+        automat.setTenant(null);
+        saveOrUpdateAutomat(automat);
+        return automatRepository.save(automat);
+    }
 }

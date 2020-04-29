@@ -119,7 +119,7 @@ render() {
                       name="name"
                       value={this.state.name}
                       onChange={this.onChange}
-                      disabled
+                      
                     />
                     {errors.name && (
                                     //Bootstrap klasa do zwracania informacji o błędzie na czerwono

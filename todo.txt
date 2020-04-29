@@ -1,1 +1,5 @@
-dodawanie/usuwanie automatu z tenanta
+uniemożliwić zabieranie automatu od innego tenanta
+
+produkt automacie - wziać cenę śrędnią za produkt, odjąc ją od ceny sprzedazy i wyświetlić
+
+dodac to inserted_product zysk przy wstawianiu do automatu

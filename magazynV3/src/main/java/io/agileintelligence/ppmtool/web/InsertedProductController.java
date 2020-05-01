@@ -48,4 +48,14 @@ public class InsertedProductController {
         insertedProductService.deleteInsertedProductByName(insertedProductId);
         return new ResponseEntity<String>("Inserted Product with id " + insertedProductId + " was deleted", HttpStatus.OK);
     }
+
+    @GetMapping("/profit/{automat_id}/{product_id}")
+    public InsertedProduct getInsertedProductAvaragePriceByAutomat(@PathVariable String automat_id, @PathVariable Long product_id) {
+        return insertedProductService.findAllByAutomatandProduct(automat_id,product_id);
+    }
+
+    @GetMapping("/profit/{automat_id}")
+    public Iterable<InsertedProduct> getInsertedProductsAvaragePriceByAutomat(@PathVariable String automat_id) {
+        return insertedProductService.findAllByAutomat(automat_id);
+    }
 }

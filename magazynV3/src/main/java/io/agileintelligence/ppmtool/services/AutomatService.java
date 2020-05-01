@@ -33,25 +33,6 @@ public class AutomatService {
     @Autowired
     ProductService productService;
 
-    public Automat setTenant(String tenant_id, String automat_id) {
-        Automat automatGet = findBySerialNumber(automat_id);
-        if (automatGet == null) {
-            throw new AutomatNotFoundException("Cannot add tenant - Automat with Serial Number: " + automat_id + " doesn't exists");
-        }
-        if (automatGet.getId() != null) {
-            Automat existingAutomat = automatRepository.findBySerialNumber(automatGet.getSerialNumber());
-            if (existingAutomat == null) {
-                throw new AutomatNotFoundException("Cannot add tenant - Automat with Serial Number: " + automatGet.getSerialNumber() + " doesn't exists");
-            }
-        }
-        //czy istnieje tenant
-        Tenant tenant = tenantService.findByNip(tenant_id);
-        if (tenant == null) {
-            throw new TenantNotFoundException(" Tenant with ID: " + tenant_id + "  does not exist ");
-        }
-        automatGet.setTenant(tenant);
-        return automatRepository.save(automatGet);
-    }
 
     public Automat saveOrUpdateAutomat(Automat automat) {
         String automatSerialNumberGet = automat.getSerialNumber().toUpperCase();
@@ -136,6 +117,32 @@ public class AutomatService {
 
         return automatRepository.findAllByTenant(null);
 
+    }
+
+    public Automat setTenant(String tenant_id, String automat_id) {
+        Automat automatGet = findBySerialNumber(automat_id);
+        if (automatGet == null) {
+            throw new AutomatNotFoundException("Cannot add tenant - Automat with Serial Number: " + automat_id + " doesn't exists");
+        }
+        if (automatGet.getId() != null) {
+            Automat existingAutomat = automatRepository.findBySerialNumber(automatGet.getSerialNumber());
+            if (existingAutomat == null) {
+                throw new AutomatNotFoundException("Cannot add tenant - Automat with Serial Number: " + automatGet.getSerialNumber() + " doesn't exists");
+            }
+        }
+
+        if (automatGet.getTenant() != null) {
+            throw new AutomatIdException("Automat with Serial Number'" + automat_id + "'is used already");
+        }
+        //czy istnieje tenant
+        Tenant tenant = tenantService.findByNip(tenant_id);
+        if (tenant == null) {
+            throw new TenantNotFoundException(" Tenant with ID: " + tenant_id + "  does not exist ");
+        }
+
+
+        automatGet.setTenant(tenant);
+        return automatRepository.save(automatGet);
     }
 
     public Automat removeTenant(String automat_id) {

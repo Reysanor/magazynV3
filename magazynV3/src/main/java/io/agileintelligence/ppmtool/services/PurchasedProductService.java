@@ -96,6 +96,9 @@ public class PurchasedProductService {
         return pp;
     }
 
+    public PurchasedProduct findPurchasedProductsPer(Long product){
+       return findAllPurchasedProductsPer(productService.findById(product));
+    }
 
     public PurchasedProduct findAllPurchasedProductsPer(Product product) {
         int amount = 0;

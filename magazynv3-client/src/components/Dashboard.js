@@ -32,7 +32,7 @@ class Dashboard extends Component {
             <div className="col-md-4">
               <div className="card text-center mb-2">
                 <Link to="/products" className="btn bg-primary text-white">
-                  Products
+                  Magazyn
                 </Link>
               </div>
             </div>

@@ -93,6 +93,19 @@ export const getPurchasedProductsPer = () => async dispatch => {
 };
 
 
+export const getPurchasesPer = (id) => async dispatch => {
+  try {
+    const res = await axios.get(`/api/purchased/per/${id}`);
+    dispatch({
+      type: GET_PURCHASED_PRODUCT,
+      payload: res.data
+    });
+    //w przypadku braku projektu
+  } catch (error) {
+   
+  }
+};
+
 
 export const deletePurchasedProduct = id => async dispatch => {
   if (

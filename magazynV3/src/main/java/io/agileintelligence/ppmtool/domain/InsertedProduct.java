@@ -23,6 +23,9 @@ public class InsertedProduct {
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date dateOfInsert;
 
+
+    private Double profit;
+
     @ManyToOne
     @JoinColumn(name = "automat_id", referencedColumnName = "id")
     private Automat automat;
@@ -73,6 +76,13 @@ public class InsertedProduct {
         this.product = product;
     }
 
+    public Double getProfit() {
+        return profit;
+    }
+
+    public void setProfit(Double profit) {
+        this.profit = profit;
+    }
 
     @Override
     public boolean equals(Object o) {

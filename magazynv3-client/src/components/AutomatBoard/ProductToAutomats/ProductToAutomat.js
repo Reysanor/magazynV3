@@ -4,10 +4,21 @@ import { deleteProductToAutomat } from "../../../actions/productToAutomatActions
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
- class ProductToAutomat extends Component {
+class ProductToAutomat extends Component {
+  constructor() {
+    super();
+    this.state = {
+      errors: {},
+    };
+  }
+
+
+
   onDeleteClick(automat_serialNumber, product_id) {
     this.props.deleteProductToAutomat(automat_serialNumber, product_id);
+
   }
+
   render() {
     //props z product_to_automat
     const { product_to_automat } = this.props;
@@ -19,21 +30,28 @@ import { connect } from "react-redux";
             Product: {product_to_automat.product.name}
           </h5>
           <p className="card-text text-truncate ">
-            Price: {product_to_automat.price}
+            Selling price: {product_to_automat.price}
           </p>
+
+          <p className="card-text text-truncate ">
+          Avarage profit: {product_to_automat.profit}
+        </p>
           <Link
             to={`/updateProductToAutomat/${product_to_automat.automat.serialNumber}/${product_to_automat.product.id}`}
             className="btn btn-primary"
           >
-           Update
+            Update
           </Link>
-          
+
           <Link
-          to={`/insertProductToAutomat/${product_to_automat.automat.serialNumber}/${product_to_automat.product.id}`}
-          className="btn btn-secondary ml-4"
-        >
-          Insert 
-        </Link>
+            to={{
+              pathname: `/insertProductToAutomat/${product_to_automat.automat.serialNumber}/${product_to_automat.product.id}`,
+              state: { sell_price: product_to_automat.price },
+            }}
+            className="btn btn-secondary ml-4"
+          >
+            Insert
+          </Link>
 
           <button
             className="btn btn-danger ml-4"
@@ -51,6 +69,11 @@ import { connect } from "react-redux";
   }
 }
 ProductToAutomat.propTypes = {
-  deleteProductToAutomat: PropTypes.func.isRequired
 };
-export default connect(null, { deleteProductToAutomat })(ProductToAutomat);
+
+const mapStateToProps = (state) => ({
+  errors: state.errors,
+
+});
+
+export default connect(mapStateToProps, { deleteProductToAutomat })(ProductToAutomat);

@@ -11,4 +11,7 @@ public interface AutomatRepository extends CrudRepository<Automat, Long> {
     Automat findBySerialNumber(String serialNumber);
 
     Iterable<Automat> findAllByTenant(Tenant tenant);
+
+    Automat findByTenant(Tenant tenant);
+
 }

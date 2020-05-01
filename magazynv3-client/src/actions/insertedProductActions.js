@@ -42,19 +42,6 @@ export const getInsertedProducts = () => async dispatch => {
   });
 };
 
-export const getInsertedProduct = (id, history) => async dispatch => {
-  try {
-    const res = await axios.get(`/api/inserted/${id}`);
-    dispatch({
-      type: GET_INSERTED_PRODUCT,
-      payload: res.data
-    });
-    //w przypadku braku projektu
-  } catch (error) {
-    history.push("/dashboard");
-  }
-};
-
 export const deleteInsertedProduct = id => async dispatch => {
   if (
     window.confirm(
@@ -67,4 +54,24 @@ export const deleteInsertedProduct = id => async dispatch => {
       payload: id //zwracam co do usuniecia
     });
   }
+};
+
+
+export const getInsertedProductAvaragePrice = (automat_serialNumber,product_id) => async dispatch => {
+  
+    const res = await axios.get(`/api/inserted/profit/${automat_serialNumber}/${product_id}`);
+    dispatch({
+      type: GET_INSERTED_PRODUCT,
+      payload: res.data
+    });
+};
+
+
+export const getInsertedProductsAvaragePrice = (automat_serialNumber) => async dispatch => {
+  
+  const res = await axios.get(`/api/inserted/profit/${automat_serialNumber}`);
+  dispatch({
+    type: GET_INSERTED_PRODUCTS,
+    payload: res.data
+  });
 };

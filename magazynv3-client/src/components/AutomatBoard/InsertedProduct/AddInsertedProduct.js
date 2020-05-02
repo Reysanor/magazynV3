@@ -135,6 +135,7 @@ class AddInsertedProduct extends Component {
                   type="number"
                   min="0.01"
                   step="0.01"
+                  
                   value={this.state.total_profit}
                   disabled
                 />

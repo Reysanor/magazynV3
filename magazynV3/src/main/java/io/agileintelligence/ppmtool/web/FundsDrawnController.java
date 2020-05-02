@@ -43,6 +43,13 @@ public class FundsDrawnController {
         return fundsDrawnService.findAllFundsDrawns();
     }
 
+
+    @GetMapping("/all/{automat_id}")
+    public Iterable<FundsDrawn> getAllFundDrawnsByAutomat(@PathVariable String automat_id) {
+        return fundsDrawnService.findAllFundsDrawnsByAutomat(automat_id);
+    }
+
+
     @DeleteMapping("/{fundDrawnId}")
     public ResponseEntity<?> deleteFundDrawn(@PathVariable Long fundDrawnId, Principal principal) {
         fundsDrawnService.deleteFundsDrawnByName(fundDrawnId);

@@ -2,21 +2,16 @@ done:
 1. przy produkcie w automacie ile wlozono oraz zysk ogólny
 3. historia dodawnia do magazynu wszystkiego 
 2a. historia dodawnia dla kazdego automatu
-
-to:
 2b. zabieranie pieniedzy z automatu
+
+to do:
 
 błędy: 
 ilość liczb po przecinku
 przyciski wracania
-
-
-
-
-
-  namesOfTable() {
-    let header = ["name", "number"];
-    return header.map((key, index) => {
-      return <th key={index}>{key.toUpperCase()}</th>;
-    });
-  }
+tworzenie Automat - opcjonalne
+automat w tenant - tylko wyswietla nazwe
+tworzenie produktu - ukryć typ
+historia produktów w magazynie - dodać edycje
+Places - Nazwa i miejscowość wyświetlać, dodawanie opcjonalen pola
+Hitory of product w automacie - łączna suma

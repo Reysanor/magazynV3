@@ -27,7 +27,7 @@ class ProductToAutomat extends Component {
         <div className="card-body bg-light">
           <h5 className="card-title">
             {" "}
-            Product: {product_to_automat.product.name}
+            {product_to_automat.product.name}
           </h5>
           <p className="card-text text-truncate ">
             Selling price: {product_to_automat.price}

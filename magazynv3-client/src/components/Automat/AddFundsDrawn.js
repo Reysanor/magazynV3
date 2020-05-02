@@ -3,8 +3,12 @@ import PropTypes from "prop-types";
 //łączenie z state
 import { connect } from "react-redux";
 //1 - pobieram funkcje i obiekty
-import { createFundsDrawn } from "../../actions/fundsDrawnActions";
+import {
+  createFundsDrawn,
+  getFundsDrawnsByAutomat,
+} from "../../actions/fundsDrawnActions";
 import classnames from "classnames";
+import ListFundsDrawn from "./ListFundsDrawn";
 
 class AddFundsDrawn extends Component {
   //construktor z domyślnymi wartościami
@@ -31,6 +35,10 @@ class AddFundsDrawn extends Component {
     }
   }
 
+  componentDidMount() {
+    const { automat_serialNumber } = this.props.match.params;
+    this.props.getFundsDrawnsByAutomat(automat_serialNumber);
+  }
   //wymaga bind w formularzu aby wprowadzać dane
   //dluższe rozwiązanie dla każdej zmiennej -> this.setState({projectName: e.target.value});
   //e.target - setState ustawia value wybranego elementu po evencie na danym name
@@ -44,16 +52,22 @@ class AddFundsDrawn extends Component {
     //tworze nowy Projekt
     const newFundsDrawn = {
       amount: this.state.amount,
-     // automat_id: this.state.automat_id,
+      // automat_id: this.state.automat_id,
 
       //komponent po wyrenderowaniu za pomoca rendera przekazuje props do komponentu
     };
 
     //console.log(newProduct);
-    this.props.createFundsDrawn(this.state.automat_id, newFundsDrawn, this.props.history);
+    this.props.createFundsDrawn(
+      this.state.automat_id,
+      newFundsDrawn,
+      this.props.history
+    );
   }
 
   render() {
+    const { funds_drawns } = this.props.funds_drawn;
+
     //pobieram errory
     //https://developer.mozilla.org/pl/docs/Web/JavaScript/Referencje/Operatory/Destructuring_assignment
     const { errors } = this.state;
@@ -97,6 +111,9 @@ class AddFundsDrawn extends Component {
                     className="btn btn-primary btn-block mt-4"
                   />
                 </form>
+
+                <ListFundsDrawn funds_drawns_prop = {funds_drawns} />
+
               </div>
             </div>
           </div>
@@ -111,14 +128,17 @@ AddFundsDrawn.propTypes = {
   //jednocześnie określa wymagany typ uzyskanego prop
   createFundsDrawn: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
+  getFundsDrawnsByAutomat: PropTypes.func.isRequired,
+  funds_drawn: PropTypes.object.isRequired,
 };
 //przyjmuje parametr state i podłącza errory to state errors (mappuje do componentu aplikacji)
 const mapStateToProps = (state) => ({
+  funds_drawn: state.funds_drawn,
   errors: state.errors,
 });
 //2 - łączenie componentu z state
 export default connect(
   //podczas łączenie się ze state aplikacji wymagane jest zmapowanie wszystkich state do props
   mapStateToProps,
-  { createFundsDrawn }
+  { createFundsDrawn, getFundsDrawnsByAutomat }
 )(AddFundsDrawn);

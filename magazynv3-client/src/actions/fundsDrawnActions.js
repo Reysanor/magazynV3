@@ -42,6 +42,14 @@ export const getFundsDrawns = () => async dispatch => {
     payload: res.data //dane z bazy
   });
 };
+export const getFundsDrawnsByAutomat = (automat_serialNumber) => async dispatch => {
+  const res = await axios.get(`/api/fund/all/${automat_serialNumber}`);
+  dispatch({
+    type: GET_FUNDS_DRAWNS, //typ reducera
+    payload: res.data //dane z bazy
+  });
+};
+
 
 export const getFundsDrawn = (id, history) => async dispatch => {
   try {

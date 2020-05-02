@@ -23,6 +23,9 @@ public class FundsDrawnService {
     @Autowired
     AutomatRepository automatRepository;
 
+    @Autowired
+    AutomatService automatService;
+
     public FundsDrawn saveOrUpdateFundDrawn(FundsDrawn fundsDrawn, String automat_id) {
         Long fundsDrawnIdGet = fundsDrawn.getId();
         if (fundsDrawn.getId() != null) {
@@ -58,6 +61,13 @@ public class FundsDrawnService {
         return fundsDrawnRepository.findAll();
 
     }
+
+
+    public Iterable<FundsDrawn> findAllFundsDrawnsByAutomat(String automat_id) {
+        Automat automat = automatService.findBySerialNumber(automat_id);
+        return fundsDrawnRepository.findAllByAutomat(automat);
+    }
+
 
     public void deleteFundsDrawnByName(Long fundDrawnId) {
         fundsDrawnRepository.delete(findById(fundDrawnId));

@@ -1,19 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getInsertedProductsByAutomat } from "../../../actions/insertedProductActions";
-class ListInsertedProducts extends Component {
+class ListFundsDrawn extends Component {
   //lifecycle hook - co ma się dziać po zamontowaniu komponentu (dane z "mapStateToProps" na dole)
-  componentDidMount() {
-    const { automat_serialNumber } = this.props.match.params;
-    this.props.getInsertedProductsByAutomat(automat_serialNumber);
-  }
+  
+  
 
   namesOfTable() {
      return(
             <tr>
-            <th>NAME</th>
-            <th>COUNT</th>
+            <th>VALUE</th>
+            <th>DATE</th>
             </tr>
      )
      //   return <th key={index}>{key.toUpperCase()}</th>;
@@ -21,14 +18,14 @@ class ListInsertedProducts extends Component {
   }
 
   dataOfTable() {
-    const { inserted_products } = this.props.inserted_product;
-    return inserted_products.map((inserted_product, index) => {
-      const { id, number, product } = inserted_product; //destructuring
+    const {funds_drawns_prop} = this.props;
+    return funds_drawns_prop.map((funds_drawn, index) => {
+      const { id, amount } = funds_drawn; //destructuring
 
       return (
         <tr key={id}>
-          <td>{product.name}</td>
-          <td>{number}</td>
+          <td>{amount}</td>
+          <td>date of get</td>
         </tr>
       );
     });
@@ -48,19 +45,16 @@ class ListInsertedProducts extends Component {
   }
 }
 
-ListInsertedProducts.propTypes = {
+ListFundsDrawn.propTypes = {
   //przekazuje funkcje, isRequired oznacza że jest niezbędna do działania componentu
   //jednocześnie określa wymagany typ uzyskanego prop
-  getInsertedProductsByAutomat: PropTypes.func.isRequired,
-  inserted_product: PropTypes.object.isRequired,
 };
 //przyjmuje parametr state i podłącza project to state project (mappuje do componentu aplikacji)
 const mapStateToProps = (state) => ({
-  inserted_product: state.inserted_product,
 });
 //łączenie componentu z state
 export default connect(
   //podczas łączenie się ze state aplikacji wymagane jest zmapowanie wszystkich state do props
   mapStateToProps,
-  { getInsertedProductsByAutomat }
-)(ListInsertedProducts);
+  {  }
+)(ListFundsDrawn);

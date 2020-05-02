@@ -5,7 +5,7 @@ class AutomatsToTenantOwned extends Component {
   render() {
     const { automats_prop } = this.props;
     //musze mapować, nie moge wyświetlnić odrazu z props
-    const pta = automats_prop.map((automat) => (
+    const atp = automats_prop.map((automat) => (
       <Automat
         key={automat.serialNumber}
         automat={automat}
@@ -22,7 +22,7 @@ class AutomatsToTenantOwned extends Component {
                   <h3>Automats in this tenant</h3>
                 </div>
               </div>
-              {pta}
+              {atp}
             </div>
           </div>
         </div>

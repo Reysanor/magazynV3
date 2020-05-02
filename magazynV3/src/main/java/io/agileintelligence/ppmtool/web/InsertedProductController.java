@@ -43,6 +43,12 @@ public class InsertedProductController {
         return insertedProductService.findAllInsertedProducts();
     }
 
+    @GetMapping("/all/{automat_id}")
+    public Iterable<InsertedProduct> getAllInsertedProductsByAutomat(@PathVariable String automat_id) {
+        return insertedProductService.findAllInsertedProductsByAutomat(automat_id);
+    }
+
+
     @DeleteMapping("/{insertedProductId}")
     public ResponseEntity<?> deleteInsertedProduct(@PathVariable Long insertedProductId, Principal principal) {
         insertedProductService.deleteInsertedProductByName(insertedProductId);
@@ -51,11 +57,11 @@ public class InsertedProductController {
 
     @GetMapping("/profit/{automat_id}/{product_id}")
     public InsertedProduct getInsertedProductAvaragePriceByAutomat(@PathVariable String automat_id, @PathVariable Long product_id) {
-        return insertedProductService.findAllByAutomatandProduct(automat_id,product_id);
+        return insertedProductService.findAllInsertedByAutomatandProduct(automat_id,product_id);
     }
 
     @GetMapping("/profit/{automat_id}")
     public Iterable<InsertedProduct> getInsertedProductsAvaragePriceByAutomat(@PathVariable String automat_id) {
-        return insertedProductService.findAllByAutomat(automat_id);
+        return insertedProductService.findInsertedPriceByAutomat(automat_id);
     }
 }

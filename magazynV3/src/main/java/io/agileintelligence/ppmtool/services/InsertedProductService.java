@@ -62,13 +62,19 @@ public class InsertedProductService {
         return insertedProductRepository.findAll();
     }
 
+
+    public Iterable<InsertedProduct> findAllInsertedProductsByAutomat(String automat_id) {
+        return insertedProductRepository.findByAutomat(automatService.findBySerialNumber(automat_id));
+
+    }
+
     public void deleteInsertedProductByName(Long insertedProductId) {
         insertedProductRepository.delete(findById(insertedProductId));
 
     }
 
 
-    public InsertedProduct findAllByAutomatandProduct(String automat_id, Long product_id) {
+    public InsertedProduct findAllInsertedByAutomatandProduct(String automat_id, Long product_id) {
         Automat automat = automatService.findBySerialNumber(automat_id);
         Product product = productService.findById(product_id);
         InsertedProduct insertedProduct = new InsertedProduct();
@@ -85,6 +91,7 @@ public class InsertedProductService {
             insertedProduct.setAutomat(automat);
             insertedProduct.setProduct(product);
             insertedProduct.setProfit(round(average / count));
+            insertedProduct.setNumber(count);
         }catch (Exception e){
             insertedProduct.setProfit(0.0);
 
@@ -92,6 +99,7 @@ public class InsertedProductService {
         return insertedProduct;
 
     }
+
 
     private static double round(double value) {
         if (2 < 0) throw new IllegalArgumentException();
@@ -101,13 +109,14 @@ public class InsertedProductService {
         return bd.doubleValue();
     }
 
-    public Iterable<InsertedProduct> findAllByAutomat(String automat_id) {
+    public Iterable<InsertedProduct> findInsertedPriceByAutomat(String automat_id) {
         Iterable<ProductToAutomat> productToAutomats = productToAutomatRepository.findAllByAutomat(automatService.findBySerialNumber(automat_id));
         List<InsertedProduct> avarageProfit = new ArrayList<>();
 
         for(ProductToAutomat ip: productToAutomats){
-            avarageProfit.add(findAllByAutomatandProduct(automat_id,ip.getProduct().getId()));
+            avarageProfit.add(findAllInsertedByAutomatandProduct(automat_id,ip.getProduct().getId()));
         }
         return avarageProfit;
     }
+
 }

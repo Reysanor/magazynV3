@@ -79,6 +79,7 @@ export const getPurchasedProduct = (id, history) => async dispatch => {
   }
 };
 
+
 export const getPurchasedProductsPer = () => async dispatch => {
   try {
     const res = await axios.get("/api/purchased/all/per");

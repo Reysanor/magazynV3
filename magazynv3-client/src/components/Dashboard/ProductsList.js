@@ -4,6 +4,7 @@ import CreateProductButton from "../../components/Product/CreateProductButton";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import {getPurchasedProductsPer} from "../../actions/purchasedProductActions";
+import PurchasedProductButton from "../Product/PurchasedProduct/PurchasedProductButton";
 
 class ProductsList extends Component {
   //lifecycle hook - co ma się dziać po zamontowaniu komponentu (dane z "mapStateToProps" na dole)
@@ -26,6 +27,7 @@ class ProductsList extends Component {
                 <br />
                 {/*przycisk do utworzenia nowego Wynajmujacego */}
                 <CreateProductButton />
+                <PurchasedProductButton/>
                 <br />
                 <hr />
                 {/*mapuje projekty i wyswietlam je jako projectItemy */}

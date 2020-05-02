@@ -36,6 +36,12 @@ class ProductToAutomat extends Component {
           <p className="card-text text-truncate ">
           Avarage profit: {product_to_automat.profit}
         </p>
+        <p className="card-text text-truncate ">
+        Total profit: {product_to_automat.profit*product_to_automat.number}
+      </p>
+        <p className="card-text text-truncate ">
+        Number of inserted: {product_to_automat.number}
+      </p>
           <Link
             to={`/updateProductToAutomat/${product_to_automat.automat.serialNumber}/${product_to_automat.product.id}`}
             className="btn btn-primary"

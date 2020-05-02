@@ -42,6 +42,15 @@ export const getInsertedProducts = () => async dispatch => {
   });
 };
 
+export const getInsertedProductsByAutomat = (automat_serialNumber) => async dispatch => {
+  const res = await axios.get(`/api/inserted/all/${automat_serialNumber}`);
+  dispatch({
+    type: GET_INSERTED_PRODUCTS, //typ reducera
+    payload: res.data //dane z bazy
+  });
+};
+
+
 export const deleteInsertedProduct = id => async dispatch => {
   if (
     window.confirm(
@@ -66,7 +75,6 @@ export const getInsertedProductAvaragePrice = (automat_serialNumber,product_id) 
     });
 };
 
-
 export const getInsertedProductsAvaragePrice = (automat_serialNumber) => async dispatch => {
   
   const res = await axios.get(`/api/inserted/profit/${automat_serialNumber}`);
@@ -75,3 +83,4 @@ export const getInsertedProductsAvaragePrice = (automat_serialNumber) => async d
     payload: res.data
   });
 };
+

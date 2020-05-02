@@ -36,6 +36,11 @@ class AutomatItemInTenant extends Component {
                     <i className="fa fa-flag-checkered pr-1"> Automat Board </i>
                   </li>
                 </Link>
+                <Link to={`/addFundsDrawn/${automat.serialNumber}`}>
+                <li className="list-group-item board">
+                  <i className="fa fa-flag-checkered pr-1"> Get Funds </i>
+                </li>
+              </Link>
                 <li
                   className="list-group-item delete"
                   onClick={this.onDeleteClick.bind(

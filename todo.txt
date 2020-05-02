@@ -1,3 +1,22 @@
-historia dodawnia do magazynu wszystkiego oraz dla kazdego automatu
-przy produkcie w automacie ile wlozono oraz zysk ogólny
-zabieranie pieniedzy z automatu
+done:
+1. przy produkcie w automacie ile wlozono oraz zysk ogólny
+3. historia dodawnia do magazynu wszystkiego 
+2a. historia dodawnia dla kazdego automatu
+
+to:
+2b. zabieranie pieniedzy z automatu
+
+błędy: 
+ilość liczb po przecinku
+przyciski wracania
+
+
+
+
+
+  namesOfTable() {
+    let header = ["name", "number"];
+    return header.map((key, index) => {
+      return <th key={index}>{key.toUpperCase()}</th>;
+    });
+  }

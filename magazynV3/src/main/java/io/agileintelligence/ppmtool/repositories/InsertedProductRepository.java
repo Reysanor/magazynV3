@@ -12,4 +12,5 @@ public interface InsertedProductRepository extends CrudRepository<InsertedProduc
 
         Iterable<InsertedProduct> findAllByAutomatAndProduct(Automat automat, Product product);
         Iterable<InsertedProduct> findByAutomat(Automat automat);
+        Iterable<InsertedProduct> findAllByAutomat(Automat automat);
 }

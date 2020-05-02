@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { getProductToAutomats } from "../../actions/productToAutomatActions";
-import { getInsertedProductsAvaragePrice } from "../../actions/insertedProductActions";
+//import { getInsertedProductsAvaragePrice } from "../../actions/insertedProductActions";
 import ProductToAutomatsWithPrices from "./ProductToAutomatsWithPrices";
 
 class AutomatBoard extends Component {
@@ -17,7 +17,7 @@ class AutomatBoard extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.getProductToAutomats(id);
-    this.props.getInsertedProductsAvaragePrice(id);
+   // this.props.getInsertedProductsAvaragePrice(id);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -29,7 +29,7 @@ class AutomatBoard extends Component {
   render() {
     const { id } = this.props.match.params;
     const { product_to_automats } = this.props.product_to_automat;
-    const {inserted_products} = this.props.inserted_product;
+    //const { inserted_products } = this.props.inserted_product;
     const { errors } = this.state;
     let BoardContent;
 
@@ -55,10 +55,11 @@ class AutomatBoard extends Component {
           );
         }
       } else {
-      
         return (
           <ProductToAutomatsWithPrices
-            product_to_automats_prop={product_to_automats} inserted_product_prop = {inserted_products}
+            product_to_automats_prop={product_to_automats}
+            //inserted_product_prop={inserted_products}
+            id_prop = {id}
           />
         );
       }
@@ -67,12 +68,19 @@ class AutomatBoard extends Component {
 
     return (
       <div className="container">
-        <Link
-          to={`/addProductToAutomat/${id}`}
-          className="btn btn-primary mb-3"
-        >
-          <i className="fas fa-plus-circle"> Add product to automat</i>
-        </Link>
+        <div className="row">
+          <Link to={`/insertedProductsToAutomat/${id}`} className="btn btn-secondary mb-3">
+            <i className="fas fa-plus-circle"> History</i>
+          </Link>
+          <hr />
+
+          <Link
+            to={`/addProductToAutomat/${id}`}
+            className="btn btn-primary mb-3"
+          >
+            <i className="fas fa-plus-circle"> Add product to automat</i>
+          </Link>
+        </div>
         <br />
         <hr />
         {BoardContent}
@@ -85,8 +93,8 @@ AutomatBoard.propTypes = {
   product: PropTypes.object.isRequired,
   getProductToAutomats: PropTypes.func.isRequired,
   product_to_automat: PropTypes.object.isRequired,
-  getInsertedProductsAvaragePrice:PropTypes.func.isRequired,
-  inserted_product: PropTypes.object.isRequired,
+  //getInsertedProductsAvaragePrice: PropTypes.func.isRequired,
+  //inserted_product: PropTypes.object.isRequired,
 
   errors: PropTypes.object.isRequired,
 };
@@ -94,8 +102,11 @@ AutomatBoard.propTypes = {
 const mapStateToProps = (state) => ({
   product: state.product,
   product_to_automat: state.product_to_automat,
-  inserted_product: state.inserted_product,
+  //inserted_product: state.inserted_product,
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { getProductToAutomats,getInsertedProductsAvaragePrice })(AutomatBoard);
+export default connect(mapStateToProps, {
+  getProductToAutomats,
+ // getInsertedProductsAvaragePrice,
+})(AutomatBoard);

@@ -25,7 +25,7 @@ public class PurchasedProductController {
     private MapValidationErrorService mapValidationErrorService;
 
     @PostMapping("{productId}")
-    public ResponseEntity<?> createOrUpdatePurchasedProduct(@Valid @RequestBody PurchasedProduct purchasedProduct,BindingResult result, @PathVariable Long productId, Principal principal) {
+    public ResponseEntity<?> createOrUpdatePurchasedProduct(@Valid @RequestBody PurchasedProduct purchasedProduct,BindingResult result, @PathVariable Long productId) {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if (errorMap != null) return errorMap;
         PurchasedProduct purchasedProduct1 = purchasedProductService.createOrUpdatePurchasedProduct(purchasedProduct,productId);
@@ -33,7 +33,7 @@ public class PurchasedProductController {
     }
 
     @PostMapping("/remove/{productId}")
-    public ResponseEntity<?> removePurchasedProduct(@Valid @RequestBody PurchasedProduct purchasedProduct,BindingResult result, @PathVariable Long productId, Principal principal) {
+    public ResponseEntity<?> removePurchasedProduct(@Valid @RequestBody PurchasedProduct purchasedProduct,BindingResult result, @PathVariable Long productId) {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if (errorMap != null) return errorMap;
         PurchasedProduct purchasedProduct1 = purchasedProductService.removePurchasedProduct(purchasedProduct,productId);
@@ -41,13 +41,13 @@ public class PurchasedProductController {
     }
 
     @GetMapping("/{purchasedId}")
-    public ResponseEntity<?> getPurchaseById(@PathVariable Long purchasedId, Principal principal) {
+    public ResponseEntity<?> getPurchaseById(@PathVariable Long purchasedId) {
         PurchasedProduct purchasedProduct1 = purchasedProductService.findById(purchasedId);
         return new ResponseEntity<PurchasedProduct>(purchasedProduct1, HttpStatus.OK);
     }
 
     @GetMapping("/all")
-    public Iterable<PurchasedProduct> getAllPurchases(Principal principal) {
+    public Iterable<PurchasedProduct> getAllPurchases() {
         return purchasedProductService.findAllPurchasedProducts();
     }
 
@@ -62,7 +62,7 @@ public class PurchasedProductController {
     }
 
     @DeleteMapping("/{purchasedId}")
-    public ResponseEntity<?> deleteAutomat(@PathVariable Long purchasedId, Principal principal) {
+    public ResponseEntity<?> deleteAutomat(@PathVariable Long purchasedId) {
         purchasedProductService.deletePurchasedProductById(purchasedId);
         return new ResponseEntity<String>("Purchase with Id: " + purchasedId + " was deleted", HttpStatus.OK);
     }

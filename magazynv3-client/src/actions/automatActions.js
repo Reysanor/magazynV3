@@ -42,8 +42,8 @@ export const getAutomats = () => async (dispatch) => {
   });
 };
 
-export const getTenantsToAutomat = (nip) => async (dispatch) => {
-  const res = await axios.get(`/api/automat/all/${nip}`);
+export const getTenantsToAutomat = (id) => async (dispatch) => {
+  const res = await axios.get(`/api/automat/all/${id}`);
   dispatch({
     type: GET_AUTOMATS, //typ reducera
     payload: res.data, //dane z bazy

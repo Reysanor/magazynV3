@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import { createInsertedProduct } from "../../../actions/insertedProductActions";
-import {getPurchasesPer} from "../../../actions/purchasedProductActions";
+import { getPurchasesPer } from "../../../actions/purchasedProductActions";
+import ListInsertedProductToAutomat from "./ListInsertedProductToAutomat";
 
 class AddInsertedProduct extends Component {
   constructor(props) {
@@ -35,18 +36,18 @@ class AddInsertedProduct extends Component {
   componentDidMount() {
     const { automat_serialNumber, product_id } = this.props.match.params;
     this.props.getPurchasesPer(product_id);
-
   }
 
   onChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
     });
-  
-    this.state.total_profit=e.target.value*this.state.profit;
+
+    this.state.total_profit =
+      Math.round((e.target.value * this.state.profit + Number.EPSILON) * 100) /
+      100;
   }
 
-  
   //on submit
   onSubmit(e) {
     // blokuje przeladowanie po submit
@@ -73,10 +74,9 @@ class AddInsertedProduct extends Component {
   render() {
     const { automat_serialNumber, product_id } = this.props.match.params;
     const { errors } = this.state;
-    const {sell_price} = this.props.location.state;
+    const { sell_price } = this.props.location.state;
     const { price } = this.props.purchased_product.purchased_product;
-    this.state.profit = String(sell_price-price);
-
+    this.state.profit = String(sell_price - price);
     //iteracja przez project_task_propsy i wrzucanie do mapy ProjectTask o nazwie project_task
 
     return (
@@ -91,9 +91,9 @@ class AddInsertedProduct extends Component {
                 Back to Automat Board
               </Link>
               <h4 className="display-4 text-center">
-                Number of inserted products
+                {this.props.location.state.product_name}
               </h4>
-
+              <h5 className="display-4 text-center">Insert</h5>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
@@ -113,35 +113,31 @@ class AddInsertedProduct extends Component {
                   )}
                 </div>
 
+                <div className="form-group">
+                  <input
+                    className="form-control form-control-lg"
+                    placeholder="profit per"
+                    name="profit"
+                    type="number"
+                    min="0.01"
+                    step="0.01"
+                    value={this.state.profit}
+                    disabled
+                  />
+                </div>
 
                 <div className="form-group">
-                <input
-                  className="form-control form-control-lg"
-                  placeholder="profit per"
-                  name="profit"
-                  type="number"
-                  min="0.01"
-                  step="0.01"
-                  value={this.state.profit}
-                  disabled
-                />
-              </div>
-
-                <div className="form-group">
-                <input
-                  className="form-control form-control-lg"
-                  placeholder="total profit"
-                  name="total_profit"
-                  type="number"
-                  min="0.01"
-                  step="0.01"
-                  
-                  value={this.state.total_profit}
-                  disabled
-                />
-              </div>
-
-              
+                  <input
+                    className="form-control form-control-lg"
+                    placeholder="total profit"
+                    name="total_profit"
+                    type="number"
+                    min="0.01"
+                    step="0.01"
+                    value={this.state.total_profit}
+                    disabled
+                  />
+                </div>
 
                 <input
                   type="submit"
@@ -149,7 +145,11 @@ class AddInsertedProduct extends Component {
                 />
               </form>
 
-             
+              <ListInsertedProductToAutomat
+                automat_serialNumber_prop={automat_serialNumber}
+                product_id_prop={product_id}
+                product_name_prop={this.props.location.state.product_name}
+              />
             </div>
           </div>
         </div>
@@ -161,15 +161,14 @@ class AddInsertedProduct extends Component {
 AddInsertedProduct.propTypes = {
   createInsertedProduct: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
-  getPurchasesPer:PropTypes.func.isRequired,
-  purchased_product: PropTypes.object.isRequired
-
+  getPurchasesPer: PropTypes.func.isRequired,
+  purchased_product: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) => ({
   errors: state.errors,
-  purchased_product: state.purchased_product
-
+  purchased_product: state.purchased_product,
 });
-export default connect(mapStateToProps, { createInsertedProduct,getPurchasesPer })(
-  AddInsertedProduct
-);
+export default connect(mapStateToProps, {
+  createInsertedProduct,
+  getPurchasesPer,
+})(AddInsertedProduct);

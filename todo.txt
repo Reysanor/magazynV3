@@ -1,17 +1,48 @@
 done:
-1. przy produkcie w automacie ile wlozono oraz zysk ogólny
-3. historia dodawnia do magazynu wszystkiego 
-2a. historia dodawnia dla kazdego automatu
-2b. zabieranie pieniedzy z automatu
+przyciski wracania
+automat w tenant - tylko wyswietla nazwe
+tworzenie produktu - ukryć typ
+Tenant - zmienic nip na id jako identyfikator
+tworzenie Automat - opcjonalne
+ilość liczb po przecinku
+
+
 
 to do:
 
-błędy: 
-ilość liczb po przecinku
-przyciski wracania
-tworzenie Automat - opcjonalne
-automat w tenant - tylko wyswietla nazwe
-tworzenie produktu - ukryć typ
-historia produktów w magazynie - dodać edycje
-Places - Nazwa i miejscowość wyświetlać, dodawanie opcjonalen pola
 Hitory of product w automacie - łączna suma
+historia produktów w magazynie - dodać edycje
+
+
+
+
+usunąć "automat capacity"
+status: naprawiany, zepsuty --> "w naprawie"
+status: wynajmowany --> "pracuje"
+"prześlij" --> "akceptuj"
+numer seryjy musi mieć 10 cyfr --> why?
+magazyn: dodać średnia cena sprzedaży
+zawsze cofa do strony startowej
+w "magazynie" --> "dodaj" - cena zakupu 1 szt. nie wszystkich
+nie da się usunąć "places"
+kod pocztowy bez "-"
+dodaj produkt do automatu --> napierw nazwa, potem cena
+"update" --> zmiana ceny
+Insert" --> dodać opisy, co oznaczają dane cyfry
+"historia" --> podsumowanie + dodać cały zysk
+
+
+błędy: 
+inne wyświetlanie na np. firefox (tabele)
+
+    this.props.getInsertedOneProductByAutomat(this.props.automat_serialNumber_prop,this.props.product_id_prop);
+
+
+
+
+
+
+
+
+
+

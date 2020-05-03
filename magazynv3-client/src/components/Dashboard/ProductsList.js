@@ -7,9 +7,12 @@ import {getPurchasedProductsPer} from "../../actions/purchasedProductActions";
 import PurchasedProductButton from "../Product/PurchasedProduct/PurchasedProductButton";
 
 class ProductsList extends Component {
+
+
   //lifecycle hook - co ma się dziać po zamontowaniu komponentu (dane z "mapStateToProps" na dole)
   componentDidMount() {
-    this.props.getPurchasedProductsPer();
+  this.props.getPurchasedProductsPer();
+
   }
 
   render() {
@@ -34,6 +37,10 @@ class ProductsList extends Component {
                 {purchased_products.map((purchased_product) => (
                   <ProductItem key={purchased_product.product.id} purchased_product={purchased_product} />
                 ))}
+
+
+                  
+
 
               </div>
             </div>

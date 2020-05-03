@@ -138,7 +138,7 @@ class AddTenant extends Component {
                       className={classnames("form-control form-control-lg", {
                         "is-invalid": errors.zipCode,
                       })}
-                      placeholder="Tenant street"
+                      placeholder="Tenant zipCode"
                       name="zipCode"
                       type="number"
                       min="10000"

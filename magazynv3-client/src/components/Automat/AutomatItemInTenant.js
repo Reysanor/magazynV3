@@ -21,11 +21,7 @@ class AutomatItemInTenant extends Component {
           <div className="row">
             <div className="col-lg-6 col-md-4 col-8">
               <p>{automat.name}</p>
-              <p>{automat.serialNumber}</p>
-              <p>{automat.type}</p>
-              <p>{automat.capacity}</p>
-              <p>{automat.status}</p>
-              <p>{automat.productionDate}</p>
+             
             </div>
             <div className="col-md-6 d-none d-lg-block">
               <ul className="list-group">

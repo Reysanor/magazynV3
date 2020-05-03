@@ -8,10 +8,10 @@ import {addAutomatToTenant} from "../../../actions/automatActions";
 class AddProductToAutomat extends Component {
   constructor(props) {
     super(props);
-    const { nip } = this.props.match.params;
+    const { id } = this.props.match.params;
 
     this.state = {
-      tenant: nip,
+      tenant: id,
       errors: {},
     };
         //bind pobiera i manipuluje stanem
@@ -28,7 +28,7 @@ class AddProductToAutomat extends Component {
     }
   }
   componentDidMount() {
-    const { nip } = this.props.match.params;
+    const { id } = this.props.match.params;
     this.props.getTenantsToAutomatFree();
 
   }
@@ -62,7 +62,7 @@ class AddProductToAutomat extends Component {
   
   }
   render() {
-    const { nip } = this.props.match.params;
+    const { id } = this.props.match.params;
     const { automats} = this.props.automat;
     const { errors } = this.state;
  //iteracja przez project_task_propsy i wrzucanie do mapy ProjectTask o nazwie project_task
@@ -72,7 +72,7 @@ class AddProductToAutomat extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <Link to={`/tenantBoard/${nip}`} className="btn btn-light">
+              <Link to={`/tenantBoard/${id}`} className="btn btn-light">
                 Back to Automat Board
               </Link>
               <h4 className="display-4 text-center">Add Automat to Tenant</h4>

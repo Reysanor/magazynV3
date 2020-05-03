@@ -52,7 +52,7 @@ class ProductToAutomat extends Component {
           <Link
             to={{
               pathname: `/insertProductToAutomat/${product_to_automat.automat.serialNumber}/${product_to_automat.product.id}`,
-              state: { sell_price: product_to_automat.price },
+              state: { sell_price: product_to_automat.price, product_name: product_to_automat.product.name},
             }}
             className="btn btn-secondary ml-4"
           >

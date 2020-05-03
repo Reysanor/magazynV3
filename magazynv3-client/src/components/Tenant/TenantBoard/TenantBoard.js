@@ -14,8 +14,8 @@ class TenantBoard extends Component {
     };
   }
   componentDidMount() {
-    const { nip } = this.props.match.params;
-    this.props.getTenantsToAutomat(nip);
+    const { id } = this.props.match.params;
+    this.props.getTenantsToAutomat(id);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -25,7 +25,7 @@ class TenantBoard extends Component {
   }
 
   render() {
-    const { nip } = this.props.match.params;
+    const { id } = this.props.match.params;
     const { automats } = this.props.automat;
     const { errors } = this.state;
     let BoardContent;
@@ -38,10 +38,10 @@ class TenantBoard extends Component {
               {errors.tenantNotFound}
             </div>
           );
-        } else if (errors.nip) {
+        } else if (errors.id) {
           return (
             <div className="alert alert-danger text-center" role="alert">
-              {errors.nip}
+              {errors.id}
             </div>
           );
         } else {
@@ -62,7 +62,7 @@ class TenantBoard extends Component {
 
     return (
       <div className="container">
-        <Link to={`/addAutomatToTenant/${nip}`} className="btn btn-primary mb-3">
+        <Link to={`/addAutomatToTenant/${id}`} className="btn btn-primary mb-3">
           <i className="fas fa-plus-circle"> Add Automat to Tenant</i>
         </Link>
         <br />

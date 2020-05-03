@@ -51,6 +51,14 @@ export const getInsertedProductsByAutomat = (automat_serialNumber) => async disp
 };
 
 
+export const getInsertedOneProductByAutomat = (automat_serialNumber,product_id) => async dispatch => {
+  const res = await axios.get(`/api/inserted/all/${automat_serialNumber}/${product_id}`);
+  dispatch({
+    type: GET_INSERTED_PRODUCTS, //typ reducera
+    payload: res.data //dane z bazy
+  });
+};
+
 export const deleteInsertedProduct = id => async dispatch => {
   if (
     window.confirm(

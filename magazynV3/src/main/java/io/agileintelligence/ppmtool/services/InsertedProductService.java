@@ -38,7 +38,6 @@ public class InsertedProductService {
     ProductToAutomatRepository productToAutomatRepository;
 
 
-
     public InsertedProduct saveOrUpdateInsertedProduct(InsertedProduct insertedProduct, String automat_id, Long product_id) {
         Automat automat = automatService.findBySerialNumber(automat_id);
         Product product = productService.findById(product_id);
@@ -68,6 +67,14 @@ public class InsertedProductService {
 
     }
 
+
+    public Iterable<InsertedProduct> findInsertedOneProductsByAutomat(String automat_id, Long product_id) {
+        Automat automat = automatService.findBySerialNumber(automat_id);
+        Product product = productService.findById(product_id);
+        return insertedProductRepository.findAllByAutomatAndProduct(automat, product);
+    }
+
+
     public void deleteInsertedProductByName(Long insertedProductId) {
         insertedProductRepository.delete(findById(insertedProductId));
 
@@ -92,7 +99,7 @@ public class InsertedProductService {
             insertedProduct.setProduct(product);
             insertedProduct.setProfit(round(average / count));
             insertedProduct.setNumber(count);
-        }catch (Exception e){
+        } catch (Exception e) {
             insertedProduct.setProfit(0.0);
 
         }
@@ -113,8 +120,8 @@ public class InsertedProductService {
         Iterable<ProductToAutomat> productToAutomats = productToAutomatRepository.findAllByAutomat(automatService.findBySerialNumber(automat_id));
         List<InsertedProduct> avarageProfit = new ArrayList<>();
 
-        for(ProductToAutomat ip: productToAutomats){
-            avarageProfit.add(findAllInsertedByAutomatandProduct(automat_id,ip.getProduct().getId()));
+        for (ProductToAutomat ip : productToAutomats) {
+            avarageProfit.add(findAllInsertedByAutomatandProduct(automat_id, ip.getProduct().getId()));
         }
         return avarageProfit;
     }

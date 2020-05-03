@@ -31,28 +31,28 @@ public class TenantController {
 
 
     @PostMapping("")
-    public ResponseEntity<?> createNewTenant(@Valid @RequestBody Tenant tenant, BindingResult result, Principal principal) {
+    public ResponseEntity<?> createNewTenant(@Valid @RequestBody Tenant tenant, BindingResult result) {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if (errorMap != null) return errorMap;
-        Tenant tenant1 = tenantService.saveOrUpdateTenant(tenant, principal.getName());
+        Tenant tenant1 = tenantService.saveOrUpdateTenant(tenant);
         return new ResponseEntity<Tenant>(tenant1, HttpStatus.CREATED);
     }
 
     @GetMapping("/{tenantId}")
-    public ResponseEntity<?> getTenantById(@PathVariable String tenantId, Principal principal) {
-        Tenant tenant = tenantService.findByNip(tenantId);
+    public ResponseEntity<?> getTenantById(@PathVariable Long tenantId) {
+        Tenant tenant = tenantService.findById(tenantId);
         System.out.println(tenant.getNip());
         return new ResponseEntity<Tenant>(tenant, HttpStatus.OK);
     }
 
     @GetMapping("/all")
-    public Iterable<Tenant> getAllTenants(Principal principal) {
-        return tenantService.findAllTenants(principal.getName());
+    public Iterable<Tenant> getAllTenants() {
+        return tenantService.findAllTenants();
     }
 
     @DeleteMapping("/{tenantId}")
-    public ResponseEntity<?> deleteTenant(@PathVariable String tenantId, Principal principal) {
-        tenantService.deleteTenantByNip(tenantId, principal.getName());
+    public ResponseEntity<?> deleteTenant(@PathVariable Long tenantId) {
+        tenantService.deleteTenantById(tenantId);
         return new ResponseEntity<String>("Tenant with Nip: " + tenantId + " was deleted", HttpStatus.OK);
     }
 

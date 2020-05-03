@@ -11,21 +11,19 @@ public class Tenant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "NIP is required")
-    @Size(min = 10, max = 10, message = "Please use 10 characters")
-    @Column(updatable = false, unique = true)
+    //@NotBlank(message = "NIP is required")
+   // @Column(updatable = false, unique = true)
     private String nip;
     @NotBlank(message = "Name is required")
     private String name;
-    @NotBlank(message = "Street is required")
+   // @NotBlank(message = "Street is required")
     private String street;
-    @NotBlank(message = "Zip Code is required")
+    //@NotBlank(message = "Zip Code is required")
     @Size(min = 5, max = 5, message = "Please use 5 characters")
     private String zipCode;
     @NotBlank(message = "City is required")
     private String city;
-    @NotBlank(message = "Phone number is required")
-    @Size(min = 9, max = 9, message = "Please use 9 characters")
+   // @NotBlank(message = "Phone number is required")
     private String phoneNumber;
     private String emailAddress;
 

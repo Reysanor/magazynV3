@@ -25,14 +25,12 @@ public class Automat {
     private String type;
     @Column(updatable = false)
 
-    @NotNull(message = "Capacity is required")
-    @Min(value = 18, message = "Capacity should not be less than 18")
-    @Max(value = 150, message = "Capacity should not be greater than 150")
+   // @NotNull(message = "Capacity is required")
     private Integer capacity;
 
-    @NotBlank(message = "State is required")
+    //@NotBlank(message = "State is required")
     private String status;
-    @NotNull(message = "Production date is required")
+   // @NotNull(message = "Production date is required")
     @Column(updatable = false)
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date productionDate;

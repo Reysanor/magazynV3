@@ -9,6 +9,8 @@ import io.agileintelligence.ppmtool.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class TenantService {
     @Autowired
@@ -16,49 +18,39 @@ public class TenantService {
     @Autowired
     UserRepository userRepository;
 
-    public Tenant saveOrUpdateTenant(Tenant tenant, String username) {
-        String tenantNipGet = tenant.getNip().toUpperCase();
-        if (tenant.getId() != null) {
-            Tenant existingTenant = tenantRepository.findByNip(tenant.getNip());
-            if (existingTenant != null && (!existingTenant.getTenantLeader().equals(username))) {
-                throw new TenantNotFoundException(" Tenant is not your ");
-            } else
-                if (existingTenant == null) {
-                throw new TenantNotFoundException(" Tenant with ID: " + tenant.getId() + "  does not exist ");
+    public Tenant saveOrUpdateTenant(Tenant tenant) {
+        Long tenantIdGet = tenant.getId();
+        if (tenantIdGet != null) {
+            Tenant existingTenant = findById(tenantIdGet);
+            if (existingTenant == null) {
+                throw new TenantNotFoundException(" Tenant with id: " + tenant.getId() + "  does not exist ");
             }
         }
         try {
-            //set owner
-            User user = userRepository.findByUsername(username);
-            tenant.setTenantLeader(user.getUsername());
-          //  tenant.setNip(tenantNipGet);
-            //Logi
-
-
             return tenantRepository.save(tenant);
         } catch (Exception e) {
-            throw new TenantIdException(" Tenant with Nip: " + tenantNipGet + "  does already exist ");
+            throw new TenantIdException(" Tenant with id: " + tenantIdGet + "  does already exist ");
         }
     }
 
-    public Tenant findByNip(String nip){
 
-        Tenant tenant = tenantRepository.findByNip(nip);
 
-        if(tenant == null){
-            throw new TenantNotFoundException("Tenant with Nip "+ nip + " does not exist");
+
+    public Tenant findById(Long id) {
+        Optional<Tenant> tenant = tenantRepository.findById(id);
+
+        if (!tenant.isPresent()) {
+            throw new TenantNotFoundException("Tenant with id " + id + " does not exist");
         }
-        //if(!tenant.getTenantLeader().equals(username)){
-        //    throw  new TenantNotFoundException("Tenant is not your");
-        //}
-        return tenant;
+
+        return tenant.get();
     }
 
-    public  Iterable<Tenant> findAllTenants(String username){
+    public Iterable<Tenant> findAllTenants() {
         return tenantRepository.findAll();
     }
 
-    public void deleteTenantByNip(String nip, String username){
-        tenantRepository.delete(findByNip(nip));
+    public void deleteTenantById(Long id) {
+        tenantRepository.delete(findById(id));
     }
 }

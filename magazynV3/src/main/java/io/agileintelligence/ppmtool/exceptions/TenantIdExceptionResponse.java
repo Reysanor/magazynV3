@@ -1,17 +1,17 @@
 package io.agileintelligence.ppmtool.exceptions;
 
 public class TenantIdExceptionResponse {
-    private String tenantNip;
+    private String id;
 
-    public TenantIdExceptionResponse(String tenantNip) {
-        this.tenantNip = tenantNip;
+    public TenantIdExceptionResponse(String id) {
+        this.id = id;
     }
 
-    public String getTenantNip() {
-        return tenantNip;
+    public String getId() {
+        return id;
     }
 
-    public void setTenantNip(String tenantNip) {
-        this.tenantNip = tenantNip;
+    public void setId(String id) {
+        this.id = id;
     }
 }

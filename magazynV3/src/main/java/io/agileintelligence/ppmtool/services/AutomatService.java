@@ -106,10 +106,10 @@ public class AutomatService {
         return productToAutomatRepository.save(productToAutomat);
     }
 
-    public Iterable<Automat> findAllAutomatsToTenant(String tenantId) {
+    public Iterable<Automat> findAllAutomatsToTenant(Long tenantId) {
         //Tenant tenant = tenantService.findByNip(tenantId);
 
-        return automatRepository.findAllByTenant(tenantService.findByNip(tenantId));
+        return automatRepository.findAllByTenant(tenantService.findById(tenantId));
 
     }
 
@@ -119,7 +119,7 @@ public class AutomatService {
 
     }
 
-    public Automat setTenant(String tenant_id, String automat_id) {
+    public Automat setTenant(Long tenant_id, String automat_id) {
         Automat automatGet = findBySerialNumber(automat_id);
         if (automatGet == null) {
             throw new AutomatNotFoundException("Cannot add tenant - Automat with Serial Number: " + automat_id + " doesn't exists");
@@ -135,7 +135,7 @@ public class AutomatService {
             throw new AutomatIdException("Automat with Serial Number'" + automat_id + "'is used already");
         }
         //czy istnieje tenant
-        Tenant tenant = tenantService.findByNip(tenant_id);
+        Tenant tenant = tenantService.findById(tenant_id);
         if (tenant == null) {
             throw new TenantNotFoundException(" Tenant with ID: " + tenant_id + "  does not exist ");
         }

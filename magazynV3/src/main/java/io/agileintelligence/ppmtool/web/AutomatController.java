@@ -45,7 +45,7 @@ public class AutomatController {
     }
 
     @GetMapping("/all/{tenantId}")
-    public Iterable<Automat> getAllAutomatsToTenant(@PathVariable String tenantId) {
+    public Iterable<Automat> getAllAutomatsToTenant(@PathVariable Long tenantId) {
         return automatService.findAllAutomatsToTenant(tenantId);
     }
 
@@ -103,7 +103,7 @@ public class AutomatController {
     //zmienic na patch
     @PostMapping("/att/{tenant_id}/{automat_id}")
     public ResponseEntity<?> addAutomatToTenant(
-            @PathVariable String tenant_id, @PathVariable String automat_id) {
+            @PathVariable Long tenant_id, @PathVariable String automat_id) {
         // ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         //if (errorMap != null) return errorMap;
         Automat automat1 = automatService.setTenant(tenant_id, automat_id);

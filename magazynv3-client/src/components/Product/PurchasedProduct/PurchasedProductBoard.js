@@ -9,10 +9,14 @@ class PurchasedProductBoard extends Component {
     this.props.getPurchasedProducts();
   }
   namesOfTable() {
-    let header = ["name", "number", "price"];
-    return header.map((key, index) => {
-      return <th key={index}>{key.toUpperCase()}</th>;
-    });
+    return(
+      <tr>
+      <th>NAME</th>
+      <th>COUNT</th>
+      <th>PRICE</th>
+
+      </tr>
+)
   }
 
   dataOfTable() {
@@ -20,50 +24,47 @@ class PurchasedProductBoard extends Component {
     return purchased_products.map((purchased_product, index) => {
       const { id, amount, price, product } = purchased_product; //destructuring
 
-      if(amount>0){
-        return (
-          <tr key={id}>
-            <td>{product.name}</td>
-            <td id="purchasedProductsPlus">{amount}</td>
-            <td>{price}</td>
-            <td>
-              {" "}
-              <Link to="/PurchasedProductBoard">Edit </Link>
-            </td>
-          </tr>
-        );
-      }else{
-        return (
-          <tr key={id}>
-            <td>{product.name}</td>
-            <td id="purchasedProductsMinus">{amount}</td>
-            <td></td>
-            <td>
-              {" "}
-              <Link to="/PurchasedProductBoard">Edit </Link>
-            </td>
-          </tr>
-        );
+      if (id != null) {
+        if (amount > 0) {
+          return (
+            <tr key={id}>
+              <td>{product.name}</td>
+              <td id="purchasedProductsPlus">{amount}</td>
+              <td>{price}</td>
+              <td>
+                {" "}
+                <Link to={`/updatePurchasedProduct/${id}`}>Edit </Link>
+              </td>
+            </tr>
+          );
+        } else {
+          return (
+            <tr key={id}>
+              <td>{product.name}</td>
+              <td id="purchasedProductsMinus">{amount}</td>
+              <td></td>
+              <td>
+                {" "}
+                <Link to={`/updatePurchasedProduct/${id}`}>Edit </Link>
+              </td>
+            </tr>
+          );
+        }
       }
-     
     });
   }
 
   render() {
-
     return (
       <div>
         <div className="card card-body bg-light mb-5">
-            <h1 id="purchasedProductsTitle">History of storage</h1>
-            <table id="purchasedProducts">
-              <tr>{this.namesOfTable()}</tr>
-              <tbody>{this.dataOfTable()}</tbody>
-            </table>
-          </div>
+          <h1 id="purchasedProductsTitle">History of storage</h1>
+          <table id="purchasedProducts">
+          <thead>{this.namesOfTable()}</thead>
+            <tbody>{this.dataOfTable()}</tbody>
+          </table>
         </div>
-        
-
- 
+      </div>
     );
   }
 }

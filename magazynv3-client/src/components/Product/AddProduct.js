@@ -100,7 +100,7 @@ render() {
                       </div>
                     )}
                   </div>
-
+{/*
                   <div className="form-group">
                   <select
                     className="form-control form-control-lg"
@@ -113,8 +113,8 @@ render() {
                     <option value="hot">hot</option>
                     <option value="snack">snack</option>
                   </select>
-                </div>
-
+                                </div>
+*/}
                 
                   <input
                     type="submit"

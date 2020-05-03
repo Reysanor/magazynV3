@@ -218,7 +218,7 @@ class UpdateTenant extends Component {
                                             placeholder="Tenant phoneNumber"
                                             name="phoneNumber"
                                             type="text"
-                                            maxlength="9" minlength="9" size="9"
+                                            maxLength="9" minLength="9" size="9"
                                             value={this.state.phoneNumber}
                                             onChange={this.onChange}
                                         />

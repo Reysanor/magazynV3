@@ -23,17 +23,18 @@ class TenantItem extends Component {
               <span className="mx-auto">{tenant.name}</span>
             </div>
             <div className="col-lg-6 col-md-4 col-8">
-              <p>{tenant.nip}</p>
+              <p>{tenant.city}</p>
             </div>
+
             <div className="col-md-4 d-none d-lg-block">
               <ul className="list-group">
                 {/*Link z parametrem (id tego tenanta)*/}
-                <Link to={`/updateTenant/${tenant.nip}`}>
+                <Link to={`/updateTenant/${tenant.id}`}>
                   <li className="list-group-item update">
                     <i className="fa fa-edit pr-1"> Update Tenant Info</i>
                   </li>
                 </Link>
-                <Link to={`/tenantBoard/${tenant.nip}`}>
+                <Link to={`/tenantBoard/${tenant.id}`}>
                   <li className="list-group-item board">
                     <i className="fa fa-flag-checkered pr-1"> Tenant Board </i>
                   </li>

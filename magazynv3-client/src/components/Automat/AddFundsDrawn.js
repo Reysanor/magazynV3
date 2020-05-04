@@ -36,7 +36,7 @@ class AddFundsDrawn extends Component {
   }
 
   componentDidMount() {
-    const { automat_serialNumber } = this.props.match.params;
+    const { automat_serialNumber,tenant_id } = this.props.match.params;
     this.props.getFundsDrawnsByAutomat(automat_serialNumber);
   }
   //wymaga bind w formularzu aby wprowadzać dane
@@ -57,8 +57,9 @@ class AddFundsDrawn extends Component {
       //komponent po wyrenderowaniu za pomoca rendera przekazuje props do komponentu
     };
 
-    //console.log(newProduct);
+    console.log( );
     this.props.createFundsDrawn(
+      this.props.match.params.tenant_id,
       this.state.automat_id,
       newFundsDrawn,
       this.props.history
@@ -108,7 +109,7 @@ class AddFundsDrawn extends Component {
 
                   <input
                     type="submit"
-                    className="btn btn-primary btn-block mt-4"
+                    className="btn btn-primary btn-block mt-4" value="akceptuj"
                   />
                 </form>
 

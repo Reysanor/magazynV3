@@ -15,7 +15,6 @@ class AddAutomat extends Component {
             name: "",
             serialNumber: "",
             type: "",
-            capacity: "",
             status: "",
             productionDate: "",
             errors: {}
@@ -49,7 +48,6 @@ class AddAutomat extends Component {
             name: this.state.name,
             serialNumber: this.state.serialNumber,
             type: this.state.type,
-            capacity: this.state.capacity,
             status: this.state.status,
             productionDate: this.state.productionDate,
             //komponent po wyrenderowaniu za pomoca rendera przekazuje props do komponentu
@@ -138,26 +136,7 @@ render() {
                   </select>
                 </div>
 
-                    <div className="form-group">
-                    <input
-                      className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.capacity
-                      })}
-                      placeholder="Automat capacity"
-                      name="capacity"
-                      type="number"
-                      min="50" max="150"
-                      value={this.state.capacity}
-                      onChange={this.onChange}
-                    />
-                    {errors.capacity && (
-                      <div className="invalid-feedback">
-                        {errors.capacity} 
-                      </div>
-                    )}
-                    </div>
-
-
+                   
                     <div className="form-group">
                     <select
                       className="form-control form-control-lg"
@@ -167,9 +146,8 @@ render() {
                     >
                       <option value="">Choose a status</option>
                       <option value="w magazynie">w magazynie</option>
-                      <option value="naprawiany">naprawiany</option>
-                      <option value="zepsuty">zepsuty</option>
-                      <option value="wynajmowany">wynajmowany</option>
+                      <option value="w naprawie">w naprawie</option>
+                      <option value="pracuje">pracuje</option>
                     </select>
                   </div>
 
@@ -198,7 +176,7 @@ render() {
                 
                   <input
                     type="submit"
-                    className="btn btn-primary btn-block mt-4"
+                    className="btn btn-primary btn-block mt-4" value="akceptuj"
                   />
                 </form>
               </div>

@@ -45,7 +45,7 @@ class AddPurchasedProduct extends Component {
         //tworze nowy Projekt
         const newPurchasedProduct = {
             amount: this.state.amount,
-            price: this.state.price,
+            price: this.state.price*this.state.amount,
 
             //komponent po wyrenderowaniu za pomoca rendera przekazuje props do komponentu
 
@@ -120,7 +120,7 @@ render() {
 
                   <input
                     type="submit"
-                    className="btn btn-primary btn-block mt-4"
+                    className="btn btn-primary btn-block mt-4" value="akceptuj"
                   />
                 </form>
               </div>

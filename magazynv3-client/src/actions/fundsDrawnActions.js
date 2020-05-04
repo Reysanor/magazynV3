@@ -13,11 +13,11 @@ import { GET_ERRORS, GET_FUNDS_DRAWN, GET_FUNDS_DRAWNS, DELETE_FUNDS_DRAWN } fro
 //wykorzystuja odpowiednie typy i prowadza do reducerów w index.js
 //przekazuje project jako obiekt i history co pozwoli na przekierowanie w index.js
                                                 // czeka na promise i zwraca result (E6)
-export const createFundsDrawn = (automat_id,funds_drawn, history) => async dispatch => {
+export const createFundsDrawn = (tenant_id, automat_id,funds_drawn, history) => async dispatch => {
   try {
     //po poprawnym utworzeniu projektu wracam do dashboard (do tego używam parametru history)
     await axios.post(`/api/fund/${automat_id}`, funds_drawn);
-    history.push("/dashboard");
+    history.push(`/tenantBoard/${tenant_id}`);
     //opóźnienie rozgłoszenia (ang. “dispatch) akcji lub rozgłoszenie jej tylko 
     //jeśli zostaną spełnione określone warunki.
     dispatch({

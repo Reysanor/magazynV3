@@ -17,7 +17,7 @@ export const createAutomat = (automat, history) => async (dispatch) => {
   try {
     //po poprawnym utworzeniu projektu wracam do dashboard (do tego używam parametru history)
     await axios.post("/api/automat", automat);
-    history.push("/dashboard");
+    history.push("/automats");
     //opóźnienie rozgłoszenia (ang. “dispatch) akcji lub rozgłoszenie jej tylko
     //jeśli zostaną spełnione określone warunki.
     dispatch({
@@ -67,7 +67,7 @@ export const getAutomat = (id, history) => async (dispatch) => {
     });
     //w przypadku braku projektu
   } catch (error) {
-    history.push("/dashboard");
+    history.push("/automats");
   }
 };
 

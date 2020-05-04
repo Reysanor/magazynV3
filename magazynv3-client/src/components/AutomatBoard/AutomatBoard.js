@@ -17,7 +17,7 @@ class AutomatBoard extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.getProductToAutomats(id);
-   // this.props.getInsertedProductsAvaragePrice(id);
+    // this.props.getInsertedProductsAvaragePrice(id);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -59,7 +59,7 @@ class AutomatBoard extends Component {
           <ProductToAutomatsWithPrices
             product_to_automats_prop={product_to_automats}
             //inserted_product_prop={inserted_products}
-            id_prop = {id}
+            id_prop={id}
           />
         );
       }
@@ -69,9 +69,6 @@ class AutomatBoard extends Component {
     return (
       <div className="container">
         <div className="row">
-          <Link to={`/insertedProductsToAutomat/${id}`} className="btn btn-secondary mb-3">
-            <i className="fas fa-plus-circle"> History</i>
-          </Link>
           <hr />
 
           <Link
@@ -108,5 +105,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getProductToAutomats,
- // getInsertedProductsAvaragePrice,
+  // getInsertedProductsAvaragePrice,
 })(AutomatBoard);

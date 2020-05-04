@@ -17,7 +17,7 @@ export const createProduct = (product, history) => async dispatch => {
   try {
     //po poprawnym utworzeniu projektu wracam do dashboard (do tego używam parametru history)
     await axios.post("/api/product", product);
-    history.push("/dashboard");
+    history.push("/products");
     //opóźnienie rozgłoszenia (ang. “dispatch) akcji lub rozgłoszenie jej tylko 
     //jeśli zostaną spełnione określone warunki.
     dispatch({
@@ -60,7 +60,7 @@ export const getProduct = (id, history) => async dispatch => {
     });
     //w przypadku braku projektu
   } catch (error) {
-    history.push("/dashboard");
+    history.push("/products");
   }
 };
 

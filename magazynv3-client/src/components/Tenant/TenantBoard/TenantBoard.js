@@ -55,7 +55,7 @@ class TenantBoard extends Component {
         {
           /* przekazanie do backlog*/
         }
-        return <AutomatsToTenantOwned automats_prop={automats} />;
+        return <AutomatsToTenantOwned automats_prop={automats} tenant_id_prop={id} />;
       }
     };
     BoardContent = boardAlgorithm(errors, automats);

@@ -1,49 +1,35 @@
 done:
-przyciski wracania
-automat w tenant - tylko wyswietla nazwe
-tworzenie produktu - ukryć typ
-Tenant - zmienic nip na id jako identyfikator
-tworzenie Automat - opcjonalne
-ilość liczb po przecinku
-
-
-
-to do:
-
-Hitory of product w automacie - łączna suma
-historia produktów w magazynie - dodać edycje
-
-
-
-
-
 
 usunąć "automat capacity"
 status: naprawiany, zepsuty --> "w naprawie"
 status: wynajmowany --> "pracuje"
-"prześlij" --> "akceptuj"
 numer seryjy musi mieć 10 cyfr --> why?
-magazyn: dodać średnia cena sprzedaży
-zawsze cofa do strony startowej
-w "magazynie" --> "dodaj" - cena zakupu 1 szt. nie wszystkich
+"prześlij" --> "akceptuj"
+w "magazynie" --> "dodaj" - cena zakupu 1 szt. nie wszystkich - ok, mnoże po prostu
 nie da się usunąć "places"
 kod pocztowy bez "-"
+zawsze cofa do strony startowej
 dodaj produkt do automatu --> napierw nazwa, potem cena
 "update" --> zmiana ceny
 Insert" --> dodać opisy, co oznaczają dane cyfry
-"historia" --> podsumowanie + dodać cały zysk
+
+
+to check:
+
+
+
+to do:
+magazyn - lista produktów: dodać średnia cena sprzedaży i średni zysk (Avarage profit: z automatu) - inserted_profit number*profit dla każdego
 
 
 błędy: 
+zaokrąglanie liczb (historia w magazynie), dodać zł przy wartościach
 inne wyświetlanie na np. firefox (tabele)
-props.purchased_product - zrobić render sprawdzający czy klucze się powtarzają, jak tak to ma nie wyświetlać mapy.
+usunięcie automatu z tenanta powinno usuwać powiązanie z produktami a tego nie robi
 
 
 
 
+rozwój:
 
-
-
-
-
-
+dodać pole typu "old" przy odłączaniu

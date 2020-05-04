@@ -27,7 +27,7 @@ export default function(state = initialState, action) {
         //zwraca do wyswietlenia projekty sprzeczne z action.payload (id do skasowania)
         ...state,
         tenants: state.tenants.filter(
-          tenant => tenant.nip !== action.payload
+          tenant => tenant.id !== action.payload
         )
       };
     default:

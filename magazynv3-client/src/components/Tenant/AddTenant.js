@@ -140,9 +140,9 @@ class AddTenant extends Component {
                       })}
                       placeholder="Tenant zipCode"
                       name="zipCode"
-                      type="number"
-                      min="10000"
-                      max="99999"
+                      maxLength="6"
+                      minLength="6"
+                      size="6"
                       value={this.state.zipCode}
                       onChange={this.onChange}
                     />
@@ -206,7 +206,7 @@ class AddTenant extends Component {
                   </div>
                   <input
                     type="submit"
-                    className="btn btn-primary btn-block mt-4"
+                    className="btn btn-primary btn-block mt-4" value="akceptuj"
                   />
                 </form>
               </div>

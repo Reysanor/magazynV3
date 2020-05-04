@@ -80,6 +80,27 @@ public class InsertedProductService {
 
     }
 
+    public InsertedProduct findInsertedPriceToAutomatTotalProfit(String automat_id) {
+        Automat automat = automatService.findBySerialNumber(automat_id);
+        InsertedProduct insertedProduct = new InsertedProduct();
+
+        try {
+            Iterable<InsertedProduct> insertedProducts = insertedProductRepository.findAllByAutomat(automat);
+            double average = 0.0;
+            int count = 0;
+            for (InsertedProduct ip : insertedProducts) {
+                average = average + ip.getProfit() * ip.getNumber();
+                count = count + ip.getNumber();
+            }
+            insertedProduct.setAutomat(automat);
+            insertedProduct.setProfit(round(average));
+        } catch (Exception e) {
+            insertedProduct.setProfit(0.0);
+
+        }
+        return insertedProduct;
+
+    }
 
     public InsertedProduct findAllInsertedByAutomatandProduct(String automat_id, Long product_id) {
         Automat automat = automatService.findBySerialNumber(automat_id);

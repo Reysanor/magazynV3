@@ -92,3 +92,11 @@ export const getInsertedProductsAvaragePrice = (automat_serialNumber) => async d
   });
 };
 
+export const getInsertedProductsToAutomatTotalProfit = (automat_serialNumber) => async dispatch => {
+  
+  const res = await axios.get(`/api/inserted/profit/all/${automat_serialNumber}`);
+  dispatch({
+    type: GET_INSERTED_PRODUCT,
+    payload: res.data
+  });
+};

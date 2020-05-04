@@ -9,6 +9,7 @@ class AutomatsToTenantOwned extends Component {
       <Automat
         key={automat.serialNumber}
         automat={automat}
+        tenant_id={this.props.tenant_id_prop}
       />
     ));
 

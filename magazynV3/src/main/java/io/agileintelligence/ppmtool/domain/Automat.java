@@ -18,15 +18,12 @@ public class Automat {
     @NotBlank(message = "Name is required")
     private String name;
     @NotBlank(message = "Serial number is required")
-    @Size(min = 10, max = 10, message = "Please use 10 characters")
+  //  @Size(min = 10, max = 10, message = "Please use 10 characters")
     @Column(updatable = false, unique = true)
     private String serialNumber;
     //@NotBlank(message = "Type is required")
     private String type;
-    @Column(updatable = false)
 
-   // @NotNull(message = "Capacity is required")
-    private Integer capacity;
 
     //@NotBlank(message = "State is required")
     private String status;
@@ -100,13 +97,8 @@ public class Automat {
         this.type = type;
     }
 
-    public int getCapacity() {
-        return capacity;
-    }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
+
 
     public String getStatus() {
         return status;
@@ -132,9 +124,6 @@ public class Automat {
         this.tenant = tenant;
     }
 
-    public void setCapacity(Integer capacity) {
-        this.capacity = capacity;
-    }
 
     public List<InsertedProduct> getInsertedProducts() {
         return insertedProducts;
@@ -156,7 +145,6 @@ public class Automat {
                 .add("name='" + name + "'")
                 .add("serialNumber='" + serialNumber + "'")
                 .add("type='" + type + "'")
-                .add("capacity=" + capacity)
                 .add("status='" + status + "'")
                 .add("productionDate=" + productionDate)
                 .toString();

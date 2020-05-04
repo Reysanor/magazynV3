@@ -16,6 +16,7 @@ class AddInsertedProduct extends Component {
       number: "",
       profit: 0,
       total_profit: 0,
+      currentPrice: 0,
       product: product_id,
       automat: automat_serialNumber,
       errors: {},
@@ -56,13 +57,13 @@ class AddInsertedProduct extends Component {
     const newInsertedProduct = {
       number: this.state.number,
       profit: this.state.profit,
+      currentPrice: this.props.location.state.sell_price
       //product: this.state.product
       //komponent po wyrenderowaniu za pomoca rendera przekazuje props do komponentu
     };
     //console.log(this.state.automat);
     //console.log(newTask);
     //przekazuje id projektu, nowy task, history do backlogActions.js
-
     this.props.createInsertedProduct(
       this.state.automat,
       this.state.product, //tu wstawić wybrany z listy product
@@ -95,7 +96,9 @@ class AddInsertedProduct extends Component {
               </h4>
               <h5 className="display-4 text-center">Insert</h5>
               <form onSubmit={this.onSubmit}>
-                <div className="form-group">
+              <div className="form-group form-inline">
+              <label className="form-label" style={{marginRight: '77px'}}>Ilość: </label>
+
                   <input
                     className={classnames("form-control form-control-lg", {
                       "is-invalid": errors.number,
@@ -108,12 +111,15 @@ class AddInsertedProduct extends Component {
                     value={this.state.number}
                     onChange={this.onChange}
                   />
+
                   {errors.number && (
                     <div className="invalid-feedback"> {errors.number}</div>
                   )}
                 </div>
 
-                <div className="form-group">
+                <div className="form-group form-inline">
+                <label className="form-label" style={{marginRight: '9px'}}>Zysk za sztukę: </label>
+
                   <input
                     className="form-control form-control-lg"
                     placeholder="profit per"
@@ -126,7 +132,8 @@ class AddInsertedProduct extends Component {
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group form-inline">
+                <label className="form-label" style={{marginRight: '16px'}}> Zysk w sumie: </label>
                   <input
                     className="form-control form-control-lg"
                     placeholder="total profit"
@@ -142,6 +149,7 @@ class AddInsertedProduct extends Component {
                 <input
                   type="submit"
                   className="btn btn-primary btn-block mt-4"
+                  value="akceptuj"
                 />
               </form>
 

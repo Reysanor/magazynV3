@@ -19,7 +19,7 @@ public class Tenant {
    // @NotBlank(message = "Street is required")
     private String street;
     //@NotBlank(message = "Zip Code is required")
-    @Size(min = 5, max = 5, message = "Please use 5 characters")
+    @Size(min = 6, max = 6, message = "Please use 6 characters")
     private String zipCode;
     @NotBlank(message = "City is required")
     private String city;

@@ -53,7 +53,7 @@ public class TenantController {
     @DeleteMapping("/{tenantId}")
     public ResponseEntity<?> deleteTenant(@PathVariable Long tenantId) {
         tenantService.deleteTenantById(tenantId);
-        return new ResponseEntity<String>("Tenant with Nip: " + tenantId + " was deleted", HttpStatus.OK);
+        return new ResponseEntity<String>("Tenant with id: " + tenantId + " was deleted", HttpStatus.OK);
     }
 
 

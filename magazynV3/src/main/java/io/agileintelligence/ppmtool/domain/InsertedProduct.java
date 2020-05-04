@@ -22,7 +22,8 @@ public class InsertedProduct {
     private Integer number;
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date dateOfInsert;
-
+    @NotNull(message = "current price is required")
+    private Double currentPrice;
 
     private Double profit;
 
@@ -34,7 +35,13 @@ public class InsertedProduct {
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
+    public Double getCurrentPrice() {
+        return currentPrice;
+    }
 
+    public void setCurrentPrice(Double currentPrice) {
+        this.currentPrice = currentPrice;
+    }
 
     public Long getId() {
         return id;

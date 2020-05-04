@@ -46,7 +46,7 @@ class ProductToAutomat extends Component {
             to={`/updateProductToAutomat/${product_to_automat.automat.serialNumber}/${product_to_automat.product.id}`}
             className="btn btn-primary"
           >
-            Update
+          Zmiana ceny
           </Link>
 
           <Link
@@ -56,7 +56,7 @@ class ProductToAutomat extends Component {
             }}
             className="btn btn-secondary ml-4"
           >
-            Insert
+            Wstaw
           </Link>
 
           <button
@@ -67,7 +67,7 @@ class ProductToAutomat extends Component {
               product_to_automat.product.id
             )}
           >
-            Delete
+            Usuń
           </button>
         </div>
       </div>

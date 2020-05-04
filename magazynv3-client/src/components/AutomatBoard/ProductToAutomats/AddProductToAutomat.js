@@ -80,7 +80,25 @@ class AddProductToAutomat extends Component {
               </Link>
               <h4 className="display-4 text-center">Add Product to automat</h4>
               <form onSubmit={this.onSubmit}>
-                <div className="form-group">
+               
+              <div className="form-group">
+              <select
+                className="form-control form-control-lg"
+                name="product"
+                value={this.state.product}
+                onChange={this.onChange}
+              >
+              <option value="">Select option</option>
+              {products.map((item,i) =>
+                <option key={i}  value={item.id}>
+                 {item.name}
+                </option>
+               )}
+              </select>
+            </div>
+
+              
+              <div className="form-group">
                   <input
                   className={classnames("form-control form-control-lg",{
                     "is-invalid":errors.price
@@ -102,25 +120,10 @@ class AddProductToAutomat extends Component {
                 </div>
 
 
-                <div className="form-group">
-                <select
-                  className="form-control form-control-lg"
-                  name="product"
-                  value={this.state.product}
-                  onChange={this.onChange}
-                >
-                <option value="">Select option</option>
-                {products.map((item,i) =>
-                  <option key={i}  value={item.id}>
-                   {item.name}
-                  </option>
-                 )}
-                </select>
-              </div>
-
+             
                 <input
                   type="submit"
-                  className="btn btn-primary btn-block mt-4"
+                  className="btn btn-primary btn-block mt-4" value="akceptuj"
                 />
               </form>
             </div>

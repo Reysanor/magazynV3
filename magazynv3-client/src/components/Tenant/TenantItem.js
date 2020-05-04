@@ -44,7 +44,7 @@ class TenantItem extends Component {
                   onClick={this.onDeleteClick.bind(
                     this,
                     //uzyskuje z props od rodzica (Wybranego tenanta na liscie Projektów)
-                    tenant.nip
+                    tenant.id
                   )}
                 >
                   {/* funkcja kasowania z routera */}

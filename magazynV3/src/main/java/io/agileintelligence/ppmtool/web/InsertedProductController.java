@@ -68,4 +68,9 @@ public class InsertedProductController {
     public Iterable<InsertedProduct> getInsertedProductsAvaragePriceByAutomat(@PathVariable String automat_id) {
         return insertedProductService.findInsertedPriceByAutomat(automat_id);
     }
+
+    @GetMapping("/profit/all/{automat_id}")
+    public InsertedProduct getInsertedProductsToAutomatTotalProfit(@PathVariable String automat_id) {
+        return insertedProductService.findInsertedPriceToAutomatTotalProfit(automat_id);
+    }
 }

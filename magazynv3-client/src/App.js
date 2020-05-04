@@ -41,6 +41,7 @@ import PurchasedProductBoard from "./components/Product/PurchasedProduct/Purchas
 import ListInsertedProducts from "./components/AutomatBoard/InsertedProduct/ListInsertedProducts";
 import AddFundsDrawn from "./components/Automat/AddFundsDrawn";
 import UpdatePurchasedProduct from "./components/Product/ProductBoard/UpdatePurchasedProduct";
+import ProductBoard from "./components/Product/ProductBoard";
 
 //every time I load other path I again set token
 const jwtToken = localStorage.jwtToken;
@@ -68,6 +69,7 @@ class App extends Component {
   //That's the principal reason why React uses className instead of class.
   //path pokrywa się z tym od aplikacji serwera
   render() {
+    
     return (
       //Provider definuje sposób w jaki store jest rozumiany przez reacta i reduxa
       //Provider przyjmuje atrybut prop: store
@@ -88,9 +90,10 @@ class App extends Component {
               //Project
             }
             <Switch>
+            
               <SecuredRoute exact path="/dashboard" component={Dashboard} />
               <SecuredRoute exact path="/automats" component={AutomatsList} />
-              <SecuredRoute exact path="/products" component={ProductsList} />
+              <SecuredRoute exact path="/products" component={ProductBoard} />
               <SecuredRoute exact path="/tenants" component={TenantsList} />
 
               <SecuredRoute exact path="/addProject" component={AddProject} />

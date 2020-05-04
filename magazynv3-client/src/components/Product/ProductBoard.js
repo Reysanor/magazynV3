@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import PurchasedProductBoard from "./PurchasedProduct/PurchasedProductBoard";
 import ProductsList from "../Dashboard/ProductsList";
+import PurchasedProductButton from "./PurchasedProduct/PurchasedProductButton";
 
 class ProductBoard extends Component {
   //lifecycle hook - co ma się dziać po zamontowaniu komponentu (dane z "mapStateToProps" na dole)
@@ -13,18 +12,15 @@ class ProductBoard extends Component {
     return (
       <div>
         <div className="container">
-          <div className="row">
+        <PurchasedProductButton />
+
                 <ProductsList />
 
-                <PurchasedProductBoard />
-          </div>
         </div>
       </div>
     );
   }
 }
-
-ProductBoard.propTypes = {};
 
 //łączenie componentu z state
 export default connect(

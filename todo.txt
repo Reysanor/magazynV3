@@ -16,6 +16,8 @@ historia produktów w magazynie - dodać edycje
 
 
 
+
+
 usunąć "automat capacity"
 status: naprawiany, zepsuty --> "w naprawie"
 status: wynajmowany --> "pracuje"
@@ -34,8 +36,7 @@ Insert" --> dodać opisy, co oznaczają dane cyfry
 
 błędy: 
 inne wyświetlanie na np. firefox (tabele)
-
-    this.props.getInsertedOneProductByAutomat(this.props.automat_serialNumber_prop,this.props.product_id_prop);
+props.purchased_product - zrobić render sprawdzający czy klucze się powtarzają, jak tak to ma nie wyświetlać mapy.
 
 
 

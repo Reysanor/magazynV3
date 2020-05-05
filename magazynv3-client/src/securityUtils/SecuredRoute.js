@@ -7,23 +7,23 @@ import PropTypes from "prop-types";
 const SecuredRoute = ({ component: Component, security, ...otherProps }) => (
   <Route
   //take otherProps, render props (...otherProps) and redirect to component (path) only if valid
-    {...otherProps}
-    render={props =>
-      security.validToken === true ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to="/login" />
-      )
-    }
-  />
+  {...otherProps}
+  render={props =>
+    security.validToken === true ? (
+      <Component {...props} />
+    ) : (
+      <Redirect to="/login" />
+    )
+  }
+/>
 );
 
 SecuredRoute.propTypes = {
-  security: PropTypes.object.isRequired
+security: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  security: state.security
+security: state.security
 });
 
 export default connect(mapStateToProps)(SecuredRoute);

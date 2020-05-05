@@ -26,6 +26,8 @@ class ProductItem extends Component {
 
               <p>W magazynie: {purchased_product.amount}</p>
               <p>Średnia cena zakupu: {purchased_product.price} zł</p>
+              <p>Średnia cena sprzedaży: {purchased_product.currentPrice} zł</p>
+              <p>Średni zysk: {purchased_product.profit} zł</p>
             </div>
             <div className="col-md-5 d-none d-lg-block">
               <ul className="list-group">

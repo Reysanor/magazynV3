@@ -50,7 +50,7 @@ if (jwtToken) {
   const decoded_jwtToken = jwt_decode(jwtToken);
   store.dispatch({
     type: SET_CURRENT_USER,
-    payload: decoded_jwtToken,
+    payload: decoded_jwtToken
   });
 
   //logout after time

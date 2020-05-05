@@ -103,7 +103,7 @@ render() {
                     className={classnames("form-control form-control-lg", {
                       "is-invalid": errors.price
                     })}
-                    placeholder="price"
+                    placeholder="cena/1szt."
                     name="price"
                     type="number"
                     min="0.1"

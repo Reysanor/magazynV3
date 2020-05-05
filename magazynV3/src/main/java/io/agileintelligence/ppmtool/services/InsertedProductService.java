@@ -15,9 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class InsertedProductService {
@@ -129,14 +127,6 @@ public class InsertedProductService {
     }
 
 
-    private static double round(double value) {
-        if (2 < 0) throw new IllegalArgumentException();
-
-        BigDecimal bd = new BigDecimal(Double.toString(value));
-        bd = bd.setScale(2, RoundingMode.HALF_UP);
-        return bd.doubleValue();
-    }
-
     public Iterable<InsertedProduct> findInsertedPriceByAutomat(String automat_id) {
         Iterable<ProductToAutomat> productToAutomats = productToAutomatRepository.findAllByAutomat(automatService.findBySerialNumber(automat_id));
         List<InsertedProduct> avarageProfit = new ArrayList<>();
@@ -147,4 +137,43 @@ public class InsertedProductService {
         return avarageProfit;
     }
 
+
+
+    //średnia cena sprzedaży i średni zysk
+    public Iterable<InsertedProduct> findInsertedProductsInfo() {
+        Iterable<InsertedProduct> productToAutomats = insertedProductRepository.findAll();
+
+        Map<Long, ArrayList<InsertedProduct>> map2 = new HashMap<>();
+
+        for (InsertedProduct ip : productToAutomats) {
+            map2.computeIfAbsent(ip.getProduct().getId(), k -> new ArrayList<>()).add(ip);
+        }
+        ArrayList<InsertedProduct> toReturn = new ArrayList<>();
+
+        for (Long key : map2.keySet()) {
+            int number = 0;
+            double profit = 0.00;
+            double currentPrice = 0.0;
+            for (InsertedProduct ip : map2.get(key)) {
+                number += ip.getNumber();
+                profit += ip.getNumber() * ip.getProfit();
+                currentPrice += ip.getNumber() * ip.getCurrentPrice();
+            }
+            InsertedProduct temp = new InsertedProduct();
+            temp.setNumber(number);
+            temp.setProfit(round(profit/number));
+            temp.setCurrentPrice(round(currentPrice/number));
+            temp.setProduct(productService.findById(key));
+            toReturn.add(temp);
+        }
+
+        return toReturn;
+    }
+    private static double round(double value) {
+        if (2 < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(Double.toString(value));
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
 }

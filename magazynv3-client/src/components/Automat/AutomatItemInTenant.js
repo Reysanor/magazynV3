@@ -80,7 +80,7 @@ class AutomatItemInTenant extends Component {
 AutomatItemInTenant.propTypes = {
   deleteAutomatfromTenant: PropTypes.func.isRequired,
   getInsertedProductsToAutomatTotalProfit:PropTypes.func.isRequired,
-  insertedProduct: PropTypes.object.isRequired
+  inserted_product: PropTypes.object.isRequired
 };
 const mapStateToProps = (state) => ({
   inserted_product: state.inserted_product,

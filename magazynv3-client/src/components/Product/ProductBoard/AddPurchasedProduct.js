@@ -45,7 +45,7 @@ class AddPurchasedProduct extends Component {
         //tworze nowy Projekt
         const newPurchasedProduct = {
             amount: this.state.amount,
-            price: this.state.price*this.state.amount,
+            price: this.state.price,
 
             //komponent po wyrenderowaniu za pomoca rendera przekazuje props do komponentu
 

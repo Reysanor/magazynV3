@@ -23,7 +23,8 @@ public class Automat {
     private String serialNumber;
     //@NotBlank(message = "Type is required")
     private String type;
-
+    @NotNull(message = "deleted  is required")
+    private Integer deleted = 0;
 
     //@NotBlank(message = "State is required")
     private String status;
@@ -97,8 +98,22 @@ public class Automat {
         this.type = type;
     }
 
+    public Integer getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Integer deleted) {
+        this.deleted = deleted;
+    }
 
 
+    public Set<FundsDrawn> getFundsDrawns() {
+        return fundsDrawns;
+    }
+
+    public void setFundsDrawns(Set<FundsDrawn> fundsDrawns) {
+        this.fundsDrawns = fundsDrawns;
+    }
 
     public String getStatus() {
         return status;

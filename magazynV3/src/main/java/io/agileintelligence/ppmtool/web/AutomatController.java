@@ -40,7 +40,7 @@ public class AutomatController {
     }
 
     @GetMapping("/all")
-    public Iterable<Automat> getAllAutomats(Principal principal) {
+    public Iterable<Automat> getAllAutomats() {
         return automatService.findAllAutomats();
     }
 

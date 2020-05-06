@@ -14,4 +14,6 @@ public interface AutomatRepository extends CrudRepository<Automat, Long> {
 
     Automat findByTenant(Tenant tenant);
 
+    Iterable<Automat> findAllByDeleted(Integer integer);
+
 }

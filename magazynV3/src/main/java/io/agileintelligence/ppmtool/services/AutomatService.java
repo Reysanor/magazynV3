@@ -61,12 +61,14 @@ public class AutomatService {
     }
 
     public Iterable<Automat> findAllAutomats() {
-        return automatRepository.findAll();
+        return automatRepository.findAllByDeleted(0);
     }
 
 
     public void deleteAutomatBySerialNumber(String serialNumber) {
-        automatRepository.delete(findBySerialNumber(serialNumber));
+        Automat automat = automatRepository.findBySerialNumber(serialNumber);
+        automat.setDeleted(1);
+        automatRepository.save(automat);
     }
 
     ///////////////////////////////////////////////////////////////////

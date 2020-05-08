@@ -11,54 +11,52 @@ class ProductToAutomat extends Component {
       errors: {},
     };
   }
-
-
-
   onDeleteClick(automat_serialNumber, product_id) {
     this.props.deleteProductToAutomat(automat_serialNumber, product_id);
-
   }
-
-  render() {
-    //props z product_to_automat
+  checkAutomatIsNull() {
     const { product_to_automat } = this.props;
+    if (product_to_automat.automat === null) {
+    //  console.log("no automat");
+      return <div></div>;
+    }
     return (
       <div className="card mb-1 bg-light">
         <div className="card-body bg-light">
-          <h5 className="card-title">
-            {" "}
-            {product_to_automat.product.name}
-          </h5>
+          <h5 className="card-title"> {product_to_automat.product.name}</h5>
           <p className="card-text text-truncate ">
             Selling price: {product_to_automat.price}
           </p>
 
           <p className="card-text text-truncate ">
-          Avarage profit: {product_to_automat.profit}
-        </p>
-        <p className="card-text text-truncate ">
-        Total profit: {product_to_automat.profit*product_to_automat.number}
-      </p>
-        <p className="card-text text-truncate ">
-        Number of inserted: {product_to_automat.number}
-      </p>
+            Avarage profit: {product_to_automat.profit}
+          </p>
+          <p className="card-text text-truncate ">
+            Total profit:{" "}
+            {product_to_automat.profit * product_to_automat.number}
+          </p>
+          <p className="card-text text-truncate ">
+            Number of inserted: {product_to_automat.number}
+          </p>
           <Link
             to={`/updateProductToAutomat/${product_to_automat.automat.serialNumber}/${product_to_automat.product.id}`}
             className="btn btn-primary"
           >
-          Zmiana ceny
+            Zmiana ceny
           </Link>
 
           <Link
             to={{
               pathname: `/insertProductToAutomat/${product_to_automat.automat.serialNumber}/${product_to_automat.product.id}`,
-              state: { sell_price: product_to_automat.price, product_name: product_to_automat.product.name},
+              state: {
+                sell_price: product_to_automat.price,
+                product_name: product_to_automat.product.name,
+              },
             }}
             className="btn btn-secondary ml-4"
           >
             Wstaw
           </Link>
-
           <button
             className="btn btn-danger ml-4"
             onClick={this.onDeleteClick.bind(
@@ -73,13 +71,25 @@ class ProductToAutomat extends Component {
       </div>
     );
   }
+
+  render() {
+    //props z product_to_automat
+    const { product_to_automat } = this.props;
+
+    console.log(product_to_automat);
+    //console.log(product_to_automat.automat.serialNumber)
+    //  const { id } = this.props.match.params;
+    // console.log(id)
+
+    return <div>{this.checkAutomatIsNull()}</div>;
+  }
 }
-ProductToAutomat.propTypes = {
-};
+ProductToAutomat.propTypes = {};
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
-
 });
 
-export default connect(mapStateToProps, { deleteProductToAutomat })(ProductToAutomat);
+export default connect(mapStateToProps, { deleteProductToAutomat })(
+  ProductToAutomat
+);

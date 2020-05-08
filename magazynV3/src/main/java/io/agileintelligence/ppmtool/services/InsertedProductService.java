@@ -41,6 +41,8 @@ public class InsertedProductService {
         Product product = productService.findById(product_id);
         insertedProduct.setAutomat(automat);
         insertedProduct.setProduct(product);
+        Date date = new Date();
+        insertedProduct.setDateOfInsert(date);
         automat.addInsertedProduct(insertedProduct);
         automatRepository.save(automat);
         return insertedProduct;

@@ -88,7 +88,13 @@ public class AutomatController {
     @DeleteMapping("/{automatId}/pta/{productId}")
     public ResponseEntity<?> deletePta(@PathVariable String automatId, @PathVariable Long productId) {
         automatService.deletePta(automatId,productId);
-        return new ResponseEntity<String>("Automat with SerialNumber: " + automatId + " was deleted", HttpStatus.OK);
+        return new ResponseEntity<String>("Automat with SerialNumber: " + automatId + " to product " + productId +" was deleted", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{automatId}/pta/all/delete")
+    public ResponseEntity<?> deleteAllPta(@PathVariable String automatId) {
+        automatService.deleteAllPta(automatId);
+        return new ResponseEntity<String>("All product to automat has been deleted " + automatId + " was deleted", HttpStatus.OK);
     }
 
 

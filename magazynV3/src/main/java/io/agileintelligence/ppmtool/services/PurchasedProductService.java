@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +47,8 @@ public class PurchasedProductService {
         try {
             purchasedProduct.setId(purchasedProductIdGet);
             purchasedProduct.setProduct(product.get());
+            Date date = new Date();
+            purchasedProduct.setDateOfPurchase(date);
             return purchasedProductRepository.save(purchasedProduct);
 
         } catch (Exception e) {

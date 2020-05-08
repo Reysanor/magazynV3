@@ -19,28 +19,26 @@ class TenantItem extends Component {
       <div className="container">
         <div className="card card-body bg-light mb-3">
           <div className="row">
-            <div className="col-2">
-              <span className="mx-auto">{tenant.name}</span>
-            </div>
             <div className="col-lg-6 col-md-4 col-8">
-              <p>{tenant.city}</p>
+              <Link to={`/tenantBoard/${tenant.id}`}>
+                <li className="list-group-item">
+                  <i className="fa fa-flag-checkered pr-1">
+                    {tenant.name} - {tenant.city}
+                  </i>
+                </li>
+              </Link>
             </div>
 
-            <div className="col-md-4 d-none d-lg-block">
-              <ul className="list-group">
+            <div className="col-lg-6 col-md-4 col-8">
                 {/*Link z parametrem (id tego tenanta)*/}
                 <Link to={`/updateTenant/${tenant.id}`}>
-                  <li className="list-group-item update">
+                  <li className="list-group-item">
                     <i className="fa fa-edit pr-1"> Update Tenant Info</i>
                   </li>
                 </Link>
-                <Link to={`/tenantBoard/${tenant.id}`}>
-                  <li className="list-group-item board">
-                    <i className="fa fa-flag-checkered pr-1"> Tenant Board </i>
-                  </li>
-                </Link>
-                <li
-                  className="list-group-item delete"
+
+                <button
+                  className="list-group-item list-group-item-action"
                   onClick={this.onDeleteClick.bind(
                     this,
                     //uzyskuje z props od rodzica (Wybranego tenanta na liscie Projektów)
@@ -49,8 +47,7 @@ class TenantItem extends Component {
                 >
                   {/* funkcja kasowania z routera */}
                   <i className="fa fa-minus-circle pr-1"> Delete Tenant</i>
-                </li>
-              </ul>
+                </button>
             </div>
           </div>
         </div>

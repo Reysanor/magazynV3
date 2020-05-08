@@ -107,3 +107,14 @@ export const deleteProductToAutomat = (automat_serialNumber,product_id) => async
       })
   }
 }
+
+
+
+
+
+export const deleteAllProductToAutomat = (automat_serialNumber) => async (dispatch) => {
+ {
+    await axios.delete(`/api/automat/${automat_serialNumber}/pta/all/delete`);
+    
+  }
+};

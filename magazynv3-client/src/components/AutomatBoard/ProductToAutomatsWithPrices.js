@@ -13,7 +13,7 @@ class ProductToAutomatsWithPrices extends Component {
 
   componentDidMount() {
     const {id_prop} = this.props;
-    console.log(id_prop);
+    //console.log(id_prop);
      this.props.getInsertedProductsAvaragePrice(id_prop);
   }
 
@@ -30,7 +30,7 @@ class ProductToAutomatsWithPrices extends Component {
        ...(inserted_products.find((itmInner) => itmInner.product.id === product_to_automats_prop[i].product.id))}
       );
     }
-    console.log(merged2);
+    //console.log(merged2);
 
     const pta2 = merged2.map((product_to_automat) => (
       <ProductToAutomat

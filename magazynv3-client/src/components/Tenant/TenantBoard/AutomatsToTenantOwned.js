@@ -17,7 +17,7 @@ class AutomatsToTenantOwned extends Component {
       <div>
         <div className="container">
           <div className="row">
-            <div className="col-md-10">
+            <div className="col-md-12">
               <div className="card text-center mb-2">
                 <div className="card-header bg-secondary text-white">
                   <h3>Automats in this tenant</h3>

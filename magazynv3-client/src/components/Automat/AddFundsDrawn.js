@@ -57,7 +57,6 @@ class AddFundsDrawn extends Component {
       //komponent po wyrenderowaniu za pomoca rendera przekazuje props do komponentu
     };
 
-    console.log( );
     this.props.createFundsDrawn(
       this.props.match.params.tenant_id,
       this.state.automat_id,

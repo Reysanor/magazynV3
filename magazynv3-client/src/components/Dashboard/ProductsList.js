@@ -31,7 +31,7 @@ class ProductsList extends Component {
          ...(inserted_products.find((itmInner) => itmInner.product.id === purchased_products[i].product.id))}
         );
       }
-      console.log(merged2);
+      //console.log(merged2);
   
 
        const pta2 = merged2.map((purchased_product) => (

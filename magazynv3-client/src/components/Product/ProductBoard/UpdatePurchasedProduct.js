@@ -79,8 +79,8 @@ class UpdatePurchasedProduct extends Component {
 
             //komponent po wyrenderowaniu za pomoca rendera przekazuje props do komponentu
         };
-        console.log(this.state.product.id);
-        console.log(updatePurchasedProduct)
+       // console.log(this.state.product.id);
+       // console.log(updatePurchasedProduct)
        // const {product_id} = this.state.product.id
         this.props.updatePurchasedProduct(this.state.product.id, updatePurchasedProduct, this.props.history);
 

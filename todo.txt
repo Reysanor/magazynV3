@@ -1,32 +1,14 @@
 done:
 
-usunąć "automat capacity"
-status: naprawiany, zepsuty --> "w naprawie"
-status: wynajmowany --> "pracuje"
-numer seryjy musi mieć 10 cyfr --> why?
-"prześlij" --> "akceptuj"
-w "magazynie" --> "dodaj" - cena zakupu 1 szt. nie wszystkich - ok, mnoże po prostu
-nie da się usunąć "places"
-kod pocztowy bez "-"
-zawsze cofa do strony startowej
-dodaj produkt do automatu --> napierw nazwa, potem cena
-"update" --> zmiana ceny
-Insert" --> dodać opisy, co oznaczają dane cyfry
-
-
-to check:
-
-
+usunięcie automatu z tenanta powinno usuwać powiązanie z produktami a tego nie robi
 
 to do:
-magazyn - lista produktów: dodać średnia cena sprzedaży i średni zysk (Avarage profit: z automatu) - inserted_profit number*profit dla każdego
 
 
 błędy: 
 zaokrąglanie liczb (historia w magazynie), dodać zł przy wartościach
 inne wyświetlanie na np. firefox (tabele)
-usunięcie automatu z tenanta powinno usuwać powiązanie z produktami a tego nie robi
-
+usuwać product to automat przy usuwaniu automatu z tenanta.
 
 
 

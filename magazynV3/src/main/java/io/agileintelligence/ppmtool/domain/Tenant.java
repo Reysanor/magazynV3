@@ -1,5 +1,7 @@
 package io.agileintelligence.ppmtool.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.List;
@@ -28,8 +30,12 @@ public class Tenant {
     private String emailAddress;
 
     //one to many with automat
-    @OneToMany(mappedBy = "tenant", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "tenant")
     private List<Automat> automaty;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "tenant")
+    private List<AutomatToTenantHistory> automatToTenantHistories;
 
     private String tenantLeader;
 
@@ -112,6 +118,18 @@ public class Tenant {
 
     public void addAutomat(Automat automat){
         automaty.add(automat);
+    }
+
+    public void setAutomaty(List<Automat> automaty) {
+        this.automaty = automaty;
+    }
+
+    public List<AutomatToTenantHistory> getAutomatToTenantHistories() {
+        return automatToTenantHistories;
+    }
+
+    public void setAutomatToTenantHistories(List<AutomatToTenantHistory> automatToTenantHistories) {
+        this.automatToTenantHistories = automatToTenantHistories;
     }
 
     @Override

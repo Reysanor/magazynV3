@@ -130,7 +130,7 @@ class App extends Component {
 
               <SecuredRoute
                 exact
-                path="/automatBoard/:id/"
+                path="/automatBoard/:id"
                 component={AutomatBoard}
               />
               {
@@ -138,7 +138,7 @@ class App extends Component {
               }
               <SecuredRoute
                 exact
-                path="/addProductToAutomat/:id/"
+                path="/addProductToAutomat/:id"
                 component={AddProductToAutomat}
               />
 

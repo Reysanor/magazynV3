@@ -12,10 +12,7 @@ class ProductBoard extends Component {
     return (
       <div>
         <div className="container">
-        <PurchasedProductButton />
-
                 <ProductsList />
-
         </div>
       </div>
     );

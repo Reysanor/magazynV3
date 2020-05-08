@@ -6,6 +6,8 @@ import io.agileintelligence.ppmtool.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 
 import static java.lang.Long.parseLong;
@@ -32,6 +34,10 @@ public class AutomatService {
 
     @Autowired
     ProductService productService;
+
+    @Autowired
+    AutomatToTenantHistoryRepository automatToTenantHistoryRepository;
+
 
 
     public Automat saveOrUpdateAutomat(Automat automat) {
@@ -68,6 +74,7 @@ public class AutomatService {
     public void deleteAutomatBySerialNumber(String serialNumber) {
         Automat automat = automatRepository.findBySerialNumber(serialNumber);
         automat.setDeleted(1);
+
         automatRepository.save(automat);
     }
 
@@ -78,7 +85,9 @@ public class AutomatService {
         productToAutomat.setAutomat(automat);
         productToAutomat.setProduct(product);
         automat.addProductToAutomats(productToAutomat);
+
         automatRepository.save(automat);
+
         return productToAutomat;
     }
 
@@ -101,6 +110,11 @@ public class AutomatService {
     public void deletePta(String automatId, Long productId){
         productToAutomatRepository.delete(findPta(automatId,productId));
     }
+    public void deleteAllPta(String automatId) {
+        Automat automat = findBySerialNumber(automatId);
+        productToAutomatRepository.deleteByAutomat(automat);
+    }
+
 
     public ProductToAutomat UpdatePtA(String automat_id, Long product_id, ProductToAutomat updatedProductToAutomat) {
         ProductToAutomat productToAutomat = findPta(automat_id,product_id);
@@ -117,7 +131,7 @@ public class AutomatService {
 
     public Iterable<Automat> findAllAutomatsToTenantFree() {
 
-        return automatRepository.findAllByTenant(null);
+        return automatRepository.findAllByTenantAndDeleted(null, 0);
 
     }
 
@@ -141,9 +155,13 @@ public class AutomatService {
         if (tenant == null) {
             throw new TenantNotFoundException(" Tenant with ID: " + tenant_id + "  does not exist ");
         }
-
-
+        AutomatToTenantHistory automatToTenantHistory = new AutomatToTenantHistory();
+        automatToTenantHistory.setAutomat(automatGet);
+        automatToTenantHistory.setTenant(tenant);
+        Date date = new Date();
+        automatToTenantHistory.setInsertDate(date);
         automatGet.setTenant(tenant);
+        automatToTenantHistoryRepository.save(automatToTenantHistory);
         return automatRepository.save(automatGet);
     }
 
@@ -153,4 +171,6 @@ public class AutomatService {
         saveOrUpdateAutomat(automat);
         return automatRepository.save(automat);
     }
+
+
 }

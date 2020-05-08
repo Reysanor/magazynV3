@@ -39,10 +39,8 @@ public class Automat {
     private Tenant tenant;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "automat", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "automat", cascade = CascadeType.ALL)
     private List<ProductToAutomat> productToAutomats = new ArrayList<>();
-
-
 
     @OneToMany(mappedBy = "automat", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<FundsDrawn> fundsDrawns;
@@ -51,14 +49,17 @@ public class Automat {
     @OneToMany(mappedBy = "automat", cascade = CascadeType.ALL)
     private List<InsertedProduct> insertedProducts = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "automat")
+    private List<AutomatToTenantHistory> automatToTenantHistories;
+
+
     public List<ProductToAutomat> getProductToAutomats() {
         return productToAutomats;
     }
 
     public void addProductToAutomats(ProductToAutomat productToAutomat) {
-       // ProductToAutomat productToAutomat= new ProductToAutomat(this,product);
-       //1 productToAutomats.add(productToAutomat);
-        //product.getProductToAutomats().add(productToAutomat);
+
         productToAutomats.add(productToAutomat);
     }
 
@@ -151,6 +152,18 @@ public class Automat {
     public void addInsertedProduct(InsertedProduct insertedProduct) {
 
         insertedProducts.add(insertedProduct);
+    }
+
+    public void setProductToAutomats(List<ProductToAutomat> productToAutomats) {
+        this.productToAutomats = productToAutomats;
+    }
+
+    public List<AutomatToTenantHistory> getAutomatToTenantHistories() {
+        return automatToTenantHistories;
+    }
+
+    public void setAutomatToTenantHistories(List<AutomatToTenantHistory> automatToTenantHistories) {
+        this.automatToTenantHistories = automatToTenantHistories;
     }
 
     @Override

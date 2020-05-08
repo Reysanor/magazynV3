@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -41,6 +42,8 @@ public class FundsDrawnService {
         try {
             fundsDrawn.setId(fundsDrawnIdGet);
             fundsDrawn.setAutomat(automatRepository.findBySerialNumber(automat_id));
+            Date date = new Date();
+            fundsDrawn.setDateOfDrawn(date);
             return fundsDrawnRepository.save(fundsDrawn);
         } catch (Exception e) {
             throw new FundsDrawnIdException("Funds drawn with Id: " + fundsDrawnIdGet + " already exists");

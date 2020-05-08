@@ -20,7 +20,6 @@ public class PurchasedProduct {
     @NotNull(message = "Price is required")
     private Double price;
 
-    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date dateOfPurchase;
 
     @ManyToOne

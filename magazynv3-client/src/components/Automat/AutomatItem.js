@@ -33,12 +33,12 @@ class AutomatItem extends Component {
                            {/*Link z parametrem (id tego automat)*/}
                 <Link to={`/updateAutomat/${automat.serialNumber}`}>
                   <li className="list-group-item update">
-                    <i className="fa fa-edit pr-1"> Update Automat Info</i>
+                    <i className="fa fa-edit pr-1"> Zaktualizuj dane</i>
                   </li>
                 </Link>
              
-                <li
-                  className="list-group-item delete"
+                <button
+                  className="list-group-item list-group-item-action"
                   onClick={this.onDeleteClick.bind(
                     this,
                     //uzyskuje z props od rodzica (Wybranego automata na liscie Projektów)
@@ -46,8 +46,9 @@ class AutomatItem extends Component {
                   )}
                 >
                   {/* funkcja kasowania z routera */}
-                  <i className="fa fa-minus-circle pr-1"> Delete Automat</i>
-                </li>
+                  <i className="fa fa-minus-circle pr-1"> Usuń</i>
+                </button>
+                
               </ul>
             </div>
           </div>

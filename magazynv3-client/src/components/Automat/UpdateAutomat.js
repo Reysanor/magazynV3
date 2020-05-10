@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 //1 - pobieram funkcje i obiekty
 import { getAutomat, createAutomat } from "../../actions/automatActions";
 import classnames from "classnames";
+import { Link } from "react-router-dom";
 
 class UpdateAutomat extends Component {
   //construktor z domyślnymi wartościami
@@ -100,8 +101,12 @@ class UpdateAutomat extends Component {
         <div className="automat">
           <div className="container">
             <div className="row">
+          
               <div className="col-md-8 m-auto">
-                <h5 className="display-4 text-center">Create Automat form</h5>
+                <h5 className="display-4 text-center">Zaktualizuj dane automatu</h5>
+                <Link to="/automats" className="btn btn-lg btn-info">
+                Anuluj
+              </Link>
                 <hr />
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
@@ -152,7 +157,7 @@ class UpdateAutomat extends Component {
                       onChange={this.onChange}
                       disabled
                     >
-                      <option value={0}>Choose a type</option>
+                      <option value={0}>Wybierz Typ</option>
                       <option value={1}>cold</option>
                       <option value={2}>hot</option>
                       <option value={3}>snack</option>
@@ -167,7 +172,7 @@ class UpdateAutomat extends Component {
                       value={this.state.status}
                       onChange={this.onChange}
                     >
-                    <option value="">Choose a status</option>
+                    <option value="">Wybierz Stan</option>
                     <option value="w magazynie">w magazynie</option>
                     <option value="w naprawie">w naprawie</option>
                     <option value="pracuje">pracuje</option>

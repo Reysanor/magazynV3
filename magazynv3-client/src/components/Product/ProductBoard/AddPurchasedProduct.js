@@ -7,7 +7,6 @@ import { createPurchasedProduct } from "../../../actions/purchasedProductActions
 import classnames from "classnames";
 
 class AddPurchasedProduct extends Component {
-    //construktor z domyślnymi wartościami
     constructor(props) {
         super(props);
         const { id } = this.props.match.params;
@@ -18,40 +17,23 @@ class AddPurchasedProduct extends Component {
             product: id,
             errors: {}
         };
-        //bind pobiera i manipuluje stanem
         this.onChange = this.onChange.bind(this);
-        //funkcja bind  przesyła stan
         this.onSubmit = this.onSubmit.bind(this);
     }
-
-    //life cycle hooks - po każdym renderowaniu
     componentWillReceiveProps(nextProps) {
-        //jeżeli mamy zmiany w state (jakieś errory nie null)
         if (nextProps.errors) {
             this.setState({ errors: nextProps.errors });
         }
     }
-
-    //wymaga bind w formularzu aby wprowadzać dane
-    //dluższe rozwiązanie dla każdej zmiennej -> this.setState({projectName: e.target.value});
-    //e.target - setState ustawia value wybranego elementu po evencie na danym name 
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
     }
-
     onSubmit(e) {
-        // blokuje przeladowanie po submit
         e.preventDefault();
-        //tworze nowy Projekt
         const newPurchasedProduct = {
             amount: this.state.amount,
             price: this.state.price,
-
-            //komponent po wyrenderowaniu za pomoca rendera przekazuje props do komponentu
-
         };
-
-        //console.log(newProduct);
         this.props.createPurchasedProduct(this.state.product,newPurchasedProduct, this.props.history);
 
     }

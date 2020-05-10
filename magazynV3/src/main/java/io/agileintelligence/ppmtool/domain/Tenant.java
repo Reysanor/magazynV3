@@ -28,7 +28,8 @@ public class Tenant {
    // @NotBlank(message = "Phone number is required")
     private String phoneNumber;
     private String emailAddress;
-
+    @NotNull(message = "deleted  is required")
+    private Integer deleted = 0;
     //one to many with automat
     @OneToMany(mappedBy = "tenant")
     private List<Automat> automaty;
@@ -101,6 +102,14 @@ public class Tenant {
 
     public void setTenantLeader(String tenantLeader) {
         this.tenantLeader = tenantLeader;
+    }
+
+    public Integer getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Integer deleted) {
+        this.deleted = deleted;
     }
 
     public String getName() {

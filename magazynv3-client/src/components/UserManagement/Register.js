@@ -25,7 +25,7 @@ class Register extends Component {
  //block registration when log in
  componentDidMount(){
   if(this.props.security.validToken){
-    this.props.history.push("/dashboard")
+   // this.props.history.push("/dashboard")
   }
 }
 
@@ -41,6 +41,7 @@ class Register extends Component {
     // blokuje przeladowanie po submit
     e.preventDefault();
     //tworze nowy Projekt
+    console.log(this.state.fullName)
     const newUser = {
       username: this.state.username,
       fullName: this.state.fullName,

@@ -3,9 +3,8 @@ package io.agileintelligence.ppmtool.services;
 
 import io.agileintelligence.ppmtool.domain.Product;
 import io.agileintelligence.ppmtool.domain.ProductToAutomat;
-import io.agileintelligence.ppmtool.domain.User;
 import io.agileintelligence.ppmtool.exceptions.ProductIdException;
-import io.agileintelligence.ppmtool.exceptions.ProjectNotFoundException;
+import io.agileintelligence.ppmtool.exceptions.ProductNotFoundException;
 import io.agileintelligence.ppmtool.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class ProductService {
@@ -32,7 +30,7 @@ public class ProductService {
         if (product.getId() != null) {
             Optional<Product> optionalExistingProduct = productRepository.findById(productGetId);
             if (!optionalExistingProduct.isPresent()) {
-                throw new ProjectNotFoundException("Product with Name: " + product.getName() + " doesn't exists");
+                throw new ProductNotFoundException("Product with Name: " + product.getName() + " doesn't exists");
             }
         }
         try {
@@ -49,7 +47,7 @@ public class ProductService {
             return product.get();
 
         } else {
-            throw new ProjectNotFoundException("Product with id: " + id + " doesn't exists");
+            throw new ProductNotFoundException("Product with id: " + id + " doesn't exists");
         }
     }
 

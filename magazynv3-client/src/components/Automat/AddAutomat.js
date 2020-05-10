@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 //1 - pobieram funkcje i obiekty
 import { createAutomat } from "../../actions/automatActions"
 import classnames from "classnames";
+import { Link } from "react-router-dom";
 
 class AddAutomat extends Component {
     //construktor z domyślnymi wartościami
@@ -78,7 +79,10 @@ render() {
           <div className="container">
             <div className="row">
               <div className="col-md-8 m-auto">
-                <h5 className="display-4 text-center">Create Automat form</h5>
+                <h5 className="display-4 text-center">Stwórz nowy automat</h5>
+                <Link to="/automats" className="btn btn-lg btn-info">
+                Anuluj
+              </Link>
                 <hr />
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
@@ -92,7 +96,7 @@ render() {
                       className={classnames("form-control form-control-lg", {
                         "is-invalid": errors.name
                       })}
-                      placeholder="Automat Name"
+                      placeholder="Nazwa"
                       name="name"
                       value={this.state.name}
                       onChange={this.onChange}
@@ -110,7 +114,7 @@ render() {
                       className={classnames("form-control form-control-lg", {
                         "is-invalid": errors.serialNumber
                       })}
-                      placeholder="Unique Automat Serial number"
+                      placeholder="Unikalny numer seryjny"
                       name="serialNumber"
                       value={this.state.serialNumber}
                       onChange={this.onChange}
@@ -129,10 +133,10 @@ render() {
                     value={this.state.type}
                     onChange={this.onChange}
                   >
-                    <option value="">Choose a type</option>
-                    <option value="cold">cold</option>
-                    <option value="hot">hot</option>
-                    <option value="snack">snack</option>
+                    <option value="">Wybierz Typ</option>
+                    <option value="Zimny">cold</option>
+                    <option value="Gorący">hot</option>
+                    <option value="Snack">snack</option>
                   </select>
                 </div>
 
@@ -144,10 +148,10 @@ render() {
                       value={this.state.status}
                       onChange={this.onChange}
                     >
-                      <option value="">Choose a status</option>
-                      <option value="w magazynie">w magazynie</option>
-                      <option value="w naprawie">w naprawie</option>
-                      <option value="pracuje">pracuje</option>
+                      <option value="">Wybierz Stan</option>
+                      <option value="W magazynie">w magazynie</option>
+                      <option value="W naprawie">w naprawie</option>
+                      <option value="Pracuje">pracuje</option>
                     </select>
                   </div>
 

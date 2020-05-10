@@ -47,10 +47,12 @@ public class TenantService {
     }
 
     public Iterable<Tenant> findAllTenants() {
-        return tenantRepository.findAll();
+        return tenantRepository.findAllByDeleted(0);
     }
 
     public void deleteTenantById(Long id) {
-        tenantRepository.delete(findById(id));
+        Tenant tenant = findById(id);
+        tenant.setDeleted(1);
+        tenantRepository.save(tenant);
     }
 }

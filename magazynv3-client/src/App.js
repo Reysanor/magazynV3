@@ -5,13 +5,8 @@ import Header from "./components/Layout/Header";
 //import bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import AddProject from "./components/Project/AddProject";
 import { Provider } from "react-redux";
 import store from "./store";
-import UpdateProject from "./components/Project/UpdateProject";
-import ProjectBoard from "./components/ProjectBoard/ProjectBoard";
-import AddProjectTask from "./components/ProjectBoard/ProjectTasks/AddProjectTask";
-import UpdateProjectTask from "./components/ProjectBoard/ProjectTasks/UpdateProjectTask";
 import AddTenant from "./components/Tenant/AddTenant";
 import AddProduct from "./components/Product/AddProduct";
 import AddAutomat from "./components/Automat/AddAutomat";
@@ -83,41 +78,16 @@ class App extends Component {
             }
 
             <Route exact path="/" component={Landing} />
-            <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
 
-            {
-              //Project
-            }
             <Switch>
-            
+              <Route exact path="/register" component={Register} />
               <SecuredRoute exact path="/dashboard" component={Dashboard} />
               <SecuredRoute exact path="/automats" component={AutomatsList} />
               <SecuredRoute exact path="/products" component={ProductBoard} />
               <SecuredRoute exact path="/tenants" component={TenantsList} />
 
-              <SecuredRoute exact path="/addProject" component={AddProject} />
-              <SecuredRoute
-                exact
-                path="/updateProject/:id"
-                component={UpdateProject}
-              />
-              <SecuredRoute
-                exact
-                path="/projectBoard/:id"
-                component={ProjectBoard}
-              />
-              <SecuredRoute
-                exact
-                path="/addProjectTask/:id"
-                component={AddProjectTask}
-              />
-
-              <SecuredRoute
-                exact
-                path="/updateProjectTask/:backlog_id/:pt_id"
-                component={UpdateProjectTask}
-              />
+             
               {
                 //Automat
               }

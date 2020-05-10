@@ -74,7 +74,7 @@ export const getAutomat = (id, history) => async (dispatch) => {
 export const deleteAutomat = (id) => async (dispatch) => {
   if (
     window.confirm(
-      "Are you sure? This will delete the automat and all the data related to it"
+      "Jesteś Pewny? To usunie wybrany automat i powiązane z nim dane"
     )
   ) {
     await axios.delete(`/api/automat/${id}`);

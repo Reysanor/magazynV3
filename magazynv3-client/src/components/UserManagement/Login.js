@@ -52,8 +52,8 @@ class Login extends Component {
       <div className="login">
         <div className="container">
           <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Log In</h1>
+            <div className="col-md-6 m-auto">
+              <h1 className="display-4 text-center">Logowanie</h1>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
@@ -61,7 +61,7 @@ class Login extends Component {
                     className={classnames("form-control form-control-lg", {
                       "is-invalid": errors.username
                     })}
-                    placeholder="Email Address"
+                    placeholder="email"
                     name="username"
                     value={this.state.username}
                     onChange={this.onChange}
@@ -76,7 +76,7 @@ class Login extends Component {
                     className={classnames("form-control form-control-lg", {
                       "is-invalid": errors.password
                     })}
-                    placeholder="Password"
+                    placeholder="hasło"
                     name="password"
                     value={this.state.password}
                     onChange={this.onChange}
@@ -85,7 +85,7 @@ class Login extends Component {
                     <div className="invalid-feedback">{errors.password}</div>
                   )}
                 </div>
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+                <input type="submit" className="btn btn-info btn-block mt-4"  value= "Zaloguj"/>
               </form>
             </div>
           </div>

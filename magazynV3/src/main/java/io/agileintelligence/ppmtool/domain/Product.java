@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,8 +22,8 @@ public class Product {
    // @NotBlank(message = "Type is required")
     private String type;
 
-    private String productLeader;
-
+    @NotNull(message = "deleted  is required")
+    private Integer deleted = 0;
 
     //many to many with Automat
 
@@ -91,12 +92,12 @@ public class Product {
         this.type = type;
     }
 
-    public String getProductLeader() {
-        return productLeader;
+    public Integer getDeleted() {
+        return deleted;
     }
 
-    public void setProductLeader(String productLeader) {
-        this.productLeader = productLeader;
+    public void setDeleted(Integer deleted) {
+        this.deleted = deleted;
     }
 
     public List<PurchasedProduct> getPurchasedProducts() {

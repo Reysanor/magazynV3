@@ -3,25 +3,13 @@ img {
 }
 
 .navbar {
-  background-color: #e3f2fd;
+  background-color: #6e6d6d;
 }
 .fa.fa-edit {
-  color: #18a2b9;
+  color: #6e6d6d;
 }
-
-.list-group-item.delete:hover {
-  cursor: -webkit-grab;
-  background-color: pink;
-}
-
-.list-group-item.update:hover {
-  cursor: -webkit-grab;
-  background-color: gainsboro;
-}
-
-.list-group-item.board:hover {
-  cursor: -webkit-grab;
-  background-color: gainsboro;
+.card text-center mb-2{
+  width:400px
 }
 
 .fa.fa-minus-circle {
@@ -64,12 +52,6 @@ img {
   color: #bbb !important;
 }
 
-
-
-
-
-
-
 #purchasedProductsTitle {
   text-align: center;
 }
@@ -90,7 +72,7 @@ img {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: blue;
+  background-color: 6e6d6d;
   color: white;
 }
 

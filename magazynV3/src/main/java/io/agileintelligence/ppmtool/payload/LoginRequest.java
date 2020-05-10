@@ -5,9 +5,9 @@ import javax.validation.constraints.NotBlank;
 //Objekt zawierający username i password
 public class LoginRequest {
 
-    @NotBlank(message = "Username cannot be empty")
+    @NotBlank(message = "Email nie może być pusty")
     private String username;
-    @NotBlank(message = "Password cannot be empty")
+    @NotBlank(message = "Hasło nie może być puste")
     private String password;
 
     public String getUsername() {

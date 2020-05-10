@@ -22,9 +22,11 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         String jsonLoginResponse = new Gson().toJson(loginResponse); // objekt javy na json
 
         //Przygotowanie odpowiedzi
-        httpServletResponse.setContentType("application/json");
+        //httpServletResponse.setContentType("application/json");
         httpServletResponse.setStatus(401);
+        httpServletResponse.setContentType("text/xml; charset=UTF-8");
         //zwraca instancję zawierającą tekst odpowiedzi
         httpServletResponse.getWriter().print(jsonLoginResponse);
+
     }
 }

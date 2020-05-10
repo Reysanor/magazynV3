@@ -15,9 +15,9 @@ public class Automat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "Name is required")
+    @NotBlank(message = "Nazwa jest wymagana")
     private String name;
-    @NotBlank(message = "Serial number is required")
+    @NotBlank(message = "Numer seryjny jest wymagany")
   //  @Size(min = 10, max = 10, message = "Please use 10 characters")
     @Column(updatable = false, unique = true)
     private String serialNumber;

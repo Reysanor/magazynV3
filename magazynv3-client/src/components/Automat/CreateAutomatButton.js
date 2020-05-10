@@ -5,7 +5,7 @@ const CreateAutomatButton = () => {
     return (
       <React.Fragment>
         <Link to="/addAutomat" className="btn btn-lg btn-info">
-          Create a Automat
+          Dodaj Automat
         </Link>
       </React.Fragment>
     );

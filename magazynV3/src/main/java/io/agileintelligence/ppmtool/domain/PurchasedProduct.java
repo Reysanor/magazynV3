@@ -19,6 +19,7 @@ public class PurchasedProduct {
     private Integer amount;
     @NotNull(message = "Price is required")
     private Double price;
+    @NotNull(message = "Price is required")
 
     private Date dateOfPurchase;
 

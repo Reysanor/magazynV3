@@ -1,7 +1,5 @@
 import { combineReducers } from "redux";
 import errorReducer from "./errorReducer";
-import projectReducer from "./projectReducer";
-import backlogReducer from "./backlogReducer";
 import securityReducer from "./securityReducer";
 import tenantReducer from "./tenantReducer";
 import automatReducer from "./automatReducer";
@@ -28,8 +26,6 @@ import purchasedProductReducer from "./purchasedProductReducer";
 export default combineReducers({
   
   errors: errorReducer,
-  project: projectReducer,
-  backlog: backlogReducer,
   security: securityReducer,
   tenant: tenantReducer,
   product: productReducer,

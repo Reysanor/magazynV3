@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface TenantRepository extends CrudRepository<Tenant, Long> {
     Tenant findByNip(String nip);
 
+    Iterable<Tenant> findAllByDeleted(Integer integer);
 
 }

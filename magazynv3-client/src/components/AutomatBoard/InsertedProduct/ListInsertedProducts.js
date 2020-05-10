@@ -12,7 +12,7 @@ class ListInsertedProducts extends Component {
   namesOfTable() {
      return(
             <tr>
-            <th>ID</th>
+            <th>DATE</th>
             <th>NAME</th>
             <th>COUNT</th>
             </tr>
@@ -24,12 +24,12 @@ class ListInsertedProducts extends Component {
   dataOfTable() {
     const { inserted_products } = this.props.inserted_product;
     return inserted_products.map((inserted_product, index) => {
-      const { id, number, product } = inserted_product; //destructuring
+      const { id, number, product, dateOfInsert } = inserted_product; //destructuring
 
       if(id!=null){
        return (
           <tr key={id}>
-          <td>{id}</td>
+          <td>{dateOfInsert}</td>
             <td>{product.name}</td>
             <td>{number}</td>
           </tr>

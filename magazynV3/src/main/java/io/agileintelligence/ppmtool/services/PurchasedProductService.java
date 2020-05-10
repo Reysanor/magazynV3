@@ -2,7 +2,7 @@ package io.agileintelligence.ppmtool.services;
 
 import io.agileintelligence.ppmtool.domain.Product;
 import io.agileintelligence.ppmtool.domain.PurchasedProduct;
-import io.agileintelligence.ppmtool.exceptions.ProjectNotFoundException;
+import io.agileintelligence.ppmtool.exceptions.ProductNotFoundException;
 import io.agileintelligence.ppmtool.exceptions.PurchasedProductNotFoundException;
 import io.agileintelligence.ppmtool.repositories.ProductRepository;
 import io.agileintelligence.ppmtool.repositories.PurchasedProductRepository;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,7 +41,7 @@ public class PurchasedProductService {
 
         Optional<Product> product = productRepository.findById(productId);
         if (!product.isPresent()) {
-            throw new ProjectNotFoundException("Product with id: " + productId + " doesn't exists");
+            throw new ProductNotFoundException("Product with id: " + productId + " doesn't exists");
         }
         try {
             purchasedProduct.setId(purchasedProductIdGet);

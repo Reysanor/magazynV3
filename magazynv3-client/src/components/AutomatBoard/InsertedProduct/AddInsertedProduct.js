@@ -94,7 +94,6 @@ class AddInsertedProduct extends Component {
               <h4 className="display-4 text-center">
                 {this.props.location.state.product_name}
               </h4>
-              <h5 className="display-4 text-center">Insert</h5>
               <form onSubmit={this.onSubmit}>
               <div className="form-group form-inline">
               <label className="form-label" style={{marginRight: '77px'}}>Ilość: </label>
@@ -103,7 +102,7 @@ class AddInsertedProduct extends Component {
                     className={classnames("form-control form-control-lg", {
                       "is-invalid": errors.number,
                     })}
-                    placeholder="Number of inserted products"
+                    placeholder="Liczba wstawianch"
                     name="number"
                     type="number"
                     min="1"

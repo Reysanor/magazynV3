@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getInsertedProductsByAutomat } from "../../../actions/insertedProductActions";
+import { Link } from "react-router-dom";
+
 class ListInsertedProducts extends Component {
   //lifecycle hook - co ma się dziać po zamontowaniu komponentu (dane z "mapStateToProps" na dole)
   componentDidMount() {
@@ -10,15 +12,14 @@ class ListInsertedProducts extends Component {
   }
 
   namesOfTable() {
-     return(
-            <tr>
-            <th>DATE</th>
-            <th>NAME</th>
-            <th>COUNT</th>
-            </tr>
-     )
-     //   return <th key={index}>{key.toUpperCase()}</th>;
-   
+    return (
+      <tr>
+        <th>DATE</th>
+        <th>NAME</th>
+        <th>COUNT</th>
+      </tr>
+    );
+    //   return <th key={index}>{key.toUpperCase()}</th>;
   }
 
   dataOfTable() {
@@ -26,23 +27,28 @@ class ListInsertedProducts extends Component {
     return inserted_products.map((inserted_product, index) => {
       const { id, number, product, dateOfInsert } = inserted_product; //destructuring
 
-      if(id!=null){
-       return (
+      if (id != null) {
+        return (
           <tr key={id}>
-          <td>{dateOfInsert}</td>
+            <td>{dateOfInsert}</td>
             <td>{product.name}</td>
             <td>{number}</td>
           </tr>
         );
       }
-    
     });
   }
   render() {
+    const { tenant_id } = this.props.match.params;
+
     return (
       <div>
+        <Link to={`/tenantBoard/${tenant_id}`} className="btn btn-info">
+          Wróc no automatu
+        </Link>
         <div className="card card-body bg-light mb-5">
           <h1 id="purchasedProductsTitle">History of automat</h1>
+
           <table id="purchasedProducts">
             <thead>{this.namesOfTable()}</thead>
             <tbody>{this.dataOfTable()}</tbody>

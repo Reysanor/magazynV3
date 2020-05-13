@@ -33,7 +33,7 @@ class TenantItem extends Component {
                 {/*Link z parametrem (id tego tenanta)*/}
                 <Link to={`/updateTenant/${tenant.id}`}>
                   <li className="list-group-item">
-                    <i className="fa fa-edit pr-1"> Update Tenant Info</i>
+                    <i className="fa fa-edit pr-1"> Zaktualizuj Miejsce</i>
                   </li>
                 </Link>
 
@@ -46,7 +46,7 @@ class TenantItem extends Component {
                   )}
                 >
                   {/* funkcja kasowania z routera */}
-                  <i className="fa fa-minus-circle pr-1"> Delete Tenant</i>
+                  <i className="fa fa-minus-circle pr-1"> Usuń Miejsce</i>
                 </button>
             </div>
           </div>

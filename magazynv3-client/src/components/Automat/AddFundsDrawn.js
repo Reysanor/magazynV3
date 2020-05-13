@@ -9,6 +9,7 @@ import {
 } from "../../actions/fundsDrawnActions";
 import classnames from "classnames";
 import ListFundsDrawn from "./ListFundsDrawn";
+import { Link } from "react-router-dom";
 
 class AddFundsDrawn extends Component {
   //construktor z domyślnymi wartościami
@@ -67,7 +68,7 @@ class AddFundsDrawn extends Component {
 
   render() {
     const { funds_drawns } = this.props.funds_drawn;
-
+    const {tenant_id} = this.props.match.params;
     //pobieram errory
     //https://developer.mozilla.org/pl/docs/Web/JavaScript/Referencje/Operatory/Destructuring_assignment
     const { errors } = this.state;
@@ -86,6 +87,9 @@ class AddFundsDrawn extends Component {
             <div className="row">
               <div className="col-md-8 m-auto">
                 <h5 className="display-4 text-center">Create Product form</h5>
+                <Link to={`/tenantBoard/${tenant_id}`} className="btn btn-info">
+                Wróc no automatu
+              </Link>
                 <hr />
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">

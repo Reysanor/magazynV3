@@ -11,9 +11,9 @@ class PurchasedProductBoard extends Component {
   namesOfTable() {
     return(
       <tr>
-      <th>NAME</th>
-      <th>COUNT</th>
-      <th>PRICE</th>
+      <th >Nazwa</th>
+      <th>Ilość</th>
+      <th>Cena</th>
 
       </tr>
 )
@@ -31,9 +31,9 @@ class PurchasedProductBoard extends Component {
               <td>{product.name}</td>
               <td id="purchasedProductsPlus">{amount}</td>
               <td>{price}</td>
-              <td>
+              <td className="btn-info">
                 {" "}
-                <Link to={`/updatePurchasedProduct/${id}`}>Edit </Link>
+                <Link to={`/updatePurchasedProduct/${id}` } className="btn-info">Edytuj</Link>
               </td>
             </tr>
           );
@@ -42,10 +42,10 @@ class PurchasedProductBoard extends Component {
             <tr key={id}>
               <td>{product.name}</td>
               <td id="purchasedProductsMinus">{amount}</td>
-              <td></td>
-              <td>
+              <td>Nie dotyczy</td>
+              <td >
                 {" "}
-                <Link to={`/updatePurchasedProduct/${id}`}>Edit </Link>
+                <Link to={`/updatePurchasedProduct/${id}`}>Edytuj </Link>
               </td>
             </tr>
           );
@@ -56,9 +56,12 @@ class PurchasedProductBoard extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
+      <Link to="/products" className="btn btn-lg btn-info">
+      Powrót
+    </Link>
         <div className="card card-body bg-light mb-5">
-          <h1 id="purchasedProductsTitle">History of storage</h1>
+          <h1 id="purchasedProductsTitle">Historia magazynu</h1>
           <table id="purchasedProducts">
           <thead>{this.namesOfTable()}</thead>
             <tbody>{this.dataOfTable()}</tbody>

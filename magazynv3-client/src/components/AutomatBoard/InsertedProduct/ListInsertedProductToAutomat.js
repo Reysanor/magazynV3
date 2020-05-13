@@ -5,41 +5,42 @@ import { getInsertedOneProductByAutomat } from "../../../actions/insertedProduct
 class ListInsertedProductToAutomat extends Component {
   //lifecycle hook - co ma się dziać po zamontowaniu komponentu (dane z "mapStateToProps" na dole)
   componentDidMount() {
-    this.props.getInsertedOneProductByAutomat(this.props.automat_serialNumber_prop,this.props.product_id_prop);  }
+    this.props.getInsertedOneProductByAutomat(
+      this.props.automat_serialNumber_prop,
+      this.props.product_id_prop
+    );
+  }
 
   namesOfTable() {
-     return(
-            <tr>
-            <th>Date</th>
-            <th>COUNT</th>
-            </tr>
-     )
-     //   return <th key={index}>{key.toUpperCase()}</th>;
-   
+    return (
+      <tr>
+        <th>Data i czas</th>
+        <th>Liczba</th>
+      </tr>
+    );
+    //   return <th key={index}>{key.toUpperCase()}</th>;
   }
 
   dataOfTable() {
     const { inserted_products } = this.props.inserted_product;
     return inserted_products.map((inserted_product, index) => {
-      const { id, number, product } = inserted_product; //destructuring
-      if(id!=null){
-
-      return (
-        
-        <tr key={id}>
-          <td>{product.date_of_insert}</td>
-          <td>{number}</td>
-        </tr>
-      );
+      const { id, number, product, dateOfInsert } = inserted_product; //destructuring
+      if (id != null) {
+        const {finalDate} = inserted_product.dateOfInsert
+        return (
+          <tr key={id}>
+            <td>{dateOfInsert}</td>
+            <td>{number}</td>
+          </tr>
+        );
       }
     });
   }
   render() {
-
     return (
       <div>
         <div className="card card-body bg-light mb-5">
-          <h1 id="purchasedProductsTitle">History</h1>
+          <h1 id="purchasedProductsTitle">Historia</h1>
           <table id="purchasedProducts">
             <thead>{this.namesOfTable()}</thead>
             <tbody>{this.dataOfTable()}</tbody>

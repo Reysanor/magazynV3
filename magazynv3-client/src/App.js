@@ -120,7 +120,7 @@ class App extends Component {
 
               <SecuredRoute
               exact
-              path="/insertedProductsToAutomat/:automat_serialNumber"
+              path="/insertedProductsToAutomat/:automat_serialNumber/:tenant_id"
               component={ListInsertedProducts}
             />
             {

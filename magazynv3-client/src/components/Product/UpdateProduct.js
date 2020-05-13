@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 //1 - pobieram funkcje i obiekty
 import {getProduct, createProduct } from "../../actions/productActions"
 import classnames from "classnames";
+import ProductBoardButton from "./ProductBoard/ProductBoardButton"
 
 class UpdateProduct extends Component {
     //construktor z domyślnymi wartościami
@@ -101,7 +102,9 @@ render() {
           <div className="container">
             <div className="row">
               <div className="col-md-8 m-auto">
-                <h5 className="display-4 text-center">Create Product form</h5>
+                <h5 className="display-4 text-center">Edytuj produkt</h5>
+                <ProductBoardButton/>
+
                 <hr />
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
@@ -128,7 +131,7 @@ render() {
                       </div>
                     )}
                   </div>
-
+{/*
                   <div className="form-group">
                   <select
                     className="form-control form-control-lg"
@@ -143,7 +146,7 @@ render() {
                     <option value="snack">snack</option>
                   </select>
                 </div>
-
+*/}
                 
                   <input
                     type="submit"

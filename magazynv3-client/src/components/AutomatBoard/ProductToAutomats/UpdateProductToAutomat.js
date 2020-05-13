@@ -74,13 +74,13 @@ class UpdateProductToAutomat extends Component {
   render() {
     const { errors } = this.state;
     const { id } = this.props.match.params;
-
+    const { automat_serialNumber, product_id } = this.props.match.params;
     return (
       <div className="add-PBI">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <Link to={`/automatBoard/${id}`} className="btn btn-light">
+              <Link to={`/automatBoard/${automat_serialNumber}`} className="btn btn-light">
                 Back to Automat Board
               </Link>
               <h4 className="display-4 text-center">

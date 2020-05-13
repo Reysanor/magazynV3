@@ -48,7 +48,7 @@ class ProductToAutomatsWithPrices extends Component {
             <div className="col-md-4">
               <div className="card text-center mb-2">
                 <div className="card-header bg-secondary text-white">
-                  <h3>Product</h3>
+                  <h3>Produkty</h3>
                 </div>
               </div>
               {pta2}

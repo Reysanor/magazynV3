@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 //1 - pobieram funkcje i obiekty
 import { removePurchasedProduct } from "../../../actions/purchasedProductActions";
 import classnames from "classnames";
+import ProductBoardButton from "./ProductBoardButton"
 
 class RemovePurchasedProduct extends Component {
   //construktor z domyślnymi wartościami
@@ -85,8 +86,10 @@ class RemovePurchasedProduct extends Component {
             <div className="row">
               <div className="col-md-8 m-auto">
                 <h5 className="display-4 text-center">
-                  Remove Products from storage
+                  Pobierz produkt z magazynu
                 </h5>
+                <ProductBoardButton/>
+
                 <hr />
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">

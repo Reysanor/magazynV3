@@ -50,7 +50,7 @@ class AutomatBoard extends Component {
         } else {
           return (
             <div className="alert alert-info text-center" role="alert">
-              No Products To Automat on this board
+              Brak produktów w automacie
             </div>
           );
         }
@@ -75,7 +75,7 @@ class AutomatBoard extends Component {
             to={`/addProductToAutomat/${id}`}
             className="btn btn-primary mb-3"
           >
-            <i className="fas fa-plus-circle"> Add product to automat</i>
+            <i className="fas fa-plus-circle"> Dodaj produkt do automatu</i>
           </Link>
         </div>
         <br />

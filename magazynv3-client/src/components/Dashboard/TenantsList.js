@@ -23,7 +23,7 @@ class TenantsList extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <h1 className="display-4 text-center">Places</h1>
+                <h1 className="display-4 text-center">Miejsca</h1>
                 <br />
                 {/*przycisk do utworzenia nowego Wynajmujacego */}
                 <CreateTenantButton />

@@ -55,15 +55,20 @@ class TenantBoard extends Component {
         {
           /* przekazanie do backlog*/
         }
-        return <AutomatsToTenantOwned automats_prop={automats} tenant_id_prop={id} />;
+        return (
+          <AutomatsToTenantOwned automats_prop={automats} tenant_id_prop={id} />
+        );
       }
     };
     BoardContent = boardAlgorithm(errors, automats);
 
     return (
       <div className="container">
-        <Link to={`/addAutomatToTenant/${id}`} className="btn btn-primary mb-3">
-          <i className="fas fa-plus-circle"> Add Automat to Tenant</i>
+        <Link to="/tenants" className="btn btn-lg btn-info">
+          Lista miejsc
+        </Link>{" "}
+        <Link to={`/addAutomatToTenant/${id}`} className="btn btn-lg btn-info">
+          Dodaj Automat do miejsca
         </Link>
         <br />
         <hr />

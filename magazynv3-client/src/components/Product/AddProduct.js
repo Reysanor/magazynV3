@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 //łączenie z state
 import { connect } from "react-redux";
+import ProductBoardButton from "./ProductBoard/ProductBoardButton"
 //1 - pobieram funkcje i obiekty
 import { createProduct } from "../../actions/productActions"
 import classnames from "classnames";
@@ -74,7 +75,8 @@ render() {
           <div className="container">
             <div className="row">
               <div className="col-md-8 m-auto">
-                <h5 className="display-4 text-center">Create Product form</h5>
+                <h5 className="display-4 text-center">Dodaj produkt</h5>
+                <ProductBoardButton/>
                 <hr />
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
@@ -88,7 +90,7 @@ render() {
                       className={classnames("form-control form-control-lg", {
                         "is-invalid": errors.name
                       })}
-                      placeholder="Product Name"
+                      placeholder="Nazwa produktu"
                       name="name"
                       value={this.state.name}
                       onChange={this.onChange}

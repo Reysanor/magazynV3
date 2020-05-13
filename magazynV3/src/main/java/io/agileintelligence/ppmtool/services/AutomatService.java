@@ -84,10 +84,9 @@ public class AutomatService {
         Product product = productService.findById(productId);
         productToAutomat.setAutomat(automat);
         productToAutomat.setProduct(product);
+
         automat.addProductToAutomats(productToAutomat);
-
         automatRepository.save(automat);
-
         return productToAutomat;
     }
 

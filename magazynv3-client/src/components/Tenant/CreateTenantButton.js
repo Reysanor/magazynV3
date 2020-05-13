@@ -5,7 +5,7 @@ const CreateTenantButton = () => {
     return (
       <React.Fragment>
         <Link to="/addTenant" className="btn btn-lg btn-info">
-          Create a Tenant
+          Stwórz miejsce
         </Link>
       </React.Fragment>
     );

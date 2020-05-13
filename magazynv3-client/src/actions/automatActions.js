@@ -113,7 +113,7 @@ export const deleteAutomatfromTenant = (automat_serialNumber) => async (
 ) => {
   if (
     window.confirm(
-      `You want to remove automat with serial number ${automat_serialNumber} from tenant, there is no come back`
+      `Chcesz usunąc automat z numerem seryjnym ${automat_serialNumber} z miejsca, nie można cofnąć tej operacji`
     )
   ) {
     await axios.patch(`/api/automat/att/${automat_serialNumber}`);

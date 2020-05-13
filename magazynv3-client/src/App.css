@@ -58,14 +58,18 @@ img {
 
 #purchasedProducts {
   text-align: center;
+  color: black;
 }
 
 #purchasedProducts td, #purchasedProducts th {
   border: 1px solid #ddd;
   padding: 2px;
+  color: black;
 }
 
-
+#th {
+  color: black;
+}
 #purchasedProducts tr:nth-child(even){background-color: #f2f2f2;}
 
 #purchasedProducts th {
@@ -73,7 +77,7 @@ img {
   padding-bottom: 12px;
   text-align: center;
   background-color: 6e6d6d;
-  color: white;
+  color: black;
 }
 
 #purchasedProductsPlus{

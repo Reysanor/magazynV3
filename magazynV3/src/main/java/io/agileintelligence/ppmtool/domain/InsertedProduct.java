@@ -20,7 +20,6 @@ public class InsertedProduct {
 
     @NotNull(message = "Number is required")
     private Integer number;
-    @NotNull(message = "current price is required")
 
     private Date dateOfInsert;
     @NotNull(message = "current price is required")

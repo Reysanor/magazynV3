@@ -72,10 +72,10 @@ class AddProductToAutomat extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <Link to={`/tenantBoard/${id}`} className="btn btn-light">
-                Back to Automat Board
+              <Link to={`/tenantBoard/${id}`} className="btn btn-lg btn-info">
+                Wróc no automatu
               </Link>
-              <h4 className="display-4 text-center">Add Automat to Tenant</h4>
+              <h4 className="display-4 text-center">Dodaj automat do miejsca</h4>
               <form onSubmit={this.onSubmit}>
             
 
@@ -86,7 +86,7 @@ class AddProductToAutomat extends Component {
                   value={this.state.automat}
                   onChange={this.onChange}
                 >
-                <option value="">Select option</option>
+                <option value="">Wybierz</option>
                 {automats.map((item,i) =>
                   <option key={i}  value={item.serialNumber}>
                    {item.name}

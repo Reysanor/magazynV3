@@ -17,7 +17,7 @@ class ProductToAutomat extends Component {
   checkAutomatIsNull() {
     const { product_to_automat } = this.props;
     if (product_to_automat.automat === null) {
-    //  console.log("no automat");
+      //  console.log("no automat");
       return <div></div>;
     }
     return (
@@ -25,18 +25,18 @@ class ProductToAutomat extends Component {
         <div className="card-body bg-light">
           <h5 className="card-title"> {product_to_automat.product.name}</h5>
           <p className="card-text text-truncate ">
-            Selling price: {product_to_automat.price}
+            Cena sprzedaży: {product_to_automat.price}
           </p>
 
           <p className="card-text text-truncate ">
-            Avarage profit: {product_to_automat.profit}
+            Sredni zysk: {product_to_automat.profit}
           </p>
           <p className="card-text text-truncate ">
-            Total profit:{" "}
+            Całkowity zysk:{" "}
             {product_to_automat.profit * product_to_automat.number}
           </p>
           <p className="card-text text-truncate ">
-            Number of inserted: {product_to_automat.number}
+            Liczba umieszczonych: {product_to_automat.number}
           </p>
           <Link
             to={`/updateProductToAutomat/${product_to_automat.automat.serialNumber}/${product_to_automat.product.id}`}

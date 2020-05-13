@@ -46,11 +46,11 @@ class AutomatItemInTenant extends Component {
               {/*Link z parametrem (id tego automat)*/}
               <Link to={`/addFundsDrawn/${automat.serialNumber}/${tenant_id}`}>
                 <li className="list-group-item">
-                  <i className="fa fa-flag-checkered"> Get Funds </i>
+                  <i className="fa fa-flag-checkered"> Pobierz środki </i>
                 </li>
               </Link>
 
-              <Link to={`/insertedProductsToAutomat/${automat.serialNumber}`}>
+              <Link to={`/insertedProductsToAutomat/${automat.serialNumber}/${tenant_id}`}>
                 <li className="list-group-item">
                   <i className="fas fa-plus-circle"> Podsumowanie</i>
                 </li>
@@ -66,7 +66,7 @@ class AutomatItemInTenant extends Component {
               >
                 {/* funkcja kasowania z routera */}
                 <i className="fa fa-minus-circle pr-1">
-                  Remove automat from tenant
+                  Usuń automat z miejsca
                 </i>
               </button>
             </div>

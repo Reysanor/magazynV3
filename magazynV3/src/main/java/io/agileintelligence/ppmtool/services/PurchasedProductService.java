@@ -102,6 +102,8 @@ public class PurchasedProductService {
        return findAllPurchasedProductsPer(productService.findById(product));
     }
 
+
+
     public PurchasedProduct findAllPurchasedProductsPer(Product product) {
         int amount = 0;
         Double price = 0.0;
@@ -131,7 +133,7 @@ public class PurchasedProductService {
 
     }
 
-    private static double round(double value) {
+    public double round(double value) {
         if (2 < 0) throw new IllegalArgumentException();
 
         BigDecimal bd = new BigDecimal(Double.toString(value));

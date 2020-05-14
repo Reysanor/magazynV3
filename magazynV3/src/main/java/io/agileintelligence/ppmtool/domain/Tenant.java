@@ -17,6 +17,7 @@ public class Tenant {
    // @Column(updatable = false, unique = true)
     private String nip;
     @NotBlank(message = "Name is required")
+    @Column( unique = true)
     private String name;
    // @NotBlank(message = "Street is required")
     private String street;

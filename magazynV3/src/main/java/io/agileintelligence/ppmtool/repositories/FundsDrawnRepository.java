@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface FundsDrawnRepository extends CrudRepository<FundsDrawn, Long> {
 
     Iterable<FundsDrawn> findAllByAutomat(Automat automat);
+
+    FundsDrawn findAllByAmountLessThan(Double d);
 }

@@ -1,8 +1,6 @@
 package io.agileintelligence.ppmtool;
 
-import io.agileintelligence.ppmtool.domain.Automat;
-import io.agileintelligence.ppmtool.domain.InsertedProduct;
-import io.agileintelligence.ppmtool.domain.Tenant;
+import io.agileintelligence.ppmtool.domain.*;
 import io.agileintelligence.ppmtool.exceptions.*;
 import io.agileintelligence.ppmtool.repositories.FundsDrawnRepository;
 import io.agileintelligence.ppmtool.repositories.InsertedProductRepository;
@@ -52,6 +50,9 @@ public class PpmtoolApplicationTests {
 
     @Autowired
     private FundsDrawnRepository fundsDrawnRepository;
+
+    @Autowired
+    private ProductToAutomatRepository productToAutomatRepository;
 
     // @Autowired
     //  private PurchasedProductService purchasedProductService;
@@ -106,6 +107,23 @@ public class PpmtoolApplicationTests {
         assertEquals(tenant.get(), automat.getTenant());
     }
 
+
+    @Transactional
+    @Test
+    public void checkAddAutomatToProduct() {
+        Product product = productService.findById(1L);
+        Automat automat = automatService.findBySerialNumber("321321321");
+ProductToAutomat pta = new ProductToAutomat();
+        pta.setPrice(3.33);
+        pta.setProduct(product);
+        pta.setAutomat(automat);
+
+        automatService.addPtA("321321321", 1L,pta);
+
+        assertEquals(productToAutomatRepository.findByAutomatAndProduct(automat,product), pta);
+    }
+
+
     @Test
     public void checkUsedAddAutomatToTenant() {
         assertThrows(AutomatIdException.class, () -> {
@@ -136,5 +154,21 @@ public class PpmtoolApplicationTests {
 
         });
     }
+
+    @Test
+    public void checkInsertedProduct(){
+        Product product = productService.findById(1L);
+        Automat automat = automatService.findBySerialNumber("3232323232");
+        assertEquals(3.5,insertedProductService.findAllInsertedByAutomatandProduct(automat.getSerialNumber(),product.getId()).getProfit());
+    }
+
+
+    @Test
+    public void checkLackOfInsertedProduct(){
+        Product product = productService.findById(2L);
+        Automat automat = automatService.findBySerialNumber("1234567890");
+        assertEquals(0.0,insertedProductService.findAllInsertedByAutomatandProduct(automat.getSerialNumber(),product.getId()).getProfit());
+    }
+
 
 }

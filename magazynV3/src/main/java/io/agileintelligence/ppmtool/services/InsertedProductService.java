@@ -61,13 +61,13 @@ public class InsertedProductService {
         return insertedProductRepository.findAll();
     }
 
-
+    //return list of insterted of all product to one automat
     public Iterable<InsertedProduct> findAllInsertedProductsByAutomat(String automat_id) {
         return insertedProductRepository.findByAutomat(automatService.findBySerialNumber(automat_id));
 
     }
 
-
+    //return list of inserted for one product to one automat
     public Iterable<InsertedProduct> findInsertedOneProductsByAutomat(String automat_id, Long product_id) {
         Automat automat = automatService.findBySerialNumber(automat_id);
         Product product = productService.findById(product_id);
@@ -79,7 +79,7 @@ public class InsertedProductService {
         insertedProductRepository.delete(findById(insertedProductId));
 
     }
-
+    //calculate profit for automat from all products
     public InsertedProduct findInsertedPriceToAutomatTotalProfit(String automat_id) {
         Automat automat = automatService.findBySerialNumber(automat_id);
         InsertedProduct insertedProduct = new InsertedProduct();
@@ -101,7 +101,7 @@ public class InsertedProductService {
         return insertedProduct;
 
     }
-
+    //calculate profit for selected product in automat
     public InsertedProduct findAllInsertedByAutomatandProduct(String automat_id, Long product_id) {
         Automat automat = automatService.findBySerialNumber(automat_id);
         Product product = productService.findById(product_id);

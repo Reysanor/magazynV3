@@ -32,7 +32,11 @@ class AutomatItemInTenant extends Component {
         <div className="card card-body bg-light mb-3">
           <div className="row">
             <div className="col-lg-6 col-md-4 col-8">
-              <Link to={`/automatBoard/${automat.serialNumber}`}>
+            
+              <Link to={{pathname: `/automatBoard/${automat.serialNumber}`,state: {
+                tenant_id: tenant_id
+              },
+             }}>
                 <li className="list-group-item">
                   <i className="fa fa-flag-checkered"> {automat.name} </i>
                 </li>

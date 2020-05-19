@@ -87,10 +87,12 @@ class AddInsertedProduct extends Component {
             <div className="col-md-8 m-auto">
               <Link
                 to={`/automatBoard/${automat_serialNumber}`}
-                className="btn btn-light"
+                className="btn btn-dark"
               >
                 Back to Automat Board
               </Link>
+
+              
               <h4 className="display-4 text-center">
                 {this.props.location.state.product_name}
               </h4>

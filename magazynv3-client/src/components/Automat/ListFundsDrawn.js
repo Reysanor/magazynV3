@@ -20,12 +20,13 @@ class ListFundsDrawn extends Component {
   dataOfTable() {
     const {funds_drawns_prop} = this.props;
     return funds_drawns_prop.map((funds_drawn, index) => {
-      const { id, amount } = funds_drawn; //destructuring
+      const { id, amount,dateOfDrawn } = funds_drawn; //destructuring
+      const date = new Date(dateOfDrawn);
 
       return (
         <tr key={id}>
           <td>{amount}</td>
-          <td>date of get</td>
+          <td>{date.toLocaleString()}</td>
         </tr>
       );
     });

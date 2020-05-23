@@ -24,12 +24,12 @@ class ListInsertedProductToAutomat extends Component {
   dataOfTable() {
     const { inserted_products } = this.props.inserted_product;
     return inserted_products.map((inserted_product, index) => {
-      const { id, number, product, dateOfInsert } = inserted_product; //destructuring
+      const { id, number, dateOfInsert } = inserted_product; //destructuring
       if (id != null) {
-        const {finalDate} = inserted_product.dateOfInsert
+        const date = new Date(dateOfInsert);
         return (
           <tr key={id}>
-            <td>{dateOfInsert}</td>
+            <td>{date.toLocaleString()}</td>
             <td>{number}</td>
           </tr>
         );

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getInsertedProductsByAutomat } from "../../../actions/insertedProductActions";
 import { Link } from "react-router-dom";
-
+import { format } from "date-fns";
 class ListInsertedProducts extends Component {
   //lifecycle hook - co ma się dziać po zamontowaniu komponentu (dane z "mapStateToProps" na dole)
   componentDidMount() {
@@ -28,9 +28,12 @@ class ListInsertedProducts extends Component {
       const { id, number, product, dateOfInsert } = inserted_product; //destructuring
 
       if (id != null) {
+       // const options = { month: "long", day: "numeric",year};
+        const date = new Date(dateOfInsert);
         return (
+          
           <tr key={id}>
-            <td>{dateOfInsert}</td>
+            <td>{date.toLocaleString()}</td>
             <td>{product.name}</td>
             <td>{number}</td>
           </tr>
@@ -40,7 +43,9 @@ class ListInsertedProducts extends Component {
   }
   render() {
     const { tenant_id } = this.props.match.params;
-
+    const isoString = new Date().toISOString();
+    const date = new Date(isoString);
+    console.log(date);
     return (
       <div>
         <Link to={`/tenantBoard/${tenant_id}`} className="btn btn-info">

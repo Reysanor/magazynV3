@@ -18,7 +18,7 @@ import Register from "./components/UserManagement/Register";
 import Login from "./components/UserManagement/Login";
 import jwt_decode from "jwt-decode";
 import setJWTToken from "./securityUtils/setJWTToken";
-import { SET_CURRENT_USER, GET_ERRORS } from "./actions/types";
+import { SET_CURRENT_USER } from "./actions/types";
 import { logout } from "./actions/securityActions";
 import SecuredRoute from "./securityUtils/SecuredRoute";
 import AutomatBoard from "./components/AutomatBoard/AutomatBoard";
@@ -27,7 +27,6 @@ import UpdateProductToAutomat from "./components/AutomatBoard/ProductToAutomats/
 import AddInsertedProduct from "./components/AutomatBoard/InsertedProduct/AddInsertedProduct";
 import TenantBoard from "./components/Tenant/TenantBoard/TenantBoard";
 import AutomatsList from "./components/Dashboard/AutomatsList";
-import ProductsList from "./components/Dashboard/ProductsList";
 import TenantsList from "./components/Dashboard/TenantsList";
 import AddPurchasedProduct from "./components/Product/ProductBoard/AddPurchasedProduct";
 import RemovePurchasedProduct from "./components/Product/ProductBoard/RemovePurchasedProduct";
@@ -45,7 +44,7 @@ if (jwtToken) {
   const decoded_jwtToken = jwt_decode(jwtToken);
   store.dispatch({
     type: SET_CURRENT_USER,
-    payload: decoded_jwtToken
+    payload: decoded_jwtToken,
   });
 
   //logout after time
@@ -64,7 +63,6 @@ class App extends Component {
   //That's the principal reason why React uses className instead of class.
   //path pokrywa się z tym od aplikacji serwera
   render() {
-    
     return (
       //Provider definuje sposób w jaki store jest rozumiany przez reacta i reduxa
       //Provider przyjmuje atrybut prop: store
@@ -87,7 +85,6 @@ class App extends Component {
               <SecuredRoute exact path="/products" component={ProductBoard} />
               <SecuredRoute exact path="/tenants" component={TenantsList} />
 
-             
               {
                 //Automat
               }
@@ -119,19 +116,19 @@ class App extends Component {
               />
 
               <SecuredRoute
-              exact
-              path="/insertedProductsToAutomat/:automat_serialNumber/:tenant_id"
-              component={ListInsertedProducts}
-            />
-            {
-              //Automat to funds drawn
-            }
+                exact
+                path="/insertedProductsToAutomat/:automat_serialNumber/:tenant_id"
+                component={ListInsertedProducts}
+              />
+              {
+                //Automat to funds drawn
+              }
 
-            <SecuredRoute
-            exact
-            path="/addFundsDrawn/:automat_serialNumber/:tenant_id"
-            component={AddFundsDrawn}
-          />
+              <SecuredRoute
+                exact
+                path="/addFundsDrawn/:automat_serialNumber/:tenant_id"
+                component={AddFundsDrawn}
+              />
 
               {
                 //Product
@@ -151,10 +148,10 @@ class App extends Component {
               />
 
               <SecuredRoute
-              exact
-              path="/updatePurchasedProduct/:id"
-              component={UpdatePurchasedProduct}
-            />
+                exact
+                path="/updatePurchasedProduct/:id"
+                component={UpdatePurchasedProduct}
+              />
 
               <SecuredRoute
                 exact
@@ -167,9 +164,6 @@ class App extends Component {
                 path="/PurchasedProductBoard"
                 component={PurchasedProductBoard}
               />
-
-
-
 
               {
                 //Tenant

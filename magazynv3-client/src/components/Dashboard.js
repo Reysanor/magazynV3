@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 
 class Dashboard extends Component {
   //lifecycle hook - co ma się dziać po zamontowaniu komponentu (dane z "mapStateToProps" na dole)
@@ -15,31 +13,36 @@ class Dashboard extends Component {
     return (
       <div>
         <div className="container">
-          <div className="card-deck">
-            <div className="card bg-warning">
-              <Link
-                to="/automats"
-                className="card-body text-center text-black btn"
-              >
-                Automaty{" "}
-              </Link>
-            </div>
+          <Link to="/automats" className="btn btn-lg btn-info">
+            Automaty{" "}
+          </Link>
 
-            <div className="card bg-success">
-              <Link
-                to="/products"
-                className="card-body text-center text-black btn"
-              >
-                Magazyn{" "}
-              </Link>
+          <div className="card-deck">
+            <div className="card">
+              <img
+                className="bd-placeholder-img card-img-top"
+                height="400"
+                src="pList.jpg"
+                alt="image"
+              />
+              <div className="card-body">
+                <h5 className="card-title">Magazyn</h5>
+                <p className="card-text">Zakładka z produktami</p>
+                <Link to="/products" className="stretched-link" />
+              </div>
             </div>
-            <div className="card bg-danger">
-              <Link
-                to="/tenants"
-                className="card-body text-center text-black btn"
-              >
-                Miejsca{" "}
-              </Link>
+            <div className="card">
+              <img
+                className="bd-placeholder-img card-img-top"
+                height="400"
+                src="tList.jpg"
+                alt="image"
+              />
+              <div className="card-body">
+                <h5 className="card-title">Miejsca</h5>
+                <p className="card-text">Zakładka z miejscami</p>
+                <Link to="/tenants" className="stretched-link" />
+              </div>
             </div>
           </div>
         </div>

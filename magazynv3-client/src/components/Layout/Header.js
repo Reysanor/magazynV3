@@ -31,11 +31,7 @@ class Header extends Component {
               {user.fullName}
             </Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/register">
-              Utwórz konto
-            </Link>
-          </li>
+          
 
           <li className="nav-item">
             <Link
@@ -52,13 +48,7 @@ class Header extends Component {
 
     const userIsNotAuthenticated = (
       <div className="collapse navbar-collapse" id="mobile-nav">
-        <ul className="navbar-nav ml-auto">
-          <li className="nav-item">
-            <Link className="nav-link" to="/login">
-              Login
-            </Link>
-          </li>
-        </ul>
+        
       </div>
     );
 
@@ -71,7 +61,7 @@ class Header extends Component {
     }
 
     return (
-      <nav className="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
+      <nav className="navbar navbar-expand-sm navbar-dark bg-info mb-4 ">
         <div className="container">
           <Link className="navbar-brand" to="/">
             System zarządzania magazynem z maszynami sprzedażowymi

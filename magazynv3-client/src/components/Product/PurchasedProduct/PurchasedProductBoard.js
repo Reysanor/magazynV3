@@ -59,7 +59,8 @@ class PurchasedProductBoard extends Component {
       <div className="container">
       <Link to="/products" className="btn btn-lg btn-info">
       Powrót
-    </Link>
+    </Link>{" "}
+    <br/>
         <div className="card card-body bg-light mb-5">
           <h1 id="purchasedProductsTitle">Historia magazynu</h1>
           <table id="purchasedProducts">

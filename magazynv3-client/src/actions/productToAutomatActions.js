@@ -99,7 +99,7 @@ export const updateProductToAutomat = (automat_serialNumber, product_id, product
 }
 
 export const deleteProductToAutomat = (automat_serialNumber,product_id) => async dispatch => {
-  if(window.confirm(`You want to product with id  ${product_id}, with is in the automat with number ${automat_serialNumber}. There is no come back`)){
+  if(window.confirm(`Chcesz usunąć produkt z id ${product_id} z automatu o numerze seryjnym ${automat_serialNumber}. Tej operacji nie można cofnąć.`)){
       await axios.delete(`/api/automat/${automat_serialNumber}/pta/${product_id}`)
       dispatch({
           type: DELETE_PRODUCT_TO_AUTOMAT,

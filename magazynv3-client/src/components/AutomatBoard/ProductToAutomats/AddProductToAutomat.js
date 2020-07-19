@@ -62,7 +62,7 @@ class AddProductToAutomat extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <Link to={`/automatBoard/${id}`} className="btn btn-dark">
+              <Link to={`/automatBoard/${id}`} className="btn btn-lg btn-info">
                 Wróć do widoku automatu
               </Link>
               <h4 className="display-4 text-center">Dodaj produkt do automatu</h4>

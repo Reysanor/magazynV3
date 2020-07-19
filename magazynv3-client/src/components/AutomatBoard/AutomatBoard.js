@@ -16,8 +16,9 @@ class AutomatBoard extends Component {
   }
   componentDidMount() {
     const { id } = this.props.match.params;
-
+    
     this.props.getProductToAutomats(id);
+
     // this.props.getInsertedProductsAvaragePrice(id);
   }
 
@@ -67,26 +68,19 @@ class AutomatBoard extends Component {
       }
     };
     BoardContent = boardAlgorithm(errors, product_to_automats);
-
+  
     return (
+      
       <div className="container">
+        <Link to={`/tenantBoard/${2}`} className="btn btn-lg btn-info">
+          Lista automatów
+        </Link>{" "}
+        <Link to={`/addProductToAutomat/${id}`} className="btn btn-lg btn-info">
+          Dodaj produkt do automatu
+          </Link>{" "}
+
         <div className="row">
           <hr />
-          <Link to={`/tenantBoard/${5}`} className="btn btn-primary mb-3">
-            Lista miejsc
-          </Link>{" "}
-          <button
-            className="btn btn-primary mb-3"
-            onClick={this.props.history.goBack}
-          >
-            Back
-          </button>
-          <Link
-            to={`/addProductToAutomat/${id}`}
-            className="btn btn-primary mb-3"
-          >
-            <i className="fas fa-plus-circle"> Dodaj produkt do automatu</i>
-          </Link>
         </div>
         <br />
         <hr />

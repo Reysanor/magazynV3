@@ -57,12 +57,10 @@ class AddInsertedProduct extends Component {
     const newInsertedProduct = {
       number: this.state.number,
       profit: this.state.profit,
-      currentPrice: this.props.location.state.sell_price
+      currentPrice: this.props.location.state.sell_price,
       //product: this.state.product
       //komponent po wyrenderowaniu za pomoca rendera przekazuje props do komponentu
     };
-    //console.log(this.state.automat);
-    //console.log(newTask);
     //przekazuje id projektu, nowy task, history do backlogActions.js
     this.props.createInsertedProduct(
       this.state.automat,
@@ -87,18 +85,19 @@ class AddInsertedProduct extends Component {
             <div className="col-md-8 m-auto">
               <Link
                 to={`/automatBoard/${automat_serialNumber}`}
-                className="btn btn-dark"
+                className="btn btn-lg btn-info"
               >
-                Back to Automat Board
+                Wróc do widoku automatu
               </Link>
 
-              
               <h4 className="display-4 text-center">
                 {this.props.location.state.product_name}
               </h4>
               <form onSubmit={this.onSubmit}>
-              <div className="form-group form-inline">
-              <label className="form-label" style={{marginRight: '77px'}}>Ilość: </label>
+                <div className="form-group form-inline">
+                  <label className="form-label" style={{ marginRight: "77px" }}>
+                    Ilość:{" "}
+                  </label>
 
                   <input
                     className={classnames("form-control form-control-lg", {
@@ -119,7 +118,9 @@ class AddInsertedProduct extends Component {
                 </div>
 
                 <div className="form-group form-inline">
-                <label className="form-label" style={{marginRight: '9px'}}>Zysk za sztukę: </label>
+                  <label className="form-label" style={{ marginRight: "9px" }}>
+                    Zysk za sztukę:{" "}
+                  </label>
 
                   <input
                     className="form-control form-control-lg"
@@ -134,7 +135,10 @@ class AddInsertedProduct extends Component {
                 </div>
 
                 <div className="form-group form-inline">
-                <label className="form-label" style={{marginRight: '16px'}}> Zysk w sumie: </label>
+                  <label className="form-label" style={{ marginRight: "16px" }}>
+                    {" "}
+                    Zysk w sumie:{" "}
+                  </label>
                   <input
                     className="form-control form-control-lg"
                     placeholder="total profit"

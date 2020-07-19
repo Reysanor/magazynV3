@@ -12,6 +12,9 @@ class AutomatItemInTenant extends Component {
     this.props.getInsertedProductsToAutomatTotalProfit(
       this.props.automat.serialNumber
     );
+
+
+    
   }
 
   //funkcja kasowania po naciśnieciu

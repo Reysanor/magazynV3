@@ -101,6 +101,16 @@ export const getInsertedProductsInfo = () => async dispatch => {
   });
 };
 
+export const getInsertedProductsToAutomatTotalProfitAll = (inserted_product_id) => async dispatch => {
+  
+  const res = await axios.get(`/api/inserted/profit/all/per/${inserted_product_id}`);
+  dispatch({
+    type: GET_INSERTED_PRODUCTS,
+    payload: res.data
+  });
+};
+
+
 export const getInsertedProductsToAutomatTotalProfit = (automat_serialNumber) => async dispatch => {
   
   const res = await axios.get(`/api/inserted/profit/all/${automat_serialNumber}`);

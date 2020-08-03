@@ -1,17 +1,51 @@
 import React, { Component } from "react";
 import Automat from "../../Automat/AutomatItemInTenant";
+import { getInsertedProductsToAutomatTotalProfitAll } from "../../../actions/insertedProductActions";
+
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class AutomatsToTenantOwned extends Component {
+  
+  constructor() {
+    super();
+    this.state = {
+      errors: {},
+    };
+  }
+
+  componentDidMount() {
+    const {id_prop} = this.props;
+    //console.log(id_prop);
+     this.props.getInsertedProductsToAutomatTotalProfitAll(this.props.tenant_id_prop);
+  }
+  
   render() {
     const { automats_prop } = this.props;
+    const { inserted_products } = this.props.inserted_product;
+
     //musze mapować, nie moge wyświetlnić odrazu z props
-    const atp = automats_prop.map((automat) => (
+
+    let merged2 = [];
+    for(let i=0; i<automats_prop.length; i++) {
+     // let temp  = ;
+      if(inserted_products.find((itmInner) => itmInner.automat.id === automats_prop[i].id)){
+        automats_prop[i].profit = (inserted_products.find((itmInner) => itmInner.automat.id === automats_prop[i].id)).profit;
+        merged2.push(automats_prop[i]);
+
+
+      }
+    
+    }
+   
+    const pta2 = merged2.map((automat) => (
       <Automat
-        key={automat.serialNumber}
+        key={(automat.id)}
         automat={automat}
-        tenant_id={this.props.tenant_id_prop}
+        
       />
     ));
+
 
     return (
       <div>
@@ -23,7 +57,7 @@ class AutomatsToTenantOwned extends Component {
                   <h3>Automaty w tym miejscu</h3>
                 </div>
               </div>
-              {atp}
+              {pta2}
             </div>
           </div>
         </div>
@@ -31,4 +65,20 @@ class AutomatsToTenantOwned extends Component {
     );
   }
 }
-export default AutomatsToTenantOwned;
+
+
+
+AutomatsToTenantOwned.propTypes = {
+  getInsertedProductsToAutomatTotalProfitAll: PropTypes.func.isRequired,
+  inserted_product: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  inserted_product: state.inserted_product,
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, {
+  getInsertedProductsToAutomatTotalProfitAll,
+})(AutomatsToTenantOwned);

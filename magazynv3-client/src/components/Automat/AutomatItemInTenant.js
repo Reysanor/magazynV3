@@ -4,17 +4,13 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteAutomatfromTenant } from "../../actions/automatActions";
-import { getInsertedProductsToAutomatTotalProfit } from "../../actions/insertedProductActions";
+//import { getInsertedProductsToAutomatTotalProfit } from "../../actions/insertedProductActions";
 import {deleteAllProductToAutomat} from "../../actions/productToAutomatActions";
 
 class AutomatItemInTenant extends Component {
   componentDidMount() {
-    this.props.getInsertedProductsToAutomatTotalProfit(
-      this.props.automat.serialNumber
-    );
+   // this.props.getInsertedProductsToAutomatTotalProfit(this.props.automat.serialNumber);
 
-
-    
   }
 
   //funkcja kasowania po naciśnieciu
@@ -28,8 +24,8 @@ class AutomatItemInTenant extends Component {
     //pobieram dane automata od dashboard
     //<span className="mx-auto">{automat.nip}</span> = przykład wyświetlenia danych
     const { automat } = this.props;
+    console.log(automat)
     const { tenant_id } = this.props;
-    const { profit } = this.props.inserted_product.inserted_product;
     return (
       <div className="container">
         <div className="card card-body bg-light mb-3">
@@ -45,7 +41,7 @@ class AutomatItemInTenant extends Component {
                 </li>
               </Link>
               <p className="list-group-item disabled">
-                Całkowity zysk: {profit} zł
+                Całkowity zysk: {automat.profit} zł
               </p>
             </div>
 
@@ -85,16 +81,16 @@ class AutomatItemInTenant extends Component {
 }
 AutomatItemInTenant.propTypes = {
   deleteAutomatfromTenant: PropTypes.func.isRequired,
-  getInsertedProductsToAutomatTotalProfit: PropTypes.func.isRequired,
-  inserted_product: PropTypes.object.isRequired,
+ // getInsertedProductsToAutomatTotalProfit: PropTypes.func.isRequired,
+ // inserted_product: PropTypes.object.isRequired,
   deleteAllProductToAutomat: PropTypes.func.isRequired
 };
 const mapStateToProps = (state) => ({
-  inserted_product: state.inserted_product,
+ // inserted_product: state.inserted_product,
 });
 
 export default connect(
   //nie mapuje stanu bo mam tylko skasować w tym widoku
   mapStateToProps,
-  { deleteAutomatfromTenant, getInsertedProductsToAutomatTotalProfit,deleteAllProductToAutomat }
+  { deleteAutomatfromTenant,deleteAllProductToAutomat }
 )(AutomatItemInTenant);

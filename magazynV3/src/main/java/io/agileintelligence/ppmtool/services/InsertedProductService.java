@@ -79,7 +79,20 @@ public class InsertedProductService {
         insertedProductRepository.delete(findById(insertedProductId));
 
     }
-    //calculate profit for automat from all products
+
+    //List of calculated profit for all automats in selected tenant
+    public Iterable<InsertedProduct> allAutomatsInTenantProfit(Long id){
+        Iterable<Automat> all = automatService.findAllAutomatsToTenant(id);
+        List<InsertedProduct> list = new ArrayList<>();
+        for(Automat a: all){
+            list.add(findInsertedPriceToAutomatTotalProfit(a.getSerialNumber()));
+        }
+        return list;
+
+    }
+
+
+    //calculate profit from automat for all products
     public InsertedProduct findInsertedPriceToAutomatTotalProfit(String automat_id) {
         Automat automat = automatService.findBySerialNumber(automat_id);
         InsertedProduct insertedProduct = new InsertedProduct();

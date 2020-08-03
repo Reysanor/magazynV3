@@ -75,7 +75,7 @@ class ProductToAutomat extends Component {
     //props z product_to_automat
     const { product_to_automat } = this.props;
 
-    console.log(product_to_automat);
+   // console.log(product_to_automat);
     //console.log(product_to_automat.automat.serialNumber)
     //  const { id } = this.props.match.params;
     // console.log(id)

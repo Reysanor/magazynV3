@@ -4,6 +4,7 @@ import { getInsertedProductsToAutomatTotalProfitAll } from "../../../actions/ins
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { id } from "date-fns/locale";
 
 class AutomatsToTenantOwned extends Component {
   
@@ -29,13 +30,14 @@ class AutomatsToTenantOwned extends Component {
     let merged2 = [];
     for(let i=0; i<automats_prop.length; i++) {
      // let temp  = ;
-      if(inserted_products.find((itmInner) => itmInner.automat.id === automats_prop[i].id)){
+     if(automats_prop[i].id!==null ){
+      //if((inserted_products.find((itmInner) => itmInner.automat.id === automats_prop[i].id))){
+        if(inserted_products.length>0 && inserted_products[0].product===null){
+          console.log(inserted_products)
         automats_prop[i].profit = (inserted_products.find((itmInner) => itmInner.automat.id === automats_prop[i].id)).profit;
         merged2.push(automats_prop[i]);
-
-
+        }
       }
-    
     }
    
     const pta2 = merged2.map((automat) => (

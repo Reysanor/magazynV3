@@ -22,9 +22,11 @@ class ProductsList extends Component {
     }
     if (ids.length === new Set(ids).size) {
       const { inserted_products } = this.props.inserted_product;
-
+      if(inserted_products.length>0 && inserted_products[0].product !=null){
+       // console.log(inserted_products)
       let merged2 = [];
       for (let i = 0; i < purchased_products.length; i++) {
+       // console.log(inserted_products)
         merged2.push({
           ...purchased_products[i],
           ...inserted_products.find(
@@ -43,6 +45,7 @@ class ProductsList extends Component {
       ));
 
       return <div>{pta2}</div>;
+    }
     } else {
       return <div></div>;
     }

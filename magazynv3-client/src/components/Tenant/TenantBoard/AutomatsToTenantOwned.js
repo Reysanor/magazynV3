@@ -33,7 +33,7 @@ class AutomatsToTenantOwned extends Component {
      if(automats_prop[i].id!==null ){
       //if((inserted_products.find((itmInner) => itmInner.automat.id === automats_prop[i].id))){
         if(inserted_products.length>0 && inserted_products[0].product===null){
-          console.log(inserted_products)
+        //  console.log(inserted_products)
         automats_prop[i].profit = (inserted_products.find((itmInner) => itmInner.automat.id === automats_prop[i].id)).profit;
         merged2.push(automats_prop[i]);
         }

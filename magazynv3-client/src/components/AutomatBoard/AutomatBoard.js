@@ -18,6 +18,8 @@ class AutomatBoard extends Component {
     const { id } = this.props.match.params;
     
     this.props.getProductToAutomats(id);
+    
+    //dodać pobieranie id tenanta
 
     // this.props.getInsertedProductsAvaragePrice(id);
   }

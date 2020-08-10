@@ -25,10 +25,18 @@ class ProductToAutomatsWithPrices extends Component {
 
     let merged2 = [];
     for(let i=0; i<product_to_automats_prop.length; i++) {
+     
+      if(product_to_automats_prop[i].id!==null){
+        if(inserted_products.length>0 && inserted_products[0].product!==null){
+
+       // console.log("product to automat",product_to_automats_prop)
+       // console.log("inserted product", inserted_products)
       merged2.push({
        ...product_to_automats_prop[i], 
        ...(inserted_products.find((itmInner) => itmInner.product.id === product_to_automats_prop[i].product.id))}
       );
+    }
+  }
     }
     //console.log(merged2);
 

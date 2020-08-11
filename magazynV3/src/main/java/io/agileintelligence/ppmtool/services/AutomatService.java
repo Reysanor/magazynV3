@@ -63,6 +63,7 @@ public class AutomatService {
         if (automat == null) {
             throw new AutomatNotFoundException("Automat with serial number " + serialNumber + " does not exist");
         }
+
         return automat;
     }
 
@@ -172,4 +173,10 @@ public class AutomatService {
     }
 
 
+    public AutomatToTenantHistory findTenantToAutomatBySerialNumber(String automatId) {
+        AutomatToTenantHistory att = automatToTenantHistoryRepository.findFirstByAutomatOrderByIdDesc(findBySerialNumber(automatId));
+
+        return att;
+
+    }
 }

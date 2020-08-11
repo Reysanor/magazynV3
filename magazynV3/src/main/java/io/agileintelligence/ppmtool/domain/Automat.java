@@ -33,7 +33,7 @@ public class Automat {
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date productionDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne //(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
     @JsonIgnore
     private Tenant tenant;

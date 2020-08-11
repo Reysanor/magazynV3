@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 @Entity
 public class AutomatToTenantHistory {
@@ -60,6 +61,16 @@ public class AutomatToTenantHistory {
 
     public void setInsertDate(Date insertDate) {
         this.insertDate = insertDate;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", AutomatToTenantHistory.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("automat=" + automat)
+                .add("tenant=" + tenant)
+                .add("insertDate=" + insertDate)
+                .toString();
     }
 
     @Override

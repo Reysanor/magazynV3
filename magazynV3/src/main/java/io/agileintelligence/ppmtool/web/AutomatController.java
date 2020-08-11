@@ -19,8 +19,6 @@ public class AutomatController {
     @Autowired
     private AutomatService automatService;
 
-
-
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
@@ -106,6 +104,8 @@ public class AutomatController {
         return new ResponseEntity<ProductToAutomat>(updatedProductToAutomat1, HttpStatus.OK);
     }
 
+
+
     //zmienic na patch
     @PostMapping("/att/{tenant_id}/{automat_id}")
     public ResponseEntity<?> addAutomatToTenant(
@@ -124,4 +124,9 @@ public class AutomatController {
         return new ResponseEntity<Automat>(automat1, HttpStatus.OK);
     }
 
+    @GetMapping("/att/{automatId}")
+    public ResponseEntity<?> getTenantToAutomat(@PathVariable String automatId, Principal principal) {
+        AutomatToTenantHistory automatToTenantHistory = automatService.findTenantToAutomatBySerialNumber(automatId);
+        return new ResponseEntity<AutomatToTenantHistory>(automatToTenantHistory, HttpStatus.OK);
+    }
 }

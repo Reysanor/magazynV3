@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { getProductToAutomats } from "../../actions/productToAutomatActions";
 //import { getInsertedProductsAvaragePrice } from "../../actions/insertedProductActions";
 import ProductToAutomatsWithPrices from "./ProductToAutomatsWithPrices";
+import {getTenantId} from "../../actions/automatActions";
 
 class AutomatBoard extends Component {
   constructor() {
@@ -21,7 +22,7 @@ class AutomatBoard extends Component {
     
     //dodać pobieranie id tenanta
 
-    // this.props.getInsertedProductsAvaragePrice(id);
+     this.props.getTenantId(id);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -74,7 +75,7 @@ class AutomatBoard extends Component {
     return (
       
       <div className="container">
-        <Link to={`/tenantBoard/${2}`} className="btn btn-lg btn-info">
+        <Link to={`/tenants`} className="btn btn-lg btn-info">
           Lista automatów
         </Link>{" "}
         <Link to={`/addProductToAutomat/${id}`} className="btn btn-lg btn-info">
@@ -96,6 +97,8 @@ AutomatBoard.propTypes = {
   product: PropTypes.object.isRequired,
   getProductToAutomats: PropTypes.func.isRequired,
   product_to_automat: PropTypes.object.isRequired,
+  getTenantId: PropTypes.func.isRequired,
+  parent: PropTypes.object.isRequired,
   //getInsertedProductsAvaragePrice: PropTypes.func.isRequired,
   //inserted_product: PropTypes.object.isRequired,
 
@@ -105,11 +108,12 @@ AutomatBoard.propTypes = {
 const mapStateToProps = (state) => ({
   product: state.product,
   product_to_automat: state.product_to_automat,
+  parent: state.parent,
   //inserted_product: state.inserted_product,
   errors: state.errors,
 });
 
 export default connect(mapStateToProps, {
-  getProductToAutomats,
+  getProductToAutomats,getTenantId
   // getInsertedProductsAvaragePrice,
 })(AutomatBoard);

@@ -4,7 +4,7 @@
 
 import axios from "axios";
 //axios służy do komunikacji z backendem
-import { GET_ERRORS, GET_AUTOMAT, GET_AUTOMATS, DELETE_AUTOMAT } from "./types";
+import { GET_ERRORS, GET_AUTOMAT, GET_AUTOMATS, DELETE_AUTOMAT, GET_PARENT_ID} from "./types";
 //history pozwala na przekierowanie przy podsumowaniu formularza
 //async oznacza dodanie do kolejki wywolywania funkcji, dispatch przeslanie żądania
 //https://redux.js.org/advanced/async-actions
@@ -122,4 +122,14 @@ export const deleteAutomatfromTenant = (automat_serialNumber) => async (
       payload: automat_serialNumber,
     });
   }
+};
+
+
+export const getTenantId = (id) => async (dispatch) => {
+  const res = await axios.get(`/api/automat/att/${id}`);
+
+  dispatch({
+    type: GET_PARENT_ID, //typ reducera
+    payload: res.data, //dane z bazy
+  });
 };

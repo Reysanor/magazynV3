@@ -75,7 +75,8 @@ class AddInsertedProduct extends Component {
     const { errors } = this.state;
     const { sell_price } = this.props.location.state;
     const { price } = this.props.purchased_product.purchased_product;
-    this.state.profit = String(sell_price - price);
+    this.state.profit =  String( Math.round((sell_price - price+ Number.EPSILON) * 100) /
+    100);
     //iteracja przez project_task_propsy i wrzucanie do mapy ProjectTask o nazwie project_task
 
     return (
@@ -129,7 +130,7 @@ class AddInsertedProduct extends Component {
                     type="number"
                     min="0.01"
                     step="0.01"
-                    value={this.state.profit}
+                    value= { this.state.profit}
                     disabled
                   />
                 </div>

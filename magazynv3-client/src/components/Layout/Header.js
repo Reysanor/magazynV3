@@ -19,7 +19,7 @@ class Header extends Component {
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link className="nav-link" to="/dashboard">
-              Dashboard
+              Strona główna
             </Link>
           </li>
         </ul>

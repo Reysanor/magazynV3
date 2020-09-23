@@ -126,7 +126,10 @@ public class AutomatController {
 
     @GetMapping("/att/{automatId}")
     public ResponseEntity<?> getTenantToAutomat(@PathVariable String automatId, Principal principal) {
-        AutomatToTenantHistory automatToTenantHistory = automatService.findTenantToAutomatBySerialNumber(automatId);
-        return new ResponseEntity<AutomatToTenantHistory>(automatToTenantHistory, HttpStatus.OK);
+        System.out.println("hi");
+       // AutomatToTenantHistory automatToTenantHistory = automatService.findTenantToAutomatBySerialNumber(automatId);
+        Automat automat = automatService.findBySerialNumber(automatId);
+
+        return new ResponseEntity<String>("automat", HttpStatus.OK);
     }
 }

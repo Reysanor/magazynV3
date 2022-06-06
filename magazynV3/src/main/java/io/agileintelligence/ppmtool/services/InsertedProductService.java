@@ -115,7 +115,7 @@ public class InsertedProductService {
 
     }
     //calculate profit for selected product in automat
-    public InsertedProduct findAllInsertedByAutomatandProduct(String automat_id, Long product_id) {
+    public InsertedProduct findAllInsertedByAutomatAndProduct(String automat_id, Long product_id) {
         Automat automat = automatService.findBySerialNumber(automat_id);
         Product product = productService.findById(product_id);
         InsertedProduct insertedProduct = new InsertedProduct();
@@ -147,7 +147,7 @@ public class InsertedProductService {
         List<InsertedProduct> avarageProfit = new ArrayList<>();
 
         for (ProductToAutomat ip : productToAutomats) {
-            avarageProfit.add(findAllInsertedByAutomatandProduct(automat_id, ip.getProduct().getId()));
+            avarageProfit.add(findAllInsertedByAutomatAndProduct(automat_id, ip.getProduct().getId()));
         }
         return avarageProfit;
     }

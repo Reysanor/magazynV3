@@ -159,7 +159,7 @@ ProductToAutomat pta = new ProductToAutomat();
     public void checkInsertedProduct(){
         Product product = productService.findById(1L);
         Automat automat = automatService.findBySerialNumber("3232323232");
-        assertEquals(3.5,insertedProductService.findAllInsertedByAutomatAndProduct(automat.getSerialNumber(),product.getId()).getProfit());
+        assertEquals(3.5,insertedProductService.findAllInsertedByAutomatandProduct(automat.getSerialNumber(),product.getId()).getProfit());
     }
 
 
@@ -167,7 +167,7 @@ ProductToAutomat pta = new ProductToAutomat();
     public void checkLackOfInsertedProduct(){
         Product product = productService.findById(2L);
         Automat automat = automatService.findBySerialNumber("1234567890");
-        assertEquals(0.0,insertedProductService.findAllInsertedByAutomatAndProduct(automat.getSerialNumber(),product.getId()).getProfit());
+        assertEquals(0.0,insertedProductService.findAllInsertedByAutomatandProduct(automat.getSerialNumber(),product.getId()).getProfit());
     }
 
 
